@@ -1,4 +1,4 @@
-# 송종화 프론트엔드 포트폴리오
+# 송종화 포트폴리오
 
 GitHub Pages에서 별도의 빌드 없이 제공하는 정적 포트폴리오입니다.
 
@@ -22,8 +22,8 @@ python3 -m http.server 4173
 
 저장소의 기본 브랜치에 푸시하면 `.github/workflows/pages.yml`이 정적 파일을 GitHub Pages에 배포합니다.
 
-1. 저장소 이름을 `jonghwa3471.github.io`로 생성합니다.
+1. 저장소 이름을 `Portfolio`로 생성합니다.
 2. Settings → Pages → Source에서 **GitHub Actions**를 선택합니다.
 3. `main` 브랜치에 푸시합니다.
 
-배포 주소는 `https://jonghwa3471.github.io/`입니다.
+배포 주소는 `https://jonghwa3471.github.io/Portfolio/`입니다.
