@@ -27,4 +27,44 @@ const observer = new IntersectionObserver((entries) => entries.forEach((entry) =
   entry.target.classList.add("visible"); observer.unobserve(entry.target);
 }), { threshold: .08 });
 document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+const navLinks = [...document.querySelectorAll('.site-header nav a[href^="#"]')];
+const navSections = navLinks
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
+let scrollTicking = false;
+
+function updateActiveNavigation() {
+  const headerHeight = document.querySelector(".site-header")?.offsetHeight ?? 0;
+  const marker = headerHeight + window.innerHeight * .28;
+  const pageBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+  let activeId = null;
+
+  navSections.forEach((section) => {
+    const bounds = section.getBoundingClientRect();
+    if (bounds.top <= marker && bounds.bottom > headerHeight) activeId = section.id;
+  });
+  if (pageBottom && navSections.length) activeId = navSections.at(-1).id;
+
+  navLinks.forEach((link) => {
+    const isActive = link.getAttribute("href") === `#${activeId}`;
+    link.classList.toggle("is-active", isActive);
+    if (isActive) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  });
+  scrollTicking = false;
+}
+
+function requestNavigationUpdate() {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  window.requestAnimationFrame(updateActiveNavigation);
+}
+
+window.addEventListener("scroll", requestNavigationUpdate, { passive: true });
+window.addEventListener("resize", requestNavigationUpdate);
+navLinks.forEach((link) => link.addEventListener("click", () => {
+  navLinks.forEach((item) => item.classList.toggle("is-active", item === link));
+}));
+updateActiveNavigation();
 document.querySelector("#year").textContent = new Date().getFullYear();
