@@ -1,10 +1,18 @@
 # EOKKA 화면 이미지
 
-아래 파일명을 기준으로 화면 이미지를 추가하면 상세 페이지의 placeholder를 교체할 수 있습니다.
+2026-10-21 기준 배포 서비스(`eokka.qualius.co`)에서 직접 캡처한 화면입니다.
 
-- `home.webp`: 홈과 빠른 분석
-- `analysis.webp`: 분석 결과
-- `dashboard.webp`: 투자 대시보드
-- `history.webp`: 거래 기록
+- `home.jpg`: 홈과 빠른 분석
+- `about.jpg`: 서비스 소개 전체 화면
+- `analysis.jpg`: 분석 결과 소개 영역
+- `dashboard.jpg`: 대시보드·기록 소개 영역
+- `methodology.jpg`: 분석 방법 화면
+- `stock-autocomplete.jpg`: 종목 검색 자동완성과 빠른 분석 입력 화면
+- `investment-insights.jpg`: 주간 투자 인사이트 카드 영역
+- `achievements.jpg`: 도전과제 진행도와 뱃지 목록
+- `login.jpg`: 이메일 링크·소셜 로그인 화면
+- `home-desktop-logged-out.jpg`: 비로그인 데스크톱 홈
+- `investment-committee.jpg`: 투자 대가 10인의 포트폴리오 심사
+- `dashboard-live.png`: 로그인된 실제 대시보드 요약
 
-권장 비율은 16:10 또는 16:9이며, 한 파일은 가능하면 500KB 이하로 최적화합니다.
+상세 페이지에서는 목적에 따라 잘라서 보여 주며, 원본 비율은 캡처 당시 화면을 유지합니다.
