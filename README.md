@@ -30,7 +30,7 @@ npm run build
 
 콘텐츠는 Server Component에서 정적 렌더링하고, 검색·보기 전환·메뉴 활성화·모달만 Client Component에서 처리합니다. 기존 `innerHTML` 기반 화면 생성이나 전역 스크립트는 새 앱에서 실행하지 않습니다. 이미지 모달과 검색은 React 상태로 관리하며 전역 상태 관리 라이브러리는 추가하지 않았습니다.
 
-학습 상세 주소는 `/journey/carrot/`처럼 프로젝트별로 생성됩니다. 기존 `/journey/detail.html?id=carrot` 링크도 브라우저에서 새 주소로 이동합니다. 기존 루트 HTML·JS는 전환 전 원본으로 보존했으며, **앞으로는 `src/`를 수정**합니다. Python 정적 서버 대신 `npm run dev`로 새 앱을 실행하세요.
+학습 상세 주소는 `/journey/carrot/`처럼 프로젝트별로 생성됩니다. 기존 `/journey/detail.html?id=carrot` 링크도 Next.js의 호환 페이지가 새 주소로 연결합니다. 사용하지 않는 구형 HTML·JS는 제거했으며, **콘텐츠와 화면은 `src/`를 수정**합니다. Python 정적 서버 대신 `npm run dev`로 새 앱을 실행하세요. 전환 전 원본은 Git 이력에서 복구할 수 있습니다.
 
 이미지 원본은 기존 `assets/`, `photos/`, `profile/`, `journey/images/`, `projects/eokka/images/`에 둡니다. `predev`·`prebuild`에서 참조하는 이미지만 `public/`에 복사합니다. 생성된 `public/`, `.next/`, `out/`은 커밋하지 않습니다.
 

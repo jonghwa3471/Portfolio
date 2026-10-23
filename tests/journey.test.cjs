@@ -130,7 +130,7 @@ test('모든 이미지·상세 페이지 파일이 존재하고 이미지 출처
       assert.match(image.source, /^https:\/\//);
       assert.ok(image.caption);
     }
-    if (item.detail) assert.ok(fs.existsSync(path.join(root, 'journey', item.detail, 'index.html')));
+    if (item.detail) assert.ok(fs.existsSync(path.join(root, 'src/app/projects/eokka/page.tsx')));
   }
 });
 
