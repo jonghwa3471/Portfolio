@@ -265,6 +265,9 @@
 .journey-heading-phrase{display:inline-block;white-space:nowrap}
 .learning-lightbox[open]{padding:16px}
 .learning-code-highlights{min-width:0}
+figcaption{text-align:center}
+.project-detail .debug-shot{width:100%;max-width:480px;margin:20px 0}
+.project-detail .debug-shot img{max-height:250px}
 .learning-code-highlights h3{margin-top:0}
 .learning-code-label{padding:10px 18px;border:1px solid var(--line);border-bottom:0;background:#191c22;color:var(--muted);font:12px monospace}
 .learning-code-highlights pre{max-width:100%;overflow-x:auto;margin:0 0 20px;padding:20px;border:1px solid var(--line);background:#0a0c10;color:#cce7e9;font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4}

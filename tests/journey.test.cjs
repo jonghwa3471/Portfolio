@@ -8,6 +8,20 @@ const context = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(root, 'data.js'), 'utf8'), context);
 const { journey, groups } = context.window.PORTFOLIO_DATA;
 
+test('EOKKA 상세는 이미지·목차가 연결되고 구현 역할과 테스트 범위를 구분한다', () => {
+  const html = fs.readFileSync(path.join(root, 'projects/eokka/index.html'), 'utf8');
+  const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
+  assert.equal(new Set(ids).size, ids.length);
+  for (const match of html.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.includes(match[1]), match[1]);
+  for (const match of html.matchAll(/<img[^>]+src="([^"]+)"/g)) {
+    assert.ok(fs.existsSync(path.resolve(root, 'projects/eokka', decodeURIComponent(match[1]))), match[1]);
+  }
+  assert.equal((html.match(/src="\.\/images\/login.jpg"/g) || []).length, 1);
+  assert.ok(html.includes('직접 판단한 부분과 AI의 도움을 받은 부분'));
+  assert.ok(html.includes('캐시 함수의 동작을 확인하는 테스트'));
+  assert.ok(!html.includes('테스트 개수보다, 막고 싶은 회귀를 기준으로'));
+});
+
 test('학습 기록은 태그 없이 연도별·기술별 전환과 검색을 제공한다', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   assert.ok(!html.includes('id="journey-tech"'));
