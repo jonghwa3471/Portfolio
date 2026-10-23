@@ -2,49 +2,48 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
-const vm = require('node:vm');
+const React = require('react');
+const { renderToStaticMarkup } = require('react-dom/server');
+const { searchProjects } = require('../src/lib/journey-query.ts');
+const { assetPath, projectPath } = require('../src/lib/portfolio.ts');
+const EokkaContent = require('../src/content/eokka.tsx').default;
+const JourneyArchive = require('../src/components/journey-archive.tsx').default;
 const root = path.resolve(__dirname, '..');
-const context = { window: {} };
-vm.runInNewContext(fs.readFileSync(path.join(root, 'data.js'), 'utf8'), context);
+const context = { window: { PORTFOLIO_DATA: require('../src/content/portfolio.json') } };
 const { journey, groups } = context.window.PORTFOLIO_DATA;
 
 test('EOKKA 상세는 이미지·목차가 연결되고 구현 역할과 테스트 범위를 구분한다', () => {
-  const html = fs.readFileSync(path.join(root, 'projects/eokka/index.html'), 'utf8');
+  const html = renderToStaticMarkup(React.createElement(EokkaContent));
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(new Set(ids).size, ids.length);
   for (const match of html.matchAll(/href="#([^"]+)"/g)) assert.ok(ids.includes(match[1]), match[1]);
   for (const match of html.matchAll(/<img[^>]+src="([^"]+)"/g)) {
-    assert.ok(fs.existsSync(path.resolve(root, 'projects/eokka', decodeURIComponent(match[1]))), match[1]);
+    assert.ok(fs.existsSync(path.resolve(root, decodeURIComponent(match[1]).replace(/^\//, ''))), match[1]);
   }
-  assert.equal((html.match(/src="\.\/images\/login.jpg"/g) || []).length, 1);
+  assert.equal((html.match(/src="\/projects\/eokka\/images\/login.jpg"/g) || []).length, 1);
   assert.ok(html.includes('직접 판단한 부분과 AI의 도움을 받은 부분'));
   assert.ok(html.includes('캐시 함수의 동작을 확인하는 테스트'));
   assert.ok(!html.includes('테스트 개수보다, 막고 싶은 회귀를 기준으로'));
 });
 
-test('학습 기록은 태그 없이 연도별·기술별 전환과 검색을 제공한다', () => {
-  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-  assert.ok(!html.includes('id="journey-tech"'));
-  assert.ok(!html.includes('id="journey-year"'));
-  const elements = new Map();
-  const element = key => {
-    if (!elements.has(key)) elements.set(key, { innerHTML: '', value: '', addEventListener() {}, setAttribute() {}, querySelectorAll() { return []; } });
-    return elements.get(key);
-  };
-  const script = fs.readFileSync(path.join(root, 'app.js'), 'utf8').split('// A short, evidence-backed reading path')[0];
-  const runtime = { window: context.window, document: { querySelector: element, querySelectorAll: () => [] } };
-  vm.createContext(runtime);
-  vm.runInContext(script, runtime);
-  assert.match(element('#journey-grid').innerHTML, /년 학습/);
-  vm.runInContext('journeyState.view = "tech"; renderJourney();', runtime);
-  assert.match(element('#journey-grid').innerHTML, /journey-tech-group/);
-  vm.runInContext('journeyState.search = "SCSS"; renderJourney();', runtime);
-  const scssCount = journey.filter(item => item.id !== 'eokka' && [item.title, item.name, item.purpose, item.group, ...item.stack, ...item.learned].join(' ').toLowerCase().includes('scss')).length;
-  assert.ok(element('#journey-count').textContent.startsWith(`${scssCount}개 프로젝트`));
-  vm.runInContext('journeyState.search = "no-such-project-12345"; renderJourney();', runtime);
-  assert.equal(element('#empty-state').hidden, false);
-  vm.runInContext('journeyState.search = ""; journeyState.view = "date"; journeyState.limit = 18; renderJourney();', runtime);
-  assert.equal((element('#journey-grid').innerHTML.match(/class="journey-card"/g) || []).length, 18);
+test('학습 기록은 기본 연도별로 9개를 표시하며 검색 함수가 실제 데이터를 찾는다', () => {
+  const html = renderToStaticMarkup(React.createElement(JourneyArchive));
+  assert.ok(!html.includes('journey-tag'));
+  assert.match(html, /aria-pressed="true">연도별/);
+  assert.match(html, /년 학습/);
+  assert.equal((html.match(/class="journey-card"/g) || []).length, 9);
+  assert.equal(searchProjects(journey, '').length, 73);
+  assert.equal(searchProjects(journey, 'FAISS').length, 1);
+  assert.equal(searchProjects(journey, 'no-such-project-12345').length, 0);
+  const results = searchProjects(journey, 'SCSS');
+  assert.ok(results.length >= 20);
+  assert.ok(results.every((item, index) => !index || results[index - 1].created >= item.created));
+});
+
+test('이동 경로와 이미지 경로가 정적 배포에 대응한다', () => {
+  assert.equal(projectPath('eokka'), '/projects/eokka/');
+  assert.equal(projectPath('carrot'), '/journey/carrot/');
+  assert.equal(assetPath('./journey/images/kakao-login.png'), '/journey/images/kakao-login.png');
 });
 
 test('커리큘럼 연결은 69개 학습 기록에만 적용하고 독립 학습의 출처를 추측하지 않는다', () => {
