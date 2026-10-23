@@ -73,10 +73,23 @@
       </section>
 
       <section class="journey-section section" id="journey">
-        <div class="container"><header class="section-heading reveal"><p class="label">학습 여정</p><h2>HTML부터 제품 개발까지</h2><p>각 카드는 당시 집중해서 공부한 기술과 어려웠던 지점을 기록합니다.</p></header>
-          <div class="filter-bar reveal" aria-label="기술별 프로젝트 필터"><button class="active" data-filter="all">전체</button><button data-filter="HTML">HTML</button><button data-filter="JavaScript">JavaScript</button><button data-filter="React">React</button><button data-filter="TypeScript">TypeScript</button><button data-filter="Next.js">Next.js</button><button data-filter="React Router">React Router</button><button data-filter="Node.js">Node.js</button></div>
-          <div class="journey-grid" id="journey-grid"></div>
-          <p class="empty-state" id="empty-state" hidden>해당 기술의 프로젝트가 없습니다.</p>
+        <div class="container"><header class="section-heading reveal"><p class="label">학습 여정</p><h2>화면을 만드는 기초에서,<br />서비스를 <span class="journey-heading-phrase">출시하기까지.</span></h2><p>정적인 화면에 상호작용을 더하고, 서버와 데이터베이스를 연결했습니다. React로 화면과 상태를 다루는 방식을 익히고 풀스택 설계로 배움을 넓혀, 직접 기획한 서비스를 출시했습니다.</p></header>
+          <ol class="learning-path" id="learning-path" aria-label="학습의 확장 과정"></ol>
+          <div class="learning-section-heading"><h3>직접 구현하며 익힌 것</h3><p>강의·챌린지에서 구현한 기능과 학습 포인트를 중심으로 고른 대표 기록입니다.</p></div>
+          <div class="learning-highlights" id="learning-highlights"></div>
+          <section class="learning-practice" aria-labelledby="learning-practice-title"><div><span class="label">반복하며 다진 기본기</span><h3 id="learning-practice-title">다양한 화면으로 연습한 레이아웃</h3><p>SCSS 레이아웃 학습 20개를 통해 Grid·Flexbox 배치와 스타일 재사용을 연습했습니다. 비슷한 연습은 하나로 묶고, 실제 구현 화면을 골라 담았습니다.</p><button type="button" data-learning-filter="SCSS">레이아웃 학습 모아보기 ↗</button></div><div class="learning-practice-images"><a href="./journey/detail.html?id=paintbox"><img src="./journey/images/study-scss-paint-box-clone.jpg" alt="Paintbox 레이아웃 구현 화면" loading="lazy" /><span>Paintbox · 스타일 재사용 ↗</span></a><a href="./journey/detail.html?id=study-scss-museum-clone"><img src="./journey/images/study-scss-museum-clone.jpg" alt="Museum CSS Grid 구현 화면" loading="lazy" /><span>Museum · Grid 레이아웃 ↗</span></a></div></section>
+          <section class="learning-writing" aria-labelledby="learning-writing-title"><div class="learning-section-heading"><h3 id="learning-writing-title">구현한 내용을 글로 정리했습니다.</h3><p>학습 회고와 기술 개념 기록입니다. 프로젝트별 관련 글은 각 상세 페이지에서도 확인할 수 있습니다.</p></div><div id="learning-writing-links" class="learning-writing-links"></div></section>
+          <details class="learning-archive" id="learning-archive"><summary><span><strong>전체 학습 기록 살펴보기</strong><small>73개 프로젝트 · 연도와 기술로 찾아보기</small></span><span aria-hidden="true">＋</span></summary><div class="learning-archive-body">
+          <div class="journey-toolbar">
+            <div class="journey-views" role="group" aria-label="학습 여정 보기 방식"><button type="button" data-view="date" aria-pressed="true">연도별</button><button type="button" data-view="tech" aria-pressed="false">기술별</button></div>
+            <label class="journey-search"><span class="sr-only">프로젝트·기술 검색</span><input id="journey-search" type="search" placeholder="프로젝트·기술 검색" autocomplete="off" /></label>
+          </div>
+          <div class="journey-status"><p id="journey-count" role="status" aria-live="polite"></p></div>
+          <div id="journey-grid" class="journey-catalog"></div>
+          <p class="empty-state" id="empty-state" hidden>검색 결과가 없습니다. 다른 검색어를 입력해 주세요.</p>
+          <button class="journey-more" id="journey-more" type="button" hidden>프로젝트 더 보기 ↓</button>
+          <p class="journey-note">공개 저장소의 코드·README를 바탕으로 정리했습니다. 날짜는 저장소 생성일 기준이며, 상세 페이지에서 마지막 커밋일과 관련 학습 글을 확인할 수 있습니다.</p>
+          </div></details>
         </div>
       </section>
 

@@ -1,13 +1,3129 @@
+/* GitHub 공개 저장소·블로그 확인: 2026-10-22. 저장소 생성일은 개발 시작일을 의미하지 않습니다. */
 window.PORTFOLIO_DATA = {
-  journey: [
-    { id: "kakao", year: "2022", title: "카카오톡 클론", purpose: "HTML과 CSS로 여러 화면의 구조와 레이아웃을 구현", period: "2022.12", stack: ["HTML", "CSS"], learned: ["시맨틱 마크업", "Flexbox", "페이지 간 UI 일관성"], challenge: "같은 구조를 여러 페이지에서 반복 수정해야 했고, 라우팅과 컴포넌트의 필요성을 처음 체감했습니다.", repo: "https://github.com/jonghwa3471/study-html-kakao-clone" },
-    { id: "todo", year: "2023", title: "Vanilla JS 투두리스트", purpose: "브라우저 DOM과 JavaScript의 상호작용을 학습", period: "2023.01 — 2023.03", stack: ["HTML", "CSS", "JavaScript"], learned: ["DOM API", "이벤트 처리", "Local Storage"], challenge: "사용자가 만든 항목과 삭제 버튼을 연결하는 과정에서 DOM 이벤트와 데이터 식별 방식을 익혔습니다.", repo: "https://github.com/jonghwa3471/study-js-toDoList-clone" },
-    { id: "paintbox", year: "2023", title: "Paintbox 클론", purpose: "SCSS로 반복되는 스타일을 구조화", period: "2023.05", stack: ["HTML", "SCSS", "Gulp"], learned: ["SCSS 변수와 중첩", "Gulp 빌드 환경", "반응형 레이아웃"], challenge: "처음 사용하는 전처리기와 빌드 도구를 직접 설정하며 CSS도 구조적으로 관리할 수 있다는 점을 배웠습니다.", repo: "https://github.com/jonghwa3471/study-scss-paint-box-clone" },
-    { id: "wetube", year: "2023", title: "YouTube 클론", purpose: "웹 요청부터 데이터 저장까지 전체 흐름을 학습", period: "2023.06 — 2025.05", stack: ["JavaScript", "Node.js", "Express", "MongoDB"], learned: ["세션 인증", "파일 업로드", "CRUD와 데이터 모델"], challenge: "쿠키의 세션 정보와 데이터베이스 사용자를 연결하며 인증 상태가 서버와 클라이언트 사이에서 유지되는 원리를 이해했습니다.", repo: "https://github.com/jonghwa3471/js-challenge-wetube" },
-    { id: "trello", year: "2024", title: "Trello 클론", purpose: "React 상태 관리와 Drag & Drop 인터랙션을 학습", period: "2024.09", stack: ["React", "TypeScript", "Recoil"], learned: ["컴포넌트 상태", "전역 상태", "Drag & Drop"], challenge: "카드 이동 시 여러 보드의 순서를 동시에 갱신해야 해 불변성을 유지하는 상태 변경 방식을 연습했습니다.", repo: "https://github.com/jonghwa3471/react-challenge-trello" },
-    { id: "netflix", year: "2025", title: "Netflix 클론", purpose: "서버 데이터와 복잡한 화면 전환을 React로 표현", period: "2025.01 — 2025.02", stack: ["React", "TypeScript", "React Query", "Framer Motion"], learned: ["서버 상태 관리", "라우트 모달", "레이아웃 애니메이션"], challenge: "목록과 상세 모달의 전환 상태를 URL과 연결하고, Framer Motion으로 자연스러운 레이아웃 이동을 구현했습니다.", repo: "https://github.com/jonghwa3471/study-react-netflix-clone" },
-    { id: "carrot", year: "2025", title: "Carrot Market", purpose: "Next.js에서 프론트엔드와 서버를 함께 구성", period: "2025.09 — 2026.01", stack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL"], learned: ["Server Actions", "SSR과 캐시", "관계형 데이터 모델"], challenge: "인증, 상품, 커뮤니티, 채팅 데이터의 관계를 Prisma로 모델링하고 서버와 화면의 경계를 익혔습니다.", repo: "https://github.com/jonghwa3471/carrot-market-next14" },
-    { id: "wemake", year: "2026", title: "Wemake", purpose: "React Router 기반의 실전형 서비스 구조를 학습", period: "2026.05 — 2026.07", stack: ["React Router", "TypeScript", "Supabase", "Drizzle"], learned: ["loader와 action", "Supabase SSR Auth", "Migration과 RLS"], challenge: "기능별 폴더 구조와 데이터 권한 정책을 함께 설계하며 개인 프로젝트 EOKKA의 기술 기반을 마련했습니다.", repo: "https://github.com/jonghwa3471/wemake" },
-    { id: "eokka", year: "2026", title: "EOKKA", purpose: "학습한 기술을 실제 아이디어와 제품으로 연결", period: "2026.07.24 — 2026.10.17 · 85일", stack: ["React Router", "TypeScript", "Supabase", "PostgreSQL", "OpenAI"], learned: ["제품 설계", "캐시와 운영", "테스트와 AI 협업"], challenge: "기능이 늘며 커진 화면을 기능 경계로 리팩터링하고, 외부 API가 실패해도 핵심 분석이 유지되는 구조를 설계했습니다.", repo: "https://github.com/jonghwa3471/EOKKA", detail: "../projects/eokka/" }
+  "checkedAt": "2026-10-22",
+  "groups": [
+    {
+      "id": "HTML · CSS",
+      "description": "마크업과 레이아웃부터 스타일 전처리·빌드 자동화까지"
+    },
+    {
+      "id": "JavaScript · TypeScript",
+      "description": "DOM·브라우저 API와 언어의 동작 원리"
+    },
+    {
+      "id": "React",
+      "description": "컴포넌트·상태 관리·서버 데이터와 화면 인터랙션"
+    },
+    {
+      "id": "Next.js",
+      "description": "Pages Router에서 App Router·서버 액션으로"
+    },
+    {
+      "id": "React Router",
+      "description": "서버 데이터와 UI를 연결하고 실제 서비스로 확장"
+    },
+    {
+      "id": "React Native",
+      "description": "기기 API·내비게이션·저장소와 모바일 인터랙션"
+    },
+    {
+      "id": "Python · AI",
+      "description": "데이터 수집·시각화에서 문서 기반 AI 앱까지"
+    },
+    {
+      "id": "데이터 · 백엔드",
+      "description": "인증·데이터 모델·API와 실시간 통신"
+    },
+    {
+      "id": "CS · 기초",
+      "description": "객체지향·알고리즘과 기초 학습 기록"
+    }
+  ],
+  "journey": [
+    {
+      "id": "eokka",
+      "name": "EOKKA",
+      "title": "EOKKA",
+      "purpose": "학습한 풀스택 기술을 실제 투자 시나리오 서비스로 연결했습니다.",
+      "group": "React Router",
+      "year": "2026",
+      "created": "2026-07-24",
+      "updated": "2026-10-17",
+      "period": "2026.07.24",
+      "stack": [
+        "React Router",
+        "TypeScript",
+        "React",
+        "Supabase",
+        "Drizzle",
+        "Zod",
+        "Tailwind CSS"
+      ],
+      "learned": [
+        "투자 분석 흐름과 대시보드 구성",
+        "로딩·캐시·오류 모니터링을 포함한 서비스 운영"
+      ],
+      "repo": "https://github.com/jonghwa3471/EOKKA",
+      "branch": "master",
+      "commits": 141,
+      "kind": "개인 서비스",
+      "sources": [
+        "app/routes.ts",
+        "app/debug/analytics.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "Third-Party Services - Sentry",
+          "url": "https://j2yonghwa.tistory.com/183",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - React Router v7 - useFetcher",
+          "url": "https://j2yonghwa.tistory.com/164",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - Supabase SSR Package, Auth",
+          "url": "https://j2yonghwa.tistory.com/161",
+          "kind": "관련 개념"
+        }
+      ],
+      "detail": "../projects/eokka/"
+    },
+    {
+      "id": "Fullstack-GPT",
+      "name": "Fullstack-GPT",
+      "title": "Fullstack GPT",
+      "purpose": "문서 내용을 검색해 답하는 AI 앱의 데이터 흐름을 학습했습니다.",
+      "group": "Python · AI",
+      "year": "2026",
+      "created": "2026-08-14",
+      "updated": "2026-10-12",
+      "period": "2026.08.14",
+      "stack": [
+        "Python",
+        "LangChain",
+        "Streamlit",
+        "FAISS",
+        "OpenAI",
+        "Ollama"
+      ],
+      "learned": [
+        "문서 분할 → 임베딩 → FAISS 검색 → 답변 생성",
+        "임베딩 캐시와 Streamlit 스트리밍 응답"
+      ],
+      "repo": "https://github.com/jonghwa3471/Fullstack-GPT",
+      "branch": "master",
+      "commits": 45,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "Home.py",
+        "pages/01_DocumentGPT.py"
+      ],
+      "blogs": [
+        {
+          "title": "AI - LangChain RAG(Retrieval Augmented Generation)",
+          "url": "https://j2yonghwa.tistory.com/188",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "AI - LangChain Memory",
+          "url": "https://j2yonghwa.tistory.com/187",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "AI - Streamlit",
+          "url": "https://j2yonghwa.tistory.com/178",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "wemake",
+      "name": "wemake",
+      "title": "Wemake",
+      "purpose": "React Router의 loader·action으로 데이터 조회·폼 제출·오류 표시를 연결하고, 기능별로 라우트를 구성한 풀스택 학습 프로젝트입니다.",
+      "group": "React Router",
+      "year": "2026",
+      "created": "2026-04-23",
+      "updated": "2026-07-23",
+      "period": "2026.04.23",
+      "stack": [
+        "React Router",
+        "TypeScript",
+        "React",
+        "Supabase",
+        "Drizzle",
+        "Zod",
+        "Tailwind CSS"
+      ],
+      "learned": [
+        "기능별 중첩 라우트와 loader·action 기반 서버 데이터 흐름",
+        "Zod 검증 결과를 actionData로 반환해 필드별 오류 표시",
+        "useNavigation으로 제출·이동 중 상태를 구분하는 UI",
+        "서버에서 로그인 사용자 확인 후 제품 등록 처리",
+        "이미지 형식·2MB 제한 검증, 미리보기와 Supabase Storage 업로드",
+        "Supabase·Drizzle 기반 데이터 접근과 기능별 쿼리 분리"
+      ],
+      "repo": "https://github.com/jonghwa3471/wemake",
+      "branch": "master",
+      "commits": 148,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "app/routes.ts",
+        "app/db.ts",
+        "app/features/products/pages/submit-product-page.tsx",
+        "app/features/auth/pages/login-page.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "라이브러리 - React Router v7",
+          "url": "https://j2yonghwa.tistory.com/151",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "SQL - Supabase & Drizzle",
+          "url": "https://j2yonghwa.tistory.com/156",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - React Router v7 - useFetcher",
+          "url": "https://j2yonghwa.tistory.com/164",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - Supabase SSR Package, Auth",
+          "url": "https://j2yonghwa.tistory.com/161",
+          "kind": "관련 개념"
+        }
+      ],
+      "runtimeNote": "기존 배포는 일시 중지 상태여서 실행 화면과 링크를 넣지 않았습니다."
+    },
+    {
+      "id": "data-visualization",
+      "name": "data-visualization",
+      "title": "코로나 데이터 대시보드",
+      "purpose": "CSV 데이터를 가공해 지도와 차트로 시각화했습니다.",
+      "group": "Python · AI",
+      "year": "2026",
+      "created": "2026-04-17",
+      "updated": "2026-04-23",
+      "period": "2026.04.17",
+      "stack": [
+        "Python",
+        "pandas",
+        "Plotly",
+        "Dash"
+      ],
+      "learned": [
+        "pandas 데이터 가공과 Plotly 지도·막대 그래프",
+        "Dash 콜백으로 국가별 데이터 변경"
+      ],
+      "repo": "https://github.com/jonghwa3471/data-visualization",
+      "branch": "master",
+      "commits": 23,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "main.py",
+        "builders.py"
+      ],
+      "blogs": [
+        {
+          "title": "라이브러리 - pandas(python)",
+          "url": "https://j2yonghwa.tistory.com/143",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - plotly(python)",
+          "url": "https://j2yonghwa.tistory.com/144",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "seleniumpro",
+      "name": "seleniumpro",
+      "title": "Selenium 브라우저 자동화",
+      "purpose": "검색 결과와 해시태그 수집을 브라우저 자동화로 연습했습니다.",
+      "group": "Python · AI",
+      "year": "2026",
+      "created": "2026-04-06",
+      "updated": "2026-04-17",
+      "period": "2026.04.06",
+      "stack": [
+        "Python",
+        "Selenium"
+      ],
+      "learned": [
+        "WebDriverWait로 요소가 준비될 때까지 대기",
+        "검색 결과 캡처와 수집 데이터 CSV 저장"
+      ],
+      "repo": "https://github.com/jonghwa3471/seleniumpro",
+      "branch": "master",
+      "commits": 15,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "google.py",
+        "instamining.py"
+      ],
+      "blogs": [
+        {
+          "title": "Python - Selenium",
+          "url": "https://j2yonghwa.tistory.com/130",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "SQL-masterclass",
+      "name": "SQL-masterclass",
+      "title": "데이터베이스 실습",
+      "purpose": "SQL·ORM·문서형 DB의 접근 방식을 코드로 비교했습니다.",
+      "group": "데이터 · 백엔드",
+      "year": "2026",
+      "created": "2026-04-09",
+      "updated": "2026-04-14",
+      "period": "2026.04.09",
+      "stack": [
+        "TypeScript",
+        "SQL",
+        "SQLite",
+        "Drizzle",
+        "MongoDB",
+        "Python"
+      ],
+      "learned": [
+        "Drizzle 스키마와 SQLite 마이그레이션",
+        "Python의 MongoDB 연결과 문서 추가"
+      ],
+      "repo": "https://github.com/jonghwa3471/SQL-masterclass",
+      "branch": "master",
+      "commits": 9,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.ts",
+        "schema.ts"
+      ],
+      "blogs": [
+        {
+          "title": "SQL - Drizzle(ORM)",
+          "url": "https://j2yonghwa.tistory.com/140",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "SQL - SQL with Python",
+          "url": "https://j2yonghwa.tistory.com/138",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "MongoDB - MongoDB with Python",
+          "url": "https://j2yonghwa.tistory.com/139",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "dynamic-scrapper",
+      "name": "dynamic-scrapper",
+      "title": "채용 공고 스크래퍼",
+      "purpose": "여러 사이트의 채용 정보를 키워드별로 모아 보여줍니다.",
+      "group": "Python · AI",
+      "year": "2026",
+      "created": "2026-03-13",
+      "updated": "2026-03-26",
+      "period": "2026.03.13",
+      "stack": [
+        "Python",
+        "Flask",
+        "Playwright",
+        "BeautifulSoup"
+      ],
+      "learned": [
+        "Flask 라우트와 템플릿 렌더링",
+        "키워드별 결과 재사용과 정적 HTML 내보내기"
+      ],
+      "repo": "https://github.com/jonghwa3471/dynamic-scrapper",
+      "branch": "master",
+      "commits": 19,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "main.py",
+        "build/index.html"
+      ],
+      "blogs": [
+        {
+          "title": "라이브러리 - Flask",
+          "url": "https://j2yonghwa.tistory.com/111",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - Playwright",
+          "url": "https://j2yonghwa.tistory.com/110",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - BeautifulSoup",
+          "url": "https://j2yonghwa.tistory.com/109",
+          "kind": "관련 개념"
+        }
+      ],
+      "images": [
+        {
+          "src": "./journey/images/dynamic-scrapper.jpg",
+          "caption": "채용 공고 스크래퍼 화면",
+          "source": "https://github.com/jonghwa3471/dynamic-scrapper/blob/master/screenshot.png"
+        }
+      ]
+    },
+    {
+      "id": "social-coin",
+      "name": "social-coin",
+      "title": "Social Coin",
+      "purpose": "인증과 코인 데이터를 결합한 모바일 앱을 학습했습니다.",
+      "group": "React Native",
+      "year": "2026",
+      "created": "2026-02-25",
+      "updated": "2026-02-26",
+      "period": "2026.02.25",
+      "stack": [
+        "React Native",
+        "TypeScript",
+        "Expo",
+        "React",
+        "Firebase",
+        "TanStack Query",
+        "styled-components"
+      ],
+      "learned": [
+        "Firebase 인증 상태에 따른 내비게이션 분기",
+        "TanStack Query로 코인 목록 요청"
+      ],
+      "repo": "https://github.com/jonghwa3471/social-coin",
+      "branch": "master",
+      "commits": 10,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "App.tsx",
+        "screens/Home.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "Firebase - React Native Android Setup",
+          "url": "https://j2yonghwa.tistory.com/107",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Firebase - React Native iOS Setup",
+          "url": "https://j2yonghwa.tistory.com/106",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - Victory Native",
+          "url": "https://j2yonghwa.tistory.com/108",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리  - TanStack Query(React Query)",
+          "url": "https://j2yonghwa.tistory.com/102",
+          "kind": "관련 개념"
+        }
+      ],
+      "runtimeNote": "모바일 학습 앱입니다. Expo 또는 네이티브 개발 환경에서 실행하며, 브라우저 실행 화면으로 대체하지 않았습니다."
+    },
+    {
+      "id": "nomad-diary",
+      "name": "nomad-diary",
+      "title": "Nomad Diary",
+      "purpose": "기기 내 데이터 저장과 광고 SDK 연결을 연습한 일기 앱입니다.",
+      "group": "React Native",
+      "year": "2026",
+      "created": "2026-02-22",
+      "updated": "2026-02-25",
+      "period": "2026.02.22",
+      "stack": [
+        "React Native",
+        "TypeScript",
+        "Expo",
+        "React",
+        "Realm",
+        "styled-components"
+      ],
+      "learned": [
+        "Realm 데이터베이스 연결과 일기 화면 구성",
+        "네이티브 광고 SDK 초기화와 화면 연결"
+      ],
+      "repo": "https://github.com/jonghwa3471/nomad-diary",
+      "branch": "master",
+      "commits": 12,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "app/index.tsx",
+        "screens/Home.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "라이브러리 - Realm",
+          "url": "https://j2yonghwa.tistory.com/104",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Third-Party Services - Google AdMob",
+          "url": "https://j2yonghwa.tistory.com/105",
+          "kind": "관련 개념"
+        }
+      ],
+      "runtimeNote": "모바일 학습 앱입니다. Expo 또는 네이티브 개발 환경에서 실행하며, 브라우저 실행 화면으로 대체하지 않았습니다."
+    },
+    {
+      "id": "langApp",
+      "name": "langApp",
+      "title": "카드 스와이프 학습 앱",
+      "purpose": "알고 있는 항목을 제스처로 분류하는 인터랙션을 구현했습니다.",
+      "group": "React Native",
+      "year": "2026",
+      "created": "2026-02-11",
+      "updated": "2026-02-13",
+      "period": "2026.02.11",
+      "stack": [
+        "React Native",
+        "TypeScript",
+        "Expo",
+        "React",
+        "styled-components"
+      ],
+      "learned": [
+        "PanResponder로 이동 거리와 드롭 방향 판별",
+        "Animated 값으로 위치·크기·투명도 연결"
+      ],
+      "repo": "https://github.com/jonghwa3471/langApp",
+      "branch": "master",
+      "commits": 20,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "App.tsx",
+        "icons.ts"
+      ],
+      "blogs": [
+        {
+          "title": "React Native - Animation",
+          "url": "https://j2yonghwa.tistory.com/103",
+          "kind": "관련 개념"
+        }
+      ],
+      "runtimeNote": "모바일 학습 앱입니다. Expo 또는 네이티브 개발 환경에서 실행하며, 브라우저 실행 화면으로 대체하지 않았습니다."
+    },
+    {
+      "id": "noovies",
+      "name": "noovies",
+      "title": "Noovies",
+      "purpose": "영화·TV·검색 화면을 갖춘 모바일 콘텐츠 앱을 학습했습니다.",
+      "group": "React Native",
+      "year": "2026",
+      "created": "2026-01-20",
+      "updated": "2026-02-10",
+      "period": "2026.01.20",
+      "stack": [
+        "React Native",
+        "TypeScript",
+        "Expo",
+        "React",
+        "TanStack Query",
+        "styled-components"
+      ],
+      "learned": [
+        "탭·스택 내비게이션과 목록·상세 화면 분리",
+        "TanStack Query와 초기 폰트·이미지 준비"
+      ],
+      "repo": "https://github.com/jonghwa3471/noovies",
+      "branch": "master",
+      "commits": 46,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "app/index.tsx",
+        "api.ts"
+      ],
+      "blogs": [
+        {
+          "title": "React Native - React Navigation",
+          "url": "https://j2yonghwa.tistory.com/97",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리  - TanStack Query(React Query)",
+          "url": "https://j2yonghwa.tistory.com/102",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "React Native - Dark Mode",
+          "url": "https://j2yonghwa.tistory.com/99",
+          "kind": "관련 개념"
+        }
+      ],
+      "runtimeNote": "모바일 학습 앱입니다. Expo 또는 네이티브 개발 환경에서 실행하며, 브라우저 실행 화면으로 대체하지 않았습니다."
+    },
+    {
+      "id": "WorkHardTravelHardApp",
+      "name": "WorkHardTravelHardApp",
+      "title": "Work Hard · Travel Hard",
+      "purpose": "일과 여행 할 일을 나누어 관리하는 앱을 구현했습니다.",
+      "group": "React Native",
+      "year": "2026",
+      "created": "2026-01-19",
+      "updated": "2026-01-20",
+      "period": "2026.01.19",
+      "stack": [
+        "React Native",
+        "Expo",
+        "React"
+      ],
+      "learned": [
+        "React Native 입력·목록·이벤트 처리",
+        "AsyncStorage를 이용한 할 일 저장과 복원"
+      ],
+      "repo": "https://github.com/jonghwa3471/WorkHardTravelHardApp",
+      "branch": "master",
+      "commits": 17,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "App.js",
+        "colors.js"
+      ],
+      "blogs": [
+        {
+          "title": "React Native - 기본 Layout, API",
+          "url": "https://j2yonghwa.tistory.com/91",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "React Native - 배포하기",
+          "url": "https://j2yonghwa.tistory.com/94",
+          "kind": "관련 개념"
+        }
+      ],
+      "runtimeNote": "모바일 학습 앱입니다. Expo 또는 네이티브 개발 환경에서 실행하며, 브라우저 실행 화면으로 대체하지 않았습니다."
+    },
+    {
+      "id": "Learning-React-Native",
+      "name": "Learning-React-Native",
+      "title": "위치 기반 날씨 앱",
+      "purpose": "브라우저 밖의 기기 기능과 모바일 레이아웃을 학습했습니다.",
+      "group": "React Native",
+      "year": "2026",
+      "created": "2026-01-12",
+      "updated": "2026-01-16",
+      "period": "2026.01.12",
+      "stack": [
+        "React Native",
+        "Expo",
+        "React"
+      ],
+      "learned": [
+        "Expo Location 권한 요청과 현재 위치 사용",
+        "React Native 컴포넌트로 날씨 정보 표현"
+      ],
+      "repo": "https://github.com/jonghwa3471/Learning-React-Native",
+      "branch": "master",
+      "commits": 9,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "App.js",
+        "index.js"
+      ],
+      "blogs": [
+        {
+          "title": "React Native - React Native 시작하기",
+          "url": "https://j2yonghwa.tistory.com/90",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "React Native - 기본 Layout, API",
+          "url": "https://j2yonghwa.tistory.com/91",
+          "kind": "관련 개념"
+        }
+      ],
+      "runtimeNote": "모바일 학습 앱입니다. Expo 또는 네이티브 개발 환경에서 실행하며, 브라우저 실행 화면으로 대체하지 않았습니다."
+    },
+    {
+      "id": "next-challenge-2",
+      "name": "next-challenge-2",
+      "title": "Next.js SNS 챌린지",
+      "purpose": "인증과 글 작성 기능을 App Router로 연결했습니다.",
+      "group": "Next.js",
+      "year": "2025",
+      "created": "2025-12-31",
+      "updated": "2026-01-15",
+      "period": "2025.12.31",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "Prisma",
+        "Zod"
+      ],
+      "learned": [
+        "서버에서 세션 확인 후 게시물 조회·작성",
+        "Zod 입력 검증과 revalidatePath를 통한 갱신"
+      ],
+      "repo": "https://github.com/jonghwa3471/next-challenge-2",
+      "branch": "master",
+      "commits": 15,
+      "kind": "학습 챌린지",
+      "sources": [
+        "app/(private)/page.tsx",
+        "app/(private)/actions.ts"
+      ],
+      "blogs": [
+        {
+          "title": "Next.js 14 - Server Action",
+          "url": "https://j2yonghwa.tistory.com/78",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Prisma - Prisma v7 사용법",
+          "url": "https://j2yonghwa.tistory.com/92",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - Zod",
+          "url": "https://j2yonghwa.tistory.com/82",
+          "kind": "관련 개념"
+        }
+      ],
+      "images": [
+        {
+          "src": "./journey/images/next-challenge-2.jpg",
+          "caption": "로그인 화면",
+          "source": "https://next-challenge-2.vercel.app"
+        }
+      ],
+      "demo": "https://next-challenge-2.vercel.app",
+      "demoStatus": "2026.10.22 실행 확인"
+    },
+    {
+      "id": "Movie-App-with-GraphQL",
+      "name": "Movie-App-with-GraphQL",
+      "title": "GraphQL 영화 앱",
+      "purpose": "GraphQL 서버의 영화 데이터를 React 화면에 연결했습니다.",
+      "group": "React",
+      "year": "2026",
+      "created": "2026-01-07",
+      "updated": "2026-01-07",
+      "period": "2026.01.07",
+      "stack": [
+        "React",
+        "JavaScript",
+        "GraphQL",
+        "Apollo Client",
+        "React Router"
+      ],
+      "learned": [
+        "Apollo Client 설정과 쿼리 기반 데이터 요청",
+        "useQuery의 loading 상태에 따라 대기 UI와 영화 목록 분리",
+        "영화 목록·상세 라우트 분리"
+      ],
+      "repo": "https://github.com/jonghwa3471/Movie-App-with-GraphQL",
+      "branch": "master",
+      "commits": 11,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/client.js",
+        "src/routes/Movies.jsx"
+      ],
+      "blogs": [
+        {
+          "title": "GraphQL - GraphQL Client 시작하기",
+          "url": "https://j2yonghwa.tistory.com/89",
+          "kind": "관련 개념"
+        }
+      ],
+      "runtimeNote": "클라이언트가 로컬 GraphQL 서버(localhost:4000)를 사용하므로 서버를 함께 실행해야 합니다."
+    },
+    {
+      "id": "Learning-GraphQL",
+      "name": "Learning-GraphQL",
+      "title": "GraphQL 서버 실습",
+      "purpose": "REST 데이터와 사용자·게시물을 GraphQL 스키마로 표현했습니다.",
+      "group": "데이터 · 백엔드",
+      "year": "2026",
+      "created": "2026-01-04",
+      "updated": "2026-01-06",
+      "period": "2026.01.04",
+      "stack": [
+        "Node.js",
+        "JavaScript",
+        "GraphQL"
+      ],
+      "learned": [
+        "Query·Mutation·Resolver와 타입 정의",
+        "필드 리졸버로 작성자 관계 연결"
+      ],
+      "repo": "https://github.com/jonghwa3471/Learning-GraphQL",
+      "branch": "master",
+      "commits": 11,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "server.js"
+      ],
+      "blogs": [
+        {
+          "title": "GraphQL - GraphQL Server 시작하기",
+          "url": "https://j2yonghwa.tistory.com/88",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "cloudflare-workers",
+      "name": "cloudflare-workers",
+      "title": "Workers 실시간 채팅",
+      "purpose": "서버리스 런타임에서 WebSocket 채팅을 구현했습니다.",
+      "group": "데이터 · 백엔드",
+      "year": "2025",
+      "created": "2025-12-24",
+      "updated": "2025-12-29",
+      "period": "2025.12.24",
+      "stack": [
+        "TypeScript",
+        "Cloudflare Workers",
+        "WebSocket"
+      ],
+      "learned": [
+        "Durable Object로 채팅 연결과 메시지 관리",
+        "WebSocketPair를 이용한 연결 및 메시지 전달"
+      ],
+      "repo": "https://github.com/jonghwa3471/cloudflare-workers",
+      "branch": "master",
+      "commits": 10,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/index.ts",
+        "src/home.html"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "next-challenge-1",
+      "name": "next-challenge-1",
+      "title": "억만장자 프로필 탐색",
+      "purpose": "서버에서 가져온 데이터를 목록과 상세 화면으로 구성했습니다.",
+      "group": "Next.js",
+      "year": "2025",
+      "created": "2025-12-26",
+      "updated": "2025-12-26",
+      "period": "2025.12.26",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "React",
+        "Tailwind CSS"
+      ],
+      "learned": [
+        "App Router의 비동기 페이지와 로딩 UI",
+        "프로필 카드와 동적 상세 경로"
+      ],
+      "repo": "https://github.com/jonghwa3471/next-challenge-1",
+      "branch": "master",
+      "commits": 3,
+      "kind": "학습 챌린지",
+      "sources": [
+        "app/(home)/page.tsx",
+        "app/(home)/loading.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "Next.js 14 - Pages router vs App router 한 눈에 비교",
+          "url": "https://j2yonghwa.tistory.com/87",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Next.js 14 - 시작하기",
+          "url": "https://j2yonghwa.tistory.com/74",
+          "kind": "관련 개념"
+        }
+      ],
+      "images": [
+        {
+          "src": "./journey/images/next-challenge-1.jpg",
+          "caption": "억만장자 프로필 목록 화면",
+          "source": "https://next-challenge-beige.vercel.app"
+        }
+      ],
+      "demo": "https://next-challenge-beige.vercel.app",
+      "demoStatus": "2026.10.22 실행 확인"
+    },
+    {
+      "id": "carrot",
+      "name": "carrot-market-next14",
+      "title": "당근마켓 · Next14",
+      "purpose": "Next12와 Next14의 차이를 비교하며, 폼 검증·로딩 UI·캐시 갱신 등 사용자의 입력과 대기 경험을 다룬 풀스택 학습 프로젝트입니다.",
+      "group": "Next.js",
+      "year": "2025",
+      "created": "2025-09-03",
+      "updated": "2025-12-23",
+      "period": "2025.09.03",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "Prisma",
+        "Neon",
+        "Cloudflare Images",
+        "Cloudflare Stream",
+        "Supabase",
+        "React Hook Form",
+        "Zod"
+      ],
+      "learned": [
+        "App Router의 서버·클라이언트 분리와 Server Action 기반 폼 처리",
+        "React Hook Form·Zod 입력 검증과 useFormStatus의 제출 중 표시·버튼 비활성화",
+        "loading.tsx 스켈레톤과 상품 조회 캐시·태그 기반 재검증",
+        "Intercepting·Parallel Routes로 목록 위 모달과 URL·뒤로 가기 연결 실습",
+        "useOptimistic으로 서버 응답 전 좋아요 UI를 갱신하고 처리 후 캐시 재검증",
+        "Tailwind CSS로 화면 크기에 따른 반응형 디자인과 다크 모드 구현",
+        "Prisma·Neon 데이터 저장, Cloudflare 이미지·영상 처리와 Supabase 실시간 채팅 연결"
+      ],
+      "motivation": "React로 화면을 구현한 뒤, 익숙한 React를 사용하면서 서버까지 다룰 수 있는 Next.js에 관심이 생겼습니다. 정적인 페이지의 사전 렌더링, SEO에 유리한 HTML 제공, 보안에 민감한 로직을 서버에서 처리하는 방식이 매력적이었습니다. 앞서 Next12의 Pages Router를 학습한 경험을 바탕으로, Next14의 App Router에서는 라우팅과 데이터 처리, 서버·클라이언트의 역할이 어떻게 달라지는지 직접 비교해보고 싶어 학습을 이어갔습니다.",
+      "reflections": [
+        {
+          "title": "폴더 구조가 화면의 구조가 되는 직관적인 규칙",
+          "text": "Pages Router의 폴더 기반 경로도 직관적이었지만, App Router는 page.tsx와 layout.tsx로 페이지와 공통 레이아웃의 역할이 명확해져 더 편했습니다. loading.tsx·not-found.tsx처럼 상황별 파일 규칙도 정해져 있어 구조가 체계적으로 느껴졌습니다."
+        },
+        {
+          "title": "서버를 기본으로, 필요한 상호작용만 클라이언트로",
+          "text": "페이지와 레이아웃이 기본적으로 Server Component라는 점이 Next12와 달랐습니다. 상호작용에는 use client, 서버 함수에는 use server를 사용하며 실행 위치를 구분하니 화면과 데이터 처리의 역할이 명확해졌습니다."
+        },
+        {
+          "title": "스타일 작성의 부담을 줄여준 Tailwind CSS",
+          "text": "클래스를 조합하고 바로 확인하는 방식 덕분에 UI 구현이 훨씬 빨라졌다고 느꼈습니다. 특히 까다롭게 느꼈던 반응형 디자인과 다크 모드를 접두사와 dark 변형으로 다룰 수 있어 편했습니다."
+        },
+        {
+          "title": "입력뿐 아니라 기다리는 화면까지 다루기",
+          "text": "폼과 Server Action을 연결하는 흐름이 직관적으로 느껴졌습니다. 필드 오류를 표시하고 제출 중에는 버튼을 비활성화했으며, 데이터 로딩에는 스켈레톤을 구성했습니다. 좋아요는 useOptimistic으로 응답 전에 화면에 반영하고 처리 후 캐시를 갱신하며, 서버 상태와 사용자가 보는 상태를 함께 다뤘습니다."
+        },
+        {
+          "title": "SMS 인증: 대체 서비스까지 시도했지만 남은 한계",
+          "category": "challenge",
+          "text": "Twilio의 한국 번호 발송 과정에서 제약을 겪어 Vonage도 시도했지만, 발송 연동은 완성하지 못했습니다. SMS는 입력 화면까지만 구현했습니다. 외부 서비스는 코드 외에도 지원 범위와 계정·발송 조건을 확인해야 한다는 점을 느꼈습니다."
+        },
+        {
+          "title": "PlanetScale 대신 배포용 DB 대안 찾기",
+          "category": "challenge",
+          "text": "PlanetScale의 비용 부담으로 대안을 찾아, 개발 초기에는 SQLite를 사용하고 배포 시 Neon PostgreSQL로 전환했습니다. Prisma의 공급자 설정과 연결 환경변수를 바꾸며 강의와 다른 환경에 맞춰 적용했습니다."
+        },
+        {
+          "title": "데이터와 파일을 서로 다른 저장소에 연결하기",
+          "text": "Prisma·Neon에는 사용자·상품·채팅 데이터와 이미지 주소를 저장하고, 파일은 Cloudflare Images에 업로드했습니다. 채팅 전달은 Supabase Realtime, 라이브 영상은 Cloudflare Stream에 맡기며 각 서비스의 역할을 구분했습니다."
+        },
+        {
+          "title": "서버리스 환경에 맞춰 라이브 영상의 역할 나누기",
+          "category": "challenge",
+          "text": "라이브 방송을 구현하면서 배포 환경에 따라 구현 방식도 달라져야 한다는 것을 배웠습니다. Vercel의 서버리스 환경을 고려해 영상 스트리밍은 Cloudflare Stream에 맡기고, Next.js에서는 방송 생성과 정보 저장을 처리했습니다. 이 과정에서 외부 서비스를 활용해 배포 환경의 제약에 맞게 기능을 구현하는 방법을 익혔습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "서버 액션에서 폼과 오류 표시까지 이어지는 흐름",
+          "language": "TSX",
+          "description": "서버에서 실행할 코드를 actions.ts에 분리해두고, 클라이언트 컴포넌트에서 import해 사용할 수 있다는 점이 인상적이었습니다. useFormState에 액션을 연결하고 반환된 dispatch를 form의 action에 전달하면, 제출부터 서버의 처리 결과를 화면에 반영하는 과정까지 일관된 흐름으로 읽혀 좋았습니다.",
+          "code": "\"use client\";\n\nimport { useFormState } from \"react-dom\";\nimport { login } from \"./actions\";\n\n// LogIn 컴포넌트 내부의 핵심 코드\nconst [state, dispatch] = useFormState(login, null);\n\n<form action={dispatch}>\n  <Input\n    name=\"email\"\n    type=\"email\"\n    errors={state?.fieldErrors.email}\n  />\n  <Input\n    name=\"password\"\n    type=\"password\"\n    errors={state?.fieldErrors.password}\n  />\n  <Button text=\"Log in\" />\n</form>",
+          "takeaway": "서버 액션을 호출하는 흐름과 그 결과를 보여주는 코드가 자연스럽게 연결된다는 점이 특히 마음에 들었습니다. dispatch는 폼 제출에 연결하고, state는 액션이 반환한 필드 오류를 표시하는 데 사용하면서 서버와 UI의 역할을 구분할 수 있었습니다. 클라이언트에서 import하더라도 서버 액션 자체는 서버에서 실행된다는 점도 함께 이해했습니다."
+        }
+      ],
+      "nextDirection": "인증·폼 검증·이미지 업로드·DB 저장을 연결한 경험을 바탕으로, 다음에는 다른 풀스택 프레임워크의 데이터 처리 방식까지 학습 범위를 넓혔습니다. Wemake에서 React Router의 서버 데이터 흐름과 Supabase·Drizzle을 익히며, 직접 기획한 서비스를 만들기 위한 설계와 구현의 기반을 다졌습니다.",
+      "repo": "https://github.com/jonghwa3471/carrot-market-next14",
+      "branch": "master",
+      "commits": 117,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "app/(auth)/page.tsx",
+        "app/(auth)/login/page.tsx",
+        "app/(auth)/login/actions.ts",
+        "app/add/page.tsx",
+        "app/add/actions.ts",
+        "components/button.tsx",
+        "app/(tabs)/home/loading.tsx",
+        "components/like-button.tsx",
+        "app/posts/[id]/actions.ts",
+        "app/products/[id]/page.tsx",
+        "app/(tabs)/home/@modal/(...)products/[id]/page.tsx",
+        "app/streams/add/actions.ts",
+        "app/streams/[id]/page.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "Next.js 14 - Server Action",
+          "url": "https://j2yonghwa.tistory.com/78",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Next.js 14 - useFormState(useActionState)",
+          "url": "https://j2yonghwa.tistory.com/80",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Next.js 14 - useFormStatus",
+          "url": "https://j2yonghwa.tistory.com/79",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - Zod",
+          "url": "https://j2yonghwa.tistory.com/82",
+          "kind": "관련 개념"
+        }
+      ],
+      "images": [
+        {
+          "src": "./journey/images/carrot-products-clean.jpg",
+          "caption": "로그인 후 상품 목록 화면",
+          "source": "https://carrot-market-next14-seven.vercel.app/home"
+        },
+        {
+          "src": "./journey/images/carrot-login.jpg",
+          "caption": "이메일 로그인·인증 방식 선택 화면",
+          "source": "https://carrot-market-next14-seven.vercel.app/login"
+        },
+        {
+          "src": "./journey/images/carrot-product-detail-clean.jpg",
+          "caption": "상품 상세 화면",
+          "source": "https://carrot-market-next14-seven.vercel.app/products/1"
+        },
+        {
+          "src": "./journey/images/carrot-product-form-clean.jpg",
+          "caption": "상품 이미지·정보 등록 화면",
+          "source": "https://carrot-market-next14-seven.vercel.app/add"
+        }
+      ],
+      "galleryLayout": "landscape",
+      "demo": "https://carrot-market-next14-seven.vercel.app",
+      "demoStatus": "사용자가 로그인한 브라우저에서 상품 목록·상세·등록 화면을 확인했습니다. 상품 등록·수정·삭제·메시지 전송은 수행하지 않았습니다. SMS 발송은 미완성이며, 라우팅 모달은 상품 데이터가 아닌 플레이스홀더 UI를 표시하는 학습 구현입니다."
+    },
+    {
+      "id": "coding-test",
+      "name": "coding-test",
+      "title": "알고리즘 문제 풀이",
+      "purpose": "백준·프로그래머스·SWEA 풀이를 저장소에 기록했습니다.",
+      "group": "CS · 기초",
+      "year": "2025",
+      "created": "2025-01-06",
+      "updated": "2025-11-21",
+      "period": "2025.01.06",
+      "stack": [
+        "알고리즘"
+      ],
+      "learned": [
+        "플랫폼·난이도별 문제와 풀이 관리",
+        "반복적인 문제 풀이를 통한 구현 연습"
+      ],
+      "repo": "https://github.com/jonghwa3471/coding-test",
+      "branch": "main",
+      "commits": 281,
+      "kind": "학습 프로젝트",
+      "sources": [],
+      "blogs": [
+        {
+          "title": "[level 0] 평행 - 120875 - 프로그래머스 코딩테스트 입문",
+          "url": "https://j2yonghwa.tistory.com/33",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "[level 0] 저주의 숫자 3 - 120871 - 프로그래머스 코딩테스트 입문",
+          "url": "https://j2yonghwa.tistory.com/31",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "[level 0] 안전지대 - 120866 - 프로그래머스 코딩테스트 입문",
+          "url": "https://j2yonghwa.tistory.com/28",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "carrot-market-next12",
+      "name": "carrot-market-next12",
+      "title": "당근마켓 · Next12",
+      "purpose": "API Routes와 클라이언트 데이터 요청으로 마켓 구조를 학습했습니다.",
+      "group": "Next.js",
+      "year": "2025",
+      "created": "2025-05-06",
+      "updated": "2025-08-28",
+      "period": "2025.05.06",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "React",
+        "Tailwind CSS",
+        "Prisma",
+        "React Hook Form"
+      ],
+      "learned": [
+        "Pages Router·API Routes·Prisma 연결",
+        "SWR과 사용자 정의 데이터 요청 훅",
+        "마크다운 파일을 읽는 정적 블로그 페이지"
+      ],
+      "repo": "https://github.com/jonghwa3471/carrot-market-next12",
+      "branch": "master",
+      "commits": 148,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "pages/blog/index.tsx",
+        "pages/chats/index.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "Next.js 12 - API Routes",
+          "url": "https://j2yonghwa.tistory.com/46",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "라이브러리 - SWR",
+          "url": "https://j2yonghwa.tistory.com/62",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Next.js 12 - SSR + SWR",
+          "url": "https://j2yonghwa.tistory.com/69",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Next.js 12 - getStaticProps, getStaticPaths",
+          "url": "https://j2yonghwa.tistory.com/70",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "nwitter-challenge-firebase",
+      "name": "nwitter-challenge-firebase",
+      "title": "Nwitter 챌린지",
+      "purpose": "학습한 Firebase 기능을 SNS 화면으로 다시 구현했습니다.",
+      "group": "React",
+      "year": "2025",
+      "created": "2025-06-10",
+      "updated": "2025-06-18",
+      "period": "2025.06.10",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Firebase",
+        "React Hook Form",
+        "React Router",
+        "styled-components"
+      ],
+      "learned": [
+        "인증 보호 경로와 타임라인·프로필 화면 구성",
+        "글·이미지 작성 컴포넌트와 입력 폼 분리"
+      ],
+      "repo": "https://github.com/jonghwa3471/nwitter-challenge-firebase",
+      "branch": "master",
+      "commits": 4,
+      "kind": "학습 챌린지",
+      "sources": [
+        "index.html",
+        "src/App.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "노마드코더 - 강의 영상과 똑같이 따라 만들기 (트위터 구현 챌린지)",
+          "url": "https://j2yonghwa.tistory.com/54",
+          "kind": "학습 회고"
+        },
+        {
+          "title": "Firebase - query(), getDocs(), onSnapshot()을 사용해 Firestore DB에서 데이터를 가져오기",
+          "url": "https://j2yonghwa.tistory.com/57",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Firebase - Firestore Database와 Storage에 document와 사진 업로드하기",
+          "url": "https://j2yonghwa.tistory.com/56",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "study-java-for-oop",
+      "name": "study-java-for-oop",
+      "title": "Java 객체지향 기초",
+      "purpose": "클래스와 상속을 작은 Java 예제로 연습했습니다.",
+      "group": "CS · 기초",
+      "year": "2025",
+      "created": "2025-03-14",
+      "updated": "2025-05-23",
+      "period": "2025.03.14",
+      "stack": [
+        "Java",
+        "객체지향"
+      ],
+      "learned": [
+        "클래스와 객체 생성",
+        "상속을 이용한 기본 클래스 확장"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-java-for-oop",
+      "branch": "master",
+      "commits": 13,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/ex1/App.java",
+        "src/ex1/Ramyon.java"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "wetube",
+      "name": "js-challenge-wetube",
+      "title": "유튜브",
+      "purpose": "브라우저에서 사용하던 JavaScript를 Node.js 서버로 확장해, 영상 서비스의 요청 처리·인증·데이터 저장을 학습했습니다.",
+      "group": "데이터 · 백엔드",
+      "year": "2024",
+      "created": "2024-04-15",
+      "updated": "2025-05-12",
+      "period": "2024.04.15",
+      "stack": [
+        "Node.js",
+        "JavaScript",
+        "Express",
+        "MongoDB",
+        "Mongoose",
+        "Pug",
+        "AWS S3",
+        "SCSS"
+      ],
+      "learned": [
+        "미디어 이벤트와 input·change로 재생 위치·볼륨·컨트롤 UI 동기화",
+        "fetch 댓글 요청의 성공 응답을 확인한 뒤 DOM에 항목 추가",
+        "Pug 템플릿·mixin 재사용과 Express 라우터·컨트롤러 구성",
+        "Mongoose의 문서 관계·populate와 영상 제목 검색",
+        "bcrypt·세션 로그인, 영상 수정·삭제의 소유자 권한 검사",
+        "Multer·AWS S3 파일 업로드와 크기 제한, Fly.io 배포 경험"
+      ],
+      "reflections": [
+        {
+          "title": "LocalStorage에서 서버와 데이터베이스로",
+          "text": "Node.js와 Express로 서버를 만들며 프론트엔드·백엔드·DB의 전체 흐름을 처음 파악했습니다. 화살표 함수 등 ES6 문법도 컨트롤러와 이벤트 핸들러에 처음 사용하면서 익혔습니다."
+        },
+        {
+          "title": "화면 재사용과 데이터 모델링의 첫 경험",
+          "text": "Pug의 들여쓰기 문법은 낯설었지만, partial로 공통 화면을 나누고 mixin에 데이터를 전달하는 방식은 함수처럼 느껴졌습니다. MongoDB의 문서 형태는 JavaScript 객체와 비슷해 접근하기 쉬웠고, Mongoose의 schema와 model로 데이터 구조를 정의했습니다. 댓글에는 본문·작성 시각과 함께 사용자(owner)·영상(video)의 ObjectId를 저장하며 데이터 간 관계를 연결하는 방법을 배웠습니다.",
+          "image": "./journey/images/wetube-mongodb.png",
+          "imageCaption": "MongoDB 댓글 문서 — 작성자·영상을 ObjectId로 연결한 구조"
+        },
+        {
+          "title": "재생바와 실제 영상 상태를 맞추는 어려움",
+          "text": "재생바·볼륨·컨트롤 표시를 실제 영상 상태와 맞추는 일이 특히 어려웠습니다. 마우스 이동 시 타이머를 정리하고, 탐색 중에는 영상을 멈췄다가 조작 전 상태로 복원했습니다. 시간 갱신·종료 초기화·음소거 복원을 연결하며 작은 조작에도 여러 상태를 함께 고려해야 한다는 점을 배웠습니다."
+        },
+        {
+          "title": "강의와 다른 환경에서 직접 해결책 찾기",
+          "text": "S3 업로드는 강의와 달라진 사용 방식을 조사해 적용했습니다. 영상 수정 오류는 3일간 추적한 끝에, 존재 여부 조회인 Video.exists()의 결과를 영상 문서처럼 사용해 owner를 비교한 것이 원인임을 찾았습니다. Video.findById()로 실제 문서를 조회하도록 바꿔 해결하며, 조회 결과의 형태와 이후 로직이 요구하는 데이터를 함께 확인하는 중요성을 배웠습니다.",
+          "image": "./journey/images/wetube-debug-record.png",
+          "imageCaption": "영상 수정 오류의 원인과 해결을 직접 남긴 기록"
+        },
+        {
+          "title": "배포 환경까지 경험하기",
+          "text": "Heroku의 유료 전환으로 배포 대상을 Fly.io로 바꾸었습니다. 로컬 개발을 넘어 서버와 DB, 파일 저장소가 함께 동작하는 배포 환경을 경험했습니다."
+        }
+      ],
+      "motivation": "투두리스트에서 JavaScript로 화면을 바꾸고 데이터를 저장해본 뒤, 브라우저 밖에서는 데이터를 어떻게 관리하는지 궁금해졌습니다. LocalStorage를 넘어 사용자와 영상 정보를 서버와 DB에 저장하고, 화면까지 연결되는 전체 흐름을 배우기 위해 유튜브 프로젝트를 시작했습니다.",
+      "codeHighlights": [
+        {
+          "title": "참조 ID에서 연관된 문서로 확장하기",
+          "language": "JavaScript · Mongoose",
+          "description": "사용자의 videos에 연결된 영상 문서를 불러오고, 각 영상의 owner까지 중첩 populate로 가져오는 부분이 인상적이었습니다. ID로 연결해둔 데이터를 프로필 화면에 필요한 정보로 확장할 수 있다는 점이 흥미로웠습니다.",
+          "code": "const user = await User.findById(id).populate({\n  path: \"videos\",\n  populate: {\n    path: \"owner\",\n    model: \"User\",\n  },\n});",
+          "takeaway": "단순히 데이터를 저장하는 것에서 나아가, 사용자 → 영상 → 작성자의 관계를 따라 필요한 정보를 조회하는 방법을 배웠습니다. populate는 참조한 문서를 추가로 조회해 연결하는 Mongoose 기능이며, 화면에 어떤 정보가 필요한지에 따라 데이터의 관계와 조회 범위를 함께 생각하게 됐습니다."
+        }
+      ],
+      "nextDirection": "서버·DB와 화면을 연결하는 흐름은 이해했지만, 브라우저에서는 여전히 요소를 직접 찾아 이벤트와 상태를 맞춰야 했습니다. 특히 재생바와 볼륨을 구현하며 화면과 상태를 일관되게 관리하는 어려움을 느꼈습니다. 이후 React 학습에서는 컴포넌트와 props로 UI를 나누고, 상태 변화가 화면에 반영되는 방식을 익히며 이 경험을 확장했습니다.",
+      "repo": "https://github.com/jonghwa3471/js-challenge-wetube",
+      "branch": "master",
+      "commits": 22,
+      "kind": "학습 챌린지",
+      "sources": [
+        "src/server.js",
+        "src/middlewares.js",
+        "src/client/scss/components/video.scss",
+        "src/client/js/videoPlayer.js",
+        "src/client/js/commentSection.js",
+        "src/controllers/userController.js",
+        "src/controllers/videoController.js"
+      ],
+      "blogs": [
+        {
+          "title": "MongoDB - Mongoose",
+          "url": "https://j2yonghwa.tistory.com/142",
+          "kind": "관련 개념"
+        }
+      ],
+      "demo": "https://wetube-challenge-j2yonghwa.fly.dev/",
+      "demoStatus": "홈에서 제목 검색과 영상 상세 화면을 확인했습니다. 영상 상세에서의 검색은 상대 경로 문제로 오류가 발생해 개선이 필요합니다. 계정 생성·로그인·업로드 동작은 이번 확인에서 수행하지 않았습니다.",
+      "galleryLayout": "landscape",
+      "images": [
+        {
+          "src": "./journey/images/wetube-home-loaded.jpg",
+          "caption": "영상 목록 화면",
+          "source": "https://wetube-challenge-j2yonghwa.fly.dev/"
+        },
+        {
+          "src": "./journey/images/wetube-watch-wide.jpg",
+          "caption": "영상 상세·댓글 화면",
+          "source": "https://wetube-challenge-j2yonghwa.fly.dev/videos/678e165d690c1ba0a8c668d6"
+        },
+        {
+          "src": "./journey/images/wetube-login-wide.jpg",
+          "caption": "로그인 화면",
+          "source": "https://wetube-challenge-j2yonghwa.fly.dev/login"
+        },
+        {
+          "src": "./journey/images/wetube-search-wide.jpg",
+          "caption": "영상 제목 검색 결과 화면",
+          "source": "https://wetube-challenge-j2yonghwa.fly.dev/search?keyword=Avicii"
+        }
+      ]
+    },
+    {
+      "id": "study-firebase-nwitter",
+      "name": "study-firebase-nwitter",
+      "title": "Nwitter · Firebase 기초",
+      "purpose": "Firebase 인증과 보호 경로를 React 앱에 연결했습니다.",
+      "group": "React",
+      "year": "2025",
+      "created": "2025-04-17",
+      "updated": "2025-04-29",
+      "period": "2025.04.17",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Firebase",
+        "React Router",
+        "styled-components"
+      ],
+      "learned": [
+        "인증 초기화 전 로딩 화면 처리",
+        "authStateReady 이후 라우터를 표시해 인증 확인 중 화면 분기",
+        "보호 경로와 로그인·가입·프로필·타임라인 라우트 구성"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-firebase-nwitter",
+      "branch": "master",
+      "commits": 22,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "src/App.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "Firebase - 이메일 & 비밀번호 로그인과 소셜 로그인(Github)",
+          "url": "https://j2yonghwa.tistory.com/55",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Firebase - Firestore Database와 Storage에 document와 사진 업로드하기",
+          "url": "https://j2yonghwa.tistory.com/56",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Firebase - query(), getDocs(), onSnapshot()을 사용해 Firestore DB에서 데이터를 가져오기",
+          "url": "https://j2yonghwa.tistory.com/57",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Firebase - Rules",
+          "url": "https://j2yonghwa.tistory.com/59",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "study-vanilla-redux",
+      "name": "study-vanilla-redux",
+      "title": "Redux 상태 관리",
+      "purpose": "할 일 데이터를 Redux 저장소와 리듀서로 관리했습니다.",
+      "group": "React",
+      "year": "2025",
+      "created": "2025-04-10",
+      "updated": "2025-04-15",
+      "period": "2025.04.10",
+      "stack": [
+        "React",
+        "JavaScript",
+        "Redux",
+        "React Router"
+      ],
+      "learned": [
+        "Redux·Redux Toolkit 기반 상태 변경",
+        "React 화면과 저장소 연결"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-vanilla-redux",
+      "branch": "master",
+      "commits": 23,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/store.js",
+        "public/index.html"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-react-hooks",
+      "name": "study-react-hooks",
+      "title": "Custom Hooks 모음",
+      "purpose": "반복되는 브라우저 동작을 사용자 정의 훅으로 분리했습니다.",
+      "group": "React",
+      "year": "2025",
+      "created": "2025-04-07",
+      "updated": "2025-04-08",
+      "period": "2025.04.07",
+      "stack": [
+        "React",
+        "JavaScript",
+        "Custom Hooks"
+      ],
+      "learned": [
+        "입력·클릭·스크롤·네트워크 상태 훅",
+        "브라우저 이벤트를 재사용 가능한 훅 인터페이스로 구성",
+        "useEffect 정리 함수에서 스크롤 이벤트 리스너 해제"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-react-hooks",
+      "branch": "master",
+      "commits": 10,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "useAxios/useAxios.js",
+        "useScroll/useScroll.js"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-next-v14",
+      "name": "study-next-v14",
+      "title": "Next.js 14 영화 앱",
+      "purpose": "서버 컴포넌트와 App Router의 파일 구조를 학습했습니다.",
+      "group": "Next.js",
+      "year": "2025",
+      "created": "2025-03-20",
+      "updated": "2025-04-04",
+      "period": "2025.03.20",
+      "stack": [
+        "Next.js",
+        "TypeScript",
+        "React"
+      ],
+      "learned": [
+        "비동기 서버 페이지에서 영화 데이터 조회",
+        "레이아웃·loading·not-found와 상세 화면 분리"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-next-v14",
+      "branch": "master",
+      "commits": 21,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "app/(home)/page.tsx",
+        "app/about-us/page.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "Next.js 14 - 시작하기",
+          "url": "https://j2yonghwa.tistory.com/74",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Next.js 14 - Pages router vs App router 한 눈에 비교",
+          "url": "https://j2yonghwa.tistory.com/87",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "study-next-v12",
+      "name": "study-next-v12",
+      "title": "Next.js 12 영화 앱",
+      "purpose": "Pages Router와 서버 렌더링의 기본 흐름을 학습했습니다.",
+      "group": "Next.js",
+      "year": "2025",
+      "created": "2025-02-27",
+      "updated": "2025-03-20",
+      "period": "2025.02.27",
+      "stack": [
+        "Next.js",
+        "React"
+      ],
+      "learned": [
+        "getServerSideProps로 초기 데이터 전달",
+        "동적 라우트와 공통 Layout·SEO 컴포넌트"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-next-v12",
+      "branch": "master",
+      "commits": 18,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "pages/index.js",
+        "components/Layout.js"
+      ],
+      "blogs": [
+        {
+          "title": "Next.js 12 - getServerSideProps",
+          "url": "https://j2yonghwa.tistory.com/37",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Next.js 12 - Dynamic Routes",
+          "url": "https://j2yonghwa.tistory.com/38",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Next.js 12 - Layout, Head component",
+          "url": "https://j2yonghwa.tistory.com/35",
+          "kind": "관련 개념"
+        },
+        {
+          "title": "Next.js 12 - public dir, API key 숨기기(redirects, rewrites)",
+          "url": "https://j2yonghwa.tistory.com/36",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "study-gatsby-DevStickers-clone",
+      "name": "study-gatsby-DevStickers-clone",
+      "title": "DevStickers · Gatsby",
+      "purpose": "정적 사이트에 외부 콘텐츠와 MDX 글을 연결했습니다.",
+      "group": "React",
+      "year": "2024",
+      "created": "2024-08-15",
+      "updated": "2025-02-08",
+      "period": "2024.08.15",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Gatsby",
+        "GraphQL",
+        "MDX",
+        "Contentful"
+      ],
+      "learned": [
+        "Gatsby GraphQL 쿼리로 Contentful 데이터 조회",
+        "Gatsby Image와 MDX 기반 콘텐츠 구성"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-gatsby-DevStickers-clone",
+      "branch": "master",
+      "commits": 24,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/pages/index.tsx",
+        "gatsby-browser.ts"
+      ],
+      "blogs": [],
+      "images": [
+        {
+          "src": "./journey/images/study-gatsby-DevStickers-clone.jpg",
+          "caption": "DevStickers · Gatsby 화면",
+          "source": "https://github.com/jonghwa3471/study-gatsby-DevStickers-clone/blob/master/preview-devstickers.png"
+        }
+      ]
+    },
+    {
+      "id": "netflix",
+      "name": "study-react-netflix-clone",
+      "title": "Netflix",
+      "purpose": "영화 목록·검색·TV 화면을 라우트로 나눠 구성했습니다.",
+      "group": "React",
+      "year": "2024",
+      "created": "2024-04-08",
+      "updated": "2025-02-01",
+      "period": "2024.04.08",
+      "stack": [
+        "React",
+        "TypeScript",
+        "React Query",
+        "Framer Motion",
+        "React Router",
+        "styled-components"
+      ],
+      "learned": [
+        "React Query와 TypeScript 기반 API 데이터 처리",
+        "API별 query key와 로딩 상태를 구분한 콘텐츠 목록",
+        "Framer Motion의 AnimatePresence·layoutId로 목록·상세 전환 연결"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-react-netflix-clone",
+      "branch": "master",
+      "commits": 109,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/Routes/Home.tsx",
+        "src/api.ts"
+      ],
+      "blogs": [
+        {
+          "title": "라이브러리  - TanStack Query(React Query)",
+          "url": "https://j2yonghwa.tistory.com/102",
+          "kind": "관련 개념"
+        }
+      ],
+      "images": [
+        {
+          "src": "./journey/images/study-react-netflix-clone.jpg",
+          "caption": "Netflix 화면",
+          "source": "https://github.com/jonghwa3471/study-react-netflix-clone/blob/master/preview-netflix.png"
+        }
+      ],
+      "demo": "https://jonghwa3471.github.io/study-react-netflix-clone/#/"
+    },
+    {
+      "id": "study-react-movie-app-clone-2019",
+      "name": "study-react-movie-app-clone-2019",
+      "title": "영화 앱 · 클래스 컴포넌트",
+      "purpose": "클래스 컴포넌트의 상태와 생명주기로 영화 목록을 표시했습니다.",
+      "group": "React",
+      "year": "2024",
+      "created": "2024-03-31",
+      "updated": "2024-12-18",
+      "period": "2024.03.31",
+      "stack": [
+        "React",
+        "JavaScript",
+        "React Router",
+        "Axios"
+      ],
+      "learned": [
+        "componentDidMount와 axios 요청",
+        "목록에서 상세 정보로 이동하는 라우팅"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-react-movie-app-clone-2019",
+      "branch": "master",
+      "commits": 20,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/App.js",
+        "public/index.html"
+      ],
+      "blogs": [],
+      "images": [
+        {
+          "src": "./journey/images/study-react-movie-app-clone-2019.jpg",
+          "caption": "영화 앱 · 클래스 컴포넌트 화면",
+          "source": "https://github.com/jonghwa3471/study-react-movie-app-clone-2019/blob/master/preview-movie-app-2019.png"
+        }
+      ],
+      "demo": "https://jonghwa3471.github.io/study-react-movie-app-clone-2019/"
+    },
+    {
+      "id": "study-react-movie-app-clone",
+      "name": "study-react-movie-app-clone",
+      "title": "영화 앱 · 함수 컴포넌트",
+      "purpose": "Hooks로 API 요청과 화면 상태의 관계를 학습했습니다.",
+      "group": "React",
+      "year": "2024",
+      "created": "2024-03-19",
+      "updated": "2024-12-18",
+      "period": "2024.03.19",
+      "stack": [
+        "React",
+        "JavaScript",
+        "React Router",
+        "CSS Modules"
+      ],
+      "learned": [
+        "useState·useEffect와 fetch",
+        "CSS Modules와 영화 목록·상세 컴포넌트"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-react-movie-app-clone",
+      "branch": "master",
+      "commits": 23,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/App.js",
+        "public/index.html"
+      ],
+      "blogs": [],
+      "images": [
+        {
+          "src": "./journey/images/study-react-movie-app-clone.jpg",
+          "caption": "영화 앱 · 함수 컴포넌트 화면",
+          "source": "https://github.com/jonghwa3471/study-react-movie-app-clone/blob/master/preview-movie-app.png"
+        }
+      ],
+      "demo": "https://jonghwa3471.github.io/study-react-movie-app-clone/"
+    },
+    {
+      "id": "kakao-challenge-2024-recap",
+      "name": "kakao-challenge-2024-recap",
+      "title": "카카오톡 · 복습",
+      "purpose": "여러 화면의 공통 스타일을 분리하며 HTML·CSS를 복습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-11-30",
+      "updated": "2024-12-01",
+      "period": "2024.11.30",
+      "stack": [
+        "HTML",
+        "CSS"
+      ],
+      "learned": [
+        "공통 컴포넌트·화면별 스타일 분리",
+        "친구·채팅·설정 페이지의 일관된 레이아웃"
+      ],
+      "repo": "https://github.com/jonghwa3471/kakao-challenge-2024-recap",
+      "branch": "master",
+      "commits": 3,
+      "kind": "학습 챌린지",
+      "sources": [
+        "index.html",
+        "pages/chat.html"
+      ],
+      "blogs": [
+        {
+          "title": "과제 제출율 100% 달성! 웹 기초 10주 스터디 7기 회고(25.01.22)",
+          "url": "https://j2yonghwa.tistory.com/41",
+          "kind": "학습 회고"
+        }
+      ]
+    },
+    {
+      "id": "study-ts-blockchain",
+      "name": "study-ts-blockchain",
+      "title": "TypeScript 블록체인 기초",
+      "purpose": "작은 블록체인 모델로 타입과 클래스 설계를 연습했습니다.",
+      "group": "JavaScript · TypeScript",
+      "year": "2024",
+      "created": "2024-11-22",
+      "updated": "2024-11-29",
+      "period": "2024.11.22",
+      "stack": [
+        "TypeScript"
+      ],
+      "learned": [
+        "Block·Blockchain 클래스와 타입 정의",
+        "crypto를 사용한 블록 해시 계산"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-ts-blockchain",
+      "branch": "master",
+      "commits": 7,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/index.ts"
+      ],
+      "blogs": [
+        {
+          "title": "TypeScript - 배열, 튜플",
+          "url": "https://j2yonghwa.tistory.com/48",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "study-js-es6",
+      "name": "study-js-es6",
+      "title": "ES6 ~ ES2022 문법 실습",
+      "purpose": "JavaScript의 현대 문법을 주제별 예제로 정리했습니다.",
+      "group": "JavaScript · TypeScript",
+      "year": "2024",
+      "created": "2024-10-14",
+      "updated": "2024-11-08",
+      "period": "2024.10.14",
+      "stack": [
+        "JavaScript"
+      ],
+      "learned": [
+        "구조 분해·Rest/Spread·Promise·클래스",
+        "Object 메서드·Nullish 연산자·Private 필드"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-js-es6",
+      "branch": "master",
+      "commits": 64,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "es2020/ObjectMethods.js"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-js-zoom-clone",
+      "name": "study-js-zoom-clone",
+      "title": "Zoom · 실시간 통신",
+      "purpose": "HTTP 서버와 Socket.IO 기반 양방향 통신을 학습했습니다.",
+      "group": "데이터 · 백엔드",
+      "year": "2024",
+      "created": "2024-09-20",
+      "updated": "2024-10-14",
+      "period": "2024.09.20",
+      "stack": [
+        "Node.js",
+        "JavaScript",
+        "Express",
+        "Socket.IO",
+        "WebSocket"
+      ],
+      "learned": [
+        "Express와 HTTP 서버의 역할 분리",
+        "Socket.IO 룸 단위로 입장·메시지 이벤트 전달",
+        "offer·answer·ICE 이벤트를 상대에게 전달하는 WebRTC 시그널링"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-js-zoom-clone",
+      "branch": "master",
+      "commits": 34,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/server.js"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-gulp",
+      "name": "study-gulp",
+      "title": "Gulp 빌드 환경",
+      "purpose": "전처리와 자산 최적화를 자동화하는 작업 흐름을 학습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-05-11",
+      "updated": "2024-09-20",
+      "period": "2023.05.11",
+      "stack": [
+        "Gulp"
+      ],
+      "learned": [
+        "Pug·SCSS·JavaScript 빌드 파이프라인",
+        "이미지 최적화와 개발 서버 작업 구성"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-gulp",
+      "branch": "master",
+      "commits": 12,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "build/index.html",
+        "src/scss/style.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "kakao",
+      "name": "study-html-kakao-clone",
+      "title": "카카오톡",
+      "purpose": "HTML과 CSS로 로그인·친구·채팅 화면을 구현했습니다.",
+      "group": "HTML · CSS",
+      "year": "2022",
+      "created": "2022-09-29",
+      "updated": "2024-09-20",
+      "period": "2022.09.29",
+      "stack": [
+        "HTML",
+        "CSS"
+      ],
+      "learned": [
+        "HTML 구조·CSS 선택자와 reset.css 기본 스타일 초기화",
+        "BEM(Block · Element · Modifier) 클래스 명명과 공통 UI·화면별 CSS 분리",
+        "Flexbox로 상태바의 영역 크기와 내부 정렬을 분리해 배치",
+        "미디어 쿼리로 화면 너비에 따라 스타일을 바꾸는 반응형 디자인의 기초"
+      ],
+      "reflections": [
+        {
+          "title": "화면의 구조와 스타일이 연결되는 첫 경험",
+          "text": "HTML과 CSS가 함께 화면을 만드는 과정을 처음 경험한 프로젝트입니다. reset.css로 기본 스타일을 정리한 뒤 직접 화면을 구성하면서, 마크업의 계층과 CSS 선택자가 어떻게 연결되는지 이해하기 시작했습니다."
+        },
+        {
+          "title": "스타일을 찾고 수정하기 쉬운 이름과 파일 구조",
+          "text": "icon-row와 icon-row__icon처럼 클래스 이름에 UI와 내부 요소의 관계를 드러내고, CSS 파일도 공통 UI와 화면별로 나누는 방법을 배웠습니다. 단순히 화면을 완성하는 것뿐 아니라, 나중에 수정할 스타일을 쉽게 찾아갈 수 있도록 코드를 구성하는 일이 중요하다는 점을 느꼈습니다."
+        },
+        {
+          "title": "반응형 디자인의 가능성과 어려움",
+          "text": "미디어 쿼리로 화면 너비에 따라 스타일을 바꾸는 방법도 배웠습니다. 다만 화면 크기별로 레이아웃과 스타일을 조정하는 일은 당시 꽤 까다롭게 느껴졌고, 여러 환경에서 자연스럽게 보이는 화면을 만들려면 더 많은 연습이 필요하다고 생각했습니다."
+        }
+      ],
+      "motivation": "코딩을 전혀 모르던 때, 가장 기초인 HTML과 CSS를 직접 작성하며 시작했습니다. 익숙한 카카오톡 화면을 하나씩 만들어보면서, 코드 한 줄이 어떤 의미를 갖고 화면에 어떻게 반영되는지 이해하고 싶었습니다.",
+      "nextDirection": "화면을 완성하고 나니, 정적인 모습에 머무르지 않고 사용자의 입력과 실제 데이터를 다뤄보고 싶어졌습니다. 그러기 위해서는 화면에 동작을 더하는 JavaScript부터 배워야 했습니다. 이 궁금증은 자연스럽게 투두리스트 학습으로 이어졌고, 직접 입력한 내용이 화면에 반영되는 상호작용부터 차근차근 익히기 시작했습니다.",
+      "codeHighlights": [
+        {
+          "title": "같은 너비의 세 영역으로 시계의 중앙 정렬 유지하기",
+          "description": "상태바를 단순히 space-between으로 배치하면 좌우 콘텐츠의 너비가 다를 때 시계가 화면 중앙에서 벗어날 수 있습니다. 세 열에 각각 width: 33%를 지정하고 가운데 열은 중앙, 마지막 열은 오른쪽으로 정렬해 이 문제를 다뤘습니다.",
+          "code": ".status-bar {\n    display: flex;\n    justify-content: center;\n}\n\n.status-bar__column {\n    width: 33%;\n}\n\n.status-bar__column:nth-child(2) {\n    display: flex;\n    justify-content: center;\n}\n\n.status-bar__column:last-child {\n    display: flex;\n    justify-content: flex-end;\n}",
+          "takeaway": "이 코드에서 인상 깊었던 점은 영역의 크기를 정하는 일과 그 안의 내용을 정렬하는 일이 별개라는 것입니다. Flexbox의 정렬 속성만 바꾸기보다, 먼저 각 요소가 차지할 공간을 설계해야 한다는 것을 배웠습니다."
+        }
+      ],
+      "repo": "https://github.com/jonghwa3471/study-html-kakao-clone",
+      "branch": "main",
+      "commits": 31,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "chat.html"
+      ],
+      "blogs": [],
+      "images": [
+        {
+          "src": "./journey/images/kakao-login.png",
+          "caption": "로그인 화면",
+          "source": "https://jonghwa3471.github.io/study-html-kakao-clone/"
+        },
+        {
+          "src": "./journey/images/kakao-preview-1.png",
+          "caption": "채팅 화면",
+          "source": "https://github.com/jonghwa3471/study-html-kakao-clone/blob/main/preview1.png"
+        },
+        {
+          "src": "./journey/images/kakao-preview-2.png",
+          "caption": "친구 목록 화면",
+          "source": "https://github.com/jonghwa3471/study-html-kakao-clone/blob/main/preview2.png"
+        },
+        {
+          "src": "./journey/images/kakao-preview-3.png",
+          "caption": "친구 찾기 화면",
+          "source": "https://github.com/jonghwa3471/study-html-kakao-clone/blob/main/preview3.png"
+        }
+      ],
+      "demo": "https://jonghwa3471.github.io/study-html-kakao-clone/"
+    },
+    {
+      "id": "react-challenge-crypto-tracker",
+      "name": "react-challenge-crypto-tracker",
+      "title": "Crypto Tracker 챌린지",
+      "purpose": "코인 목록·가격·차트를 타입과 라우트로 연결했습니다.",
+      "group": "React",
+      "year": "2024",
+      "created": "2024-09-04",
+      "updated": "2024-09-20",
+      "period": "2024.09.04",
+      "stack": [
+        "React",
+        "TypeScript",
+        "React Query",
+        "React Router",
+        "styled-components"
+      ],
+      "learned": [
+        "React Query 기반 코인 API 요청",
+        "중첩 라우트와 차트·가격 화면 분리"
+      ],
+      "repo": "https://github.com/jonghwa3471/react-challenge-crypto-tracker",
+      "branch": "master",
+      "commits": 8,
+      "kind": "학습 챌린지",
+      "sources": [
+        "src/App.tsx",
+        "public/index.html"
+      ],
+      "blogs": [
+        {
+          "title": "라이브러리  - TanStack Query(React Query)",
+          "url": "https://j2yonghwa.tistory.com/102",
+          "kind": "관련 개념"
+        }
+      ],
+      "images": [
+        {
+          "src": "./journey/images/react-challenge-crypto-tracker.jpg",
+          "caption": "Crypto Tracker 챌린지 화면",
+          "source": "https://github.com/jonghwa3471/react-challenge-crypto-tracker/blob/master/preview-crypto-clone.png"
+        }
+      ],
+      "demo": "https://jonghwa3471.github.io/react-challenge-crypto-tracker/"
+    },
+    {
+      "id": "todo",
+      "name": "study-js-toDoList-clone",
+      "title": "투두리스트",
+      "purpose": "JavaScript로 할 일 추가·삭제와 데이터 저장을 구현하며, 정적인 화면에 사용자와의 상호작용을 더한 첫 프로젝트입니다.",
+      "group": "JavaScript · TypeScript",
+      "year": "2023",
+      "created": "2023-01-18",
+      "updated": "2024-09-20",
+      "period": "2023.01.18",
+      "stack": [
+        "JavaScript"
+      ],
+      "learned": [
+        "JavaScript로 HTML 요소를 가져오고 사용자 입력·이벤트에 반응하는 DOM 조작",
+        "할 일 항목의 생성·삭제와 화면 갱신",
+        "LocalStorage의 키를 이용한 데이터 저장·조회와 삭제 결과 반영",
+        "Geolocation 위치 정보로 날씨 API 요청, 위치 확인 실패 시 안내",
+        "난수·클래스 변경으로 배경 선택과 요소 숨김·표시"
+      ],
+      "reflections": [
+        {
+          "title": "정적인 화면에 동작을 붙이는 첫 경험",
+          "text": "입력과 이벤트에 반응하고 클래스로 요소를 숨기거나 보여주면서, 화면이 제 코드에 따라 움직이는 경험을 했습니다. 실제로 프로그래밍을 하고 있다는 느낌이 들어 즐거웠습니다."
+        },
+        {
+          "title": "화면과 저장된 데이터를 연결하는 경험",
+          "text": "LocalStorage에 저장한 정보를 다시 읽고, 삭제 결과도 화면과 저장 데이터에 함께 반영했습니다. 정해진 화면을 재현하는 것에서 데이터를 바탕으로 화면을 바꾸는 경험으로 나아갔습니다."
+        },
+        {
+          "title": "내가 갖고 있지 않은 정보를 불러오는 API",
+          "text": "요청과 응답을 충분히 이해하지는 못했지만, 직접 준비하지 않은 최신 정보를 외부 API에서 받아 보여줄 수 있다는 점이 신기했습니다. 화면을 브라우저 밖의 데이터와 연결한 첫 경험이었습니다."
+        },
+        {
+          "title": "DOM을 직접 다루며 느낀 번거로움",
+          "text": "프로젝트를 진행하면서 상호작용마다 HTML 요소를 직접 찾아 가져와 다루는 방식이 번거롭게 느껴졌습니다. 기능을 구현하는 방법을 익힌 동시에, 화면의 요소와 동작을 더 간결하게 연결하는 방법도 궁금해졌습니다."
+        }
+      ],
+      "motivation": "카카오톡 화면을 HTML과 CSS로 구현한 뒤, 사용자의 입력과 실제 데이터를 다루려면 JavaScript가 필요하다는 것을 알게 됐습니다. 먼저 입력한 내용이 화면에 나타나고 사용자 동작에 반응하는 원리를 배우고 싶어, 투두리스트를 만들며 JavaScript의 기초를 익히기 시작했습니다.",
+      "nextDirection": "외부 API의 정보를 화면에 가져왔지만, 제가 만든 할 일 데이터는 여전히 브라우저의 LocalStorage에만 저장된다는 점이 아쉬웠습니다. 사용자가 만든 데이터를 서버에 저장하고 관리하는 흐름도 이해하고 싶어졌고, 다음에는 유튜브 프로젝트를 통해 Node.js와 데이터베이스를 학습했습니다.",
+      "codeHighlights": [
+        {
+          "title": "JavaScript만으로 화면의 요소를 만들어내기",
+          "language": "JavaScript",
+          "description": "HTML에 미리 작성해둔 요소를 바꾸는 것뿐 아니라, JavaScript 코드만으로 할 일 항목과 삭제 버튼을 만들어 화면에 추가할 수 있다는 점이 매력적이었습니다.",
+          "code": "function paintToDo(newToDo) {\n  const li = document.createElement(\"li\");\n  li.id = newToDo.id;\n  const span = document.createElement(\"span\");\n  span.innerText = newToDo.text;\n  const button = document.createElement(\"button\");\n  button.innerText = \"❌\";\n  button.addEventListener(\"click\", deleteToDo);\n  li.appendChild(button);\n  li.appendChild(span);\n\n  toDoList.appendChild(li);\n}",
+          "takeaway": "createElement로 요소를 생성하고, 텍스트와 이벤트를 연결한 뒤 appendChild로 실제 화면에 붙이는 흐름을 이해했습니다. 사용자가 입력한 데이터가 새로운 HTML 요소로 바뀌는 과정을 보며, 정적인 화면을 작성하는 것과 동적으로 화면을 구성하는 것의 차이를 체감했습니다."
+        }
+      ],
+      "repo": "https://github.com/jonghwa3471/study-js-toDoList-clone",
+      "branch": "main",
+      "commits": 19,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "js/todo.js"
+      ],
+      "blogs": [],
+      "images": [
+        {
+          "src": "./journey/images/study-js-toDoList-clone.jpg",
+          "caption": "투두리스트 화면",
+          "source": "https://github.com/jonghwa3471/study-js-toDoList-clone/blob/main/preview.png"
+        }
+      ],
+      "demo": "https://jonghwa3471.github.io/study-js-toDoList-clone/"
+    },
+    {
+      "id": "study-js-meme-maker-clone",
+      "name": "study-js-meme-maker-clone",
+      "title": "Canvas 밈 메이커",
+      "purpose": "그리기·텍스트·이미지 입력을 Canvas로 구현했습니다.",
+      "group": "JavaScript · TypeScript",
+      "year": "2024",
+      "created": "2024-02-12",
+      "updated": "2024-09-20",
+      "period": "2024.02.12",
+      "stack": [
+        "JavaScript"
+      ],
+      "learned": [
+        "Canvas 2D 좌표와 마우스 이벤트",
+        "색상·선 굵기·이미지 업로드 및 다운로드"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-js-meme-maker-clone",
+      "branch": "master",
+      "commits": 21,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "app.js"
+      ],
+      "blogs": [],
+      "images": [
+        {
+          "src": "./journey/images/study-js-meme-maker-clone.jpg",
+          "caption": "Canvas 밈 메이커 화면",
+          "source": "https://github.com/jonghwa3471/study-js-meme-maker-clone/blob/master/preview-memeMaker.png"
+        }
+      ]
+    },
+    {
+      "id": "react-coingecko-crypto-tracker",
+      "name": "react-coingecko-crypto-tracker",
+      "title": "CoinGecko Crypto Tracker",
+      "purpose": "CoinGecko 데이터를 React 목록과 상세 화면으로 구성했습니다.",
+      "group": "React",
+      "year": "2024",
+      "created": "2024-05-15",
+      "updated": "2024-09-20",
+      "period": "2024.05.15",
+      "stack": [
+        "React",
+        "TypeScript",
+        "React Query",
+        "React Router",
+        "styled-components"
+      ],
+      "learned": [
+        "React Query 기반 API 데이터 요청",
+        "TypeScript 응답 타입과 차트·가격 라우트"
+      ],
+      "repo": "https://github.com/jonghwa3471/react-coingecko-crypto-tracker",
+      "branch": "master",
+      "commits": 8,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "public/index.html",
+        "src/index.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "라이브러리  - TanStack Query(React Query)",
+          "url": "https://j2yonghwa.tistory.com/102",
+          "kind": "관련 개념"
+        }
+      ],
+      "images": [
+        {
+          "src": "./journey/images/react-coingecko-crypto-tracker.jpg",
+          "caption": "CoinGecko Crypto Tracker 화면",
+          "source": "https://github.com/jonghwa3471/react-coingecko-crypto-tracker/blob/master/preview-crypto-tracker.png"
+        }
+      ],
+      "demo": "https://jonghwa3471.github.io/react-coingecko-crypto-tracker/"
+    },
+    {
+      "id": "trello",
+      "name": "react-challenge-trello",
+      "title": "Trello",
+      "purpose": "React 컴포넌트로 할 일 보드를 구성하고, 드래그 이동·삭제와 상태 저장을 구현했습니다.",
+      "group": "React",
+      "year": "2024",
+      "created": "2024-07-16",
+      "updated": "2024-09-12",
+      "period": "2024.07.16",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Recoil",
+        "Drag & Drop",
+        "styled-components",
+        "React Hook Form"
+      ],
+      "learned": [
+        "컴포넌트·props와 styled-components를 활용한 UI 재사용",
+        "TypeScript로 theme·props·할 일 데이터의 타입 정의",
+        "Recoil로 보드별 할 일을 관리하고 배열을 복사해 이동·수정·삭제 반영",
+        "보드 내·보드 간 카드 이동, 휴지통 드롭 삭제와 드래그 상태 피드백",
+        "React Hook Form의 필수 입력 검증과 중복 보드명 오류 안내",
+        "보드·할 일 추가·수정·삭제 결과를 LocalStorage에 저장하고 복원"
+      ],
+      "reflections": [
+        {
+          "title": "DOM 조작에서 컴포넌트와 타입 중심으로",
+          "text": "요소를 직접 찾아 조작하던 방식에서, 컴포넌트와 props로 화면을 조합하는 방식으로 전환했습니다. styled-components의 재사용·확장과 TypeScript의 타입 검사·자동완성을 함께 경험하며, UI와 데이터의 관계를 더 명확하게 표현할 수 있다고 느꼈습니다."
+        },
+        {
+          "title": "상태 변경을 화면과 저장 데이터에 함께 반영하기",
+          "text": "여러 컴포넌트가 함께 사용하는 보드·할 일 상태를 Recoil로 관리했습니다. 카드 이동 시 출발·도착 보드의 배열을 각각 복사해 갱신하고, 변경 결과를 LocalStorage에도 저장하며 화면의 동작과 데이터의 일관성을 함께 생각하는 연습을 했습니다."
+        },
+        {
+          "title": "라이브러리 사용에서 사용자 동작을 설계하는 경험으로",
+          "text": "드래그 이동을 휴지통 드롭 삭제로 응용하고, 드래그 중인 카드와 드롭 영역에 시각적 피드백을 더했습니다. 폼에서도 중복 보드명에 오류를 안내하며, 기능의 구현뿐 아니라 사용자가 조작 결과를 이해할 수 있도록 만드는 경험을 했습니다."
+        },
+        {
+          "title": "구현하지 못한 기능에서 남은 과제",
+          "text": "카드 이동은 구현했지만, 보드 자체를 드래그해 재정렬하는 기능은 당시 해결하지 못한 과제로 남았습니다. 카드와 보드의 이동을 각각 어떤 데이터와 드래그 구조로 표현해야 할지 더 살펴볼 필요를 느꼈습니다."
+        }
+      ],
+      "motivation": "JavaScript로 요소를 직접 찾아 화면과 동작을 연결한 경험을 바탕으로, UI를 더 체계적으로 구성하는 방법을 배우고 싶었습니다. React를 처음 사용하며 컴포넌트와 props로 화면을 조합하고, 드래그 가능한 할 일 보드를 통해 상태 변화가 화면에 반영되는 방식을 익혔습니다.",
+      "codeHighlights": [
+        {
+          "title": "변수의 값이 객체의 키가 되는 경험",
+          "language": "TypeScript",
+          "description": "가장 신기했던 부분은 객체를 만들 때 [source.droppableId]: boardCopy처럼 변수의 값을 키로 지정하는 방식이었습니다. object.property처럼 정해진 이름으로 속성에 접근하는 것에 익숙했는데, 사용자가 어느 보드에서 드래그했는지에 따라 바꿀 키를 동적으로 정할 수 있다는 점이 인상적이었습니다.",
+          "code": "// 같은 보드 안에서 이동한 경우의 핵심 로직\nconst boardCopy = [...allBoards[source.droppableId]];\nconst taskObj = boardCopy[source.index];\n\nboardCopy.splice(source.index, 1);\nboardCopy.splice(destination.index, 0, taskObj);\n\nconst dragEndResult = {\n  ...allBoards,\n  [source.droppableId]: boardCopy,\n};",
+          "takeaway": "...allBoards로 나머지 보드를 유지하면서, 대괄호 안의 값에 해당하는 보드만 새 배열로 덮어쓰는 코드가 간결하게 느껴졌습니다. 보드마다 코드를 따로 작성하지 않아도 같은 로직을 적용할 수 있다는 점에서 문법의 쓰임을 체감했습니다. 또한 slice와 달리 splice는 배열에서 항목을 직접 제거하거나 삽입한다는 것을 배우고, 복사본에 적용해 카드 순서를 바꾸는 과정도 흥미로웠습니다."
+        }
+      ],
+      "nextDirection": "React와 여러 라이브러리를 사용하면서 컴포넌트로 UI를 나누는 편리함을 경험했습니다. 동시에 Spread·화살표 함수·구조 분해 할당처럼 구현에 자주 쓰이는 문법을 더 정확히 이해하고 싶어졌습니다. 기능을 만드는 데서 한 걸음 더 나아가 코드가 동작하는 원리를 다지기 위해, 이후 ES6 강의로 학습을 이어갔습니다.",
+      "repo": "https://github.com/jonghwa3471/react-challenge-trello",
+      "branch": "master",
+      "commits": 79,
+      "kind": "학습 챌린지",
+      "sources": [
+        "src/App.tsx",
+        "src/components/Board.tsx",
+        "src/components/BoardModal.tsx",
+        "src/components/DraggableCard.tsx",
+        "src/atoms.ts"
+      ],
+      "blogs": [
+        {
+          "title": "라이브러리 - React Hook Form",
+          "url": "https://j2yonghwa.tistory.com/47",
+          "kind": "관련 개념"
+        }
+      ],
+      "demo": "https://jonghwa3471.github.io/react-challenge-trello/",
+      "demoStatus": "배포 앱에서 보드 추가·중복 이름 검증·카드 이동·할 일 수정을 확인했습니다. 화면에는 시연용 데이터를 사용했습니다.",
+      "galleryLayout": "landscape",
+      "images": [
+        {
+          "src": "./journey/images/trello-overview.jpg",
+          "caption": "할 일 보드 화면",
+          "source": "https://jonghwa3471.github.io/react-challenge-trello/"
+        },
+        {
+          "src": "./journey/images/trello-drag-feedback.jpg",
+          "caption": "보드 간 카드 이동 화면",
+          "source": "https://jonghwa3471.github.io/react-challenge-trello/"
+        },
+        {
+          "src": "./journey/images/trello-board-validation.jpg",
+          "caption": "중복 보드명 오류 안내 화면",
+          "source": "https://jonghwa3471.github.io/react-challenge-trello/"
+        },
+        {
+          "src": "./journey/images/trello-edit-task.jpg",
+          "caption": "할 일 수정 화면",
+          "source": "https://jonghwa3471.github.io/react-challenge-trello/"
+        }
+      ]
+    },
+    {
+      "id": "react-challenge-toDoList",
+      "name": "react-challenge-toDoList",
+      "title": "React 투두리스트",
+      "purpose": "할 일과 카테고리를 컴포넌트로 나누어 관리했습니다.",
+      "group": "React",
+      "year": "2024",
+      "created": "2024-09-10",
+      "updated": "2024-09-10",
+      "period": "2024.09.10",
+      "stack": [
+        "React",
+        "TypeScript",
+        "Recoil",
+        "React Hook Form",
+        "styled-components"
+      ],
+      "learned": [
+        "할 일·카테고리 입력 컴포넌트 분리",
+        "Recoil과 TypeScript 기반 상태 관리"
+      ],
+      "repo": "https://github.com/jonghwa3471/react-challenge-toDoList",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 챌린지",
+      "sources": [
+        "src/atoms.ts",
+        "src/components/ToDoList.tsx"
+      ],
+      "blogs": [
+        {
+          "title": "라이브러리 - React Hook Form",
+          "url": "https://j2yonghwa.tistory.com/47",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "study-js-youtube-clone",
+      "name": "study-js-youtube-clone",
+      "title": "YouTube · 기초",
+      "purpose": "Node.js로 인증·영상·댓글이 연결되는 웹 구조를 학습했습니다.",
+      "group": "데이터 · 백엔드",
+      "year": "2023",
+      "created": "2023-06-22",
+      "updated": "2024-09-07",
+      "period": "2023.06.22",
+      "stack": [
+        "Node.js",
+        "JavaScript",
+        "Express",
+        "MongoDB",
+        "SCSS"
+      ],
+      "learned": [
+        "Express 라우트·컨트롤러·MongoDB 모델",
+        "세션 로그인과 콘텐츠 접근 권한 검사"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-js-youtube-clone",
+      "branch": "master",
+      "commits": 132,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/controllers/userController.js",
+        "src/controllers/videoController.js"
+      ],
+      "blogs": [
+        {
+          "title": "MongoDB - Mongoose",
+          "url": "https://j2yonghwa.tistory.com/142",
+          "kind": "관련 개념"
+        }
+      ]
+    },
+    {
+      "id": "study-react-router-v6",
+      "name": "study-react-router-v6",
+      "title": "React Router 6 실습",
+      "purpose": "라우터 설정과 중첩 화면·에러 경로를 연습했습니다.",
+      "group": "React",
+      "year": "2024",
+      "created": "2024-08-12",
+      "updated": "2024-08-13",
+      "period": "2024.08.12",
+      "stack": [
+        "React",
+        "TypeScript",
+        "React Router"
+      ],
+      "learned": [
+        "RouterProvider와 경로별 화면 구성",
+        "공통 Header와 오류·Not Found 화면 분리"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-react-router-v6",
+      "branch": "master",
+      "commits": 9,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/Router.tsx",
+        "src/components/ErrorComponent.tsx"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-react-masterclass-without-ts",
+      "name": "study-react-masterclass-without-ts",
+      "title": "React Masterclass 기초",
+      "purpose": "React 화면과 스타일 컴포넌트 구성을 연습했습니다.",
+      "group": "React",
+      "year": "2024",
+      "created": "2024-04-07",
+      "updated": "2024-04-08",
+      "period": "2024.04.07",
+      "stack": [
+        "React",
+        "JavaScript",
+        "styled-components"
+      ],
+      "learned": [
+        "React 컴포넌트 렌더링",
+        "styled-components 기반 스타일 구성"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-react-masterclass-without-ts",
+      "branch": "master",
+      "commits": 8,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/App.js",
+        "public/index.html"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-concert-poster-clone",
+      "name": "study-scss-concert-poster-clone",
+      "title": "Concert Poster",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-03-10",
+      "updated": "2024-03-10",
+      "period": "2024.03.10",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-concert-poster-clone",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/style.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-pixies-poster-clone",
+      "name": "study-scss-pixies-poster-clone",
+      "title": "Pixies Poster",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-03-10",
+      "updated": "2024-03-10",
+      "period": "2024.03.10",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬",
+        "@for 반복문으로 스타일 생성"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-pixies-poster-clone",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/style.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-error-404-clone",
+      "name": "study-scss-error-404-clone",
+      "title": "Error 404",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-03-09",
+      "updated": "2024-03-09",
+      "period": "2024.03.09",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬",
+        "CSS 애니메이션으로 반복 움직임 표현"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-error-404-clone",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/style.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-museum-clone",
+      "name": "study-scss-museum-clone",
+      "title": "Museum",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-03-07",
+      "updated": "2024-03-07",
+      "period": "2024.03.07",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬",
+        "CSS 애니메이션으로 반복 움직임 표현"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-museum-clone",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/style.scss"
+      ],
+      "blogs": [],
+      "images": [
+        {
+          "src": "./journey/images/study-scss-museum-clone.jpg",
+          "caption": "Museum 화면",
+          "source": "https://github.com/jonghwa3471/study-scss-museum-clone"
+        }
+      ]
+    },
+    {
+      "id": "study-scss-mac-os-clone",
+      "name": "study-scss-mac-os-clone",
+      "title": "macOS",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-03-06",
+      "updated": "2024-03-06",
+      "period": "2024.03.06",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-mac-os-clone",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/style.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-architect-studio-clone",
+      "name": "study-scss-architect-studio-clone",
+      "title": "Architect Studio",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-03-03",
+      "updated": "2024-03-05",
+      "period": "2024.03.03",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-architect-studio-clone",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/style.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-design-agency-clone",
+      "name": "study-scss-design-agency-clone",
+      "title": "Design Agency",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-03-01",
+      "updated": "2024-03-03",
+      "period": "2024.03.01",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-design-agency-clone",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/style.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-beauty-store-clone",
+      "name": "study-scss-beauty-store-clone",
+      "title": "Beauty Store",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-03-01",
+      "updated": "2024-03-01",
+      "period": "2024.03.01",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-beauty-store-clone",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/style.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-fashion-store-clone",
+      "name": "study-scss-fashion-store-clone",
+      "title": "Fashion Store",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-02-27",
+      "updated": "2024-02-27",
+      "period": "2024.02.27",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-fashion-store-clone",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/styles.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-education-courses-app-clone",
+      "name": "study-scss-education-courses-app-clone",
+      "title": "Education Courses",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-02-27",
+      "updated": "2024-02-27",
+      "period": "2024.02.27",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-education-courses-app-clone",
+      "branch": "master",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/style.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-layout-masterclass",
+      "name": "study-scss-layout-masterclass",
+      "title": "SCSS Layout Masterclass",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-02-19",
+      "updated": "2024-02-24",
+      "period": "2024.02.19",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "Mixin과 Include로 스타일 규칙 재사용"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-layout-masterclass",
+      "branch": "master",
+      "commits": 4,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "styles/style.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "challenge-bookclub-nomad",
+      "name": "challenge-bookclub-nomad",
+      "title": "노마드 북클럽 기록",
+      "purpose": "북클럽 챌린지용 HTML 문서를 저장한 학습 기록입니다.",
+      "group": "CS · 기초",
+      "year": "2024",
+      "created": "2024-02-19",
+      "updated": "2024-02-19",
+      "period": "2024.02.19",
+      "stack": [
+        "HTML",
+        "CSS"
+      ],
+      "learned": [
+        "HTML 문서 구성과 콘텐츠 마크업"
+      ],
+      "repo": "https://github.com/jonghwa3471/challenge-bookclub-nomad",
+      "branch": "master",
+      "commits": 1,
+      "kind": "학습 챌린지",
+      "sources": [
+        "index.html"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-gulp-recap",
+      "name": "study-gulp-recap",
+      "title": "Gulp 빌드 환경 · 복습",
+      "purpose": "Gulp 작업을 다시 구성하며 빌드 자동화를 복습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2024",
+      "created": "2024-02-06",
+      "updated": "2024-02-09",
+      "period": "2024.02.06",
+      "stack": [
+        "SCSS",
+        "Gulp"
+      ],
+      "learned": [
+        "Pug·SCSS 변환과 CSS 최적화",
+        "Babel·번들링과 GitHub Pages 배포 작업"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-gulp-recap",
+      "branch": "master",
+      "commits": 12,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "src/scss/style.scss",
+        "gulpfile.babel.js"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "css-challenge",
+      "name": "css-challenge",
+      "title": "CSS 레이아웃 챌린지",
+      "purpose": "여러 작은 화면으로 CSS 배치와 표현을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-05-30",
+      "updated": "2023-06-11",
+      "period": "2023.05.30",
+      "stack": [
+        "HTML",
+        "CSS"
+      ],
+      "learned": [
+        "챌린지별 HTML·CSS 파일 구성",
+        "레이아웃·색상·타이포그래피 구현"
+      ],
+      "repo": "https://github.com/jonghwa3471/css-challenge",
+      "branch": "main",
+      "commits": 12,
+      "kind": "학습 챌린지",
+      "sources": [
+        "challenge1.html",
+        "challenge2.html"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-won-hundred-clone",
+      "name": "study-scss-won-hundred-clone",
+      "title": "Won Hundred",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-06-06",
+      "updated": "2023-06-06",
+      "period": "2023.06.06",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Gulp"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-won-hundred-clone",
+      "branch": "master",
+      "commits": 31,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "src/scss/styles.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-donica-clone",
+      "name": "study-scss-donica-clone",
+      "title": "Donica",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-06-06",
+      "updated": "2023-06-06",
+      "period": "2023.06.06",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Gulp"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "@extend로 공통 스타일 재사용"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-donica-clone",
+      "branch": "master",
+      "commits": 30,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "src/scss/styles.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "personal-project-AvanteN",
+      "name": "personal-project-AvanteN",
+      "title": "Avante N 페이지",
+      "purpose": "자동차 주제의 개인 정적 웹 페이지를 만들었습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-06-03",
+      "updated": "2023-06-03",
+      "period": "2023.06.03",
+      "stack": [
+        "HTML",
+        "CSS"
+      ],
+      "learned": [
+        "이미지와 텍스트를 활용한 HTML 구성",
+        "페이지 전용 CSS와 정적 자산 관리"
+      ],
+      "repo": "https://github.com/jonghwa3471/personal-project-AvanteN",
+      "branch": "main",
+      "commits": 2,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-rodic-davidson-clone",
+      "name": "study-scss-rodic-davidson-clone",
+      "title": "Rodic Davidson",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-06-02",
+      "updated": "2023-06-03",
+      "period": "2023.06.02",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Gulp"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-rodic-davidson-clone",
+      "branch": "master",
+      "commits": 28,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "src/scss/styles.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-tolv-clone",
+      "name": "study-scss-tolv-clone",
+      "title": "Tolv",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-05-30",
+      "updated": "2023-06-02",
+      "period": "2023.05.30",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Gulp"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-tolv-clone",
+      "branch": "master",
+      "commits": 26,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "src/scss/styles.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-schwartz-clone",
+      "name": "study-scss-schwartz-clone",
+      "title": "Schwartz",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-05-27",
+      "updated": "2023-05-28",
+      "period": "2023.05.27",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Gulp"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬",
+        "@extend로 공통 스타일 재사용"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-schwartz-clone",
+      "branch": "master",
+      "commits": 23,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "src/scss/styles.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-zoo-clone",
+      "name": "study-scss-zoo-clone",
+      "title": "Zoo",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-05-26",
+      "updated": "2023-05-26",
+      "period": "2023.05.26",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Gulp"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-zoo-clone",
+      "branch": "master",
+      "commits": 20,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "src/scss/styles.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "study-scss-10x19-clone",
+      "name": "study-scss-10x19-clone",
+      "title": "10×19",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-05-23",
+      "updated": "2023-05-26",
+      "period": "2023.05.23",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Gulp"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬",
+        "CSS 애니메이션으로 반복 움직임 표현"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-10x19-clone",
+      "branch": "master",
+      "commits": 17,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "src/scss/styles.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "paintbox",
+      "name": "study-scss-paint-box-clone",
+      "title": "Paintbox",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-05-22",
+      "updated": "2023-05-23",
+      "period": "2023.05.22",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Gulp"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "CSS Grid로 행·열과 콘텐츠 영역 배치",
+        "Flexbox로 내부 요소 정렬",
+        "@extend로 공통 스타일 재사용"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-paint-box-clone",
+      "branch": "master",
+      "commits": 13,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "src/scss/styles.scss"
+      ],
+      "blogs": [],
+      "images": [
+        {
+          "src": "./journey/images/study-scss-paint-box-clone.jpg",
+          "caption": "Paintbox 화면",
+          "source": "https://github.com/jonghwa3471/study-scss-paint-box-clone"
+        }
+      ]
+    },
+    {
+      "id": "study-scss-best-horror-scenes-clone",
+      "name": "study-scss-best-horror-scenes-clone",
+      "title": "Best Horror Scenes",
+      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-05-17",
+      "updated": "2023-05-22",
+      "period": "2023.05.17",
+      "stack": [
+        "HTML",
+        "CSS",
+        "SCSS",
+        "Gulp"
+      ],
+      "learned": [
+        "HTML 마크업과 SCSS 파일 분리",
+        "Flexbox로 내부 요소 정렬"
+      ],
+      "repo": "https://github.com/jonghwa3471/study-scss-best-horror-scenes-clone",
+      "branch": "master",
+      "commits": 11,
+      "kind": "학습 프로젝트",
+      "sources": [
+        "index.html",
+        "src/scss/styles.scss"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "js-challenge",
+      "name": "js-challenge",
+      "title": "JavaScript 기초 챌린지",
+      "purpose": "작은 예제로 이벤트와 화면 변경을 연습했습니다.",
+      "group": "JavaScript · TypeScript",
+      "year": "2023",
+      "created": "2023-02-28",
+      "updated": "2023-03-02",
+      "period": "2023.02.28",
+      "stack": [
+        "JavaScript"
+      ],
+      "learned": [
+        "시계·색상 변경·숫자 게임 구현",
+        "마우스와 화면 크기 변경 이벤트"
+      ],
+      "repo": "https://github.com/jonghwa3471/js-challenge",
+      "branch": "main",
+      "commits": 3,
+      "kind": "학습 챌린지",
+      "sources": [
+        "colors5.html",
+        "colors5.js"
+      ],
+      "blogs": []
+    },
+    {
+      "id": "html-challenge",
+      "name": "html-challenge",
+      "title": "HTML·CSS 기초 챌린지",
+      "purpose": "폼과 여러 레이아웃을 만들며 웹 화면의 기초를 익혔습니다.",
+      "group": "HTML · CSS",
+      "year": "2023",
+      "created": "2023-01-11",
+      "updated": "2023-01-18",
+      "period": "2023.01.11",
+      "stack": [
+        "HTML",
+        "CSS"
+      ],
+      "learned": [
+        "입력 폼과 HTML 요소 구성",
+        "페이지별 CSS 선택자와 스타일 적용"
+      ],
+      "repo": "https://github.com/jonghwa3471/html-challenge",
+      "branch": "main",
+      "commits": 5,
+      "kind": "학습 챌린지",
+      "sources": [
+        "challenge.html",
+        "challenge2.html"
+      ],
+      "blogs": []
+    }
   ]
 };
+
+// 커리큘럼은 학습 맥락 확인용이며, 수록 기능의 근거는 각 저장소의 실제 소스입니다.
+// 최신 강의의 추가 기능·수강률·실무 숙련도를 개인 프로젝트 성과로 옮기지 않습니다.
+(() => {
+  const data = window.PORTFOLIO_DATA;
+  const courses = [
+    ["kokoa", "코코아톡 클론코딩", "kokoa-clone", ["HTML·CSS", "Advanced CSS", "Publishing"], ["kakao", "kakao-challenge-2024-recap", "html-challenge"]],
+    ["javascript", "바닐라 JS로 크롬 앱 만들기", "javascript-for-beginners", ["Javascript on the Browser", "To Do List", "Weather"], ["todo", "js-challenge"]],
+    ["wetube", "유튜브 풀스택", "wetube", ["Routing·Templates", "Models·Authentication", "Video Player·Deployment"], ["wetube", "study-js-youtube-clone"]],
+    ["react", "React JS 마스터클래스", "react-masterclass", ["Typescript", "State Management", "Trello·Nomflix"], ["trello", "netflix", "react-challenge-crypto-tracker", "react-coingecko-crypto-tracker", "react-challenge-toDoList", "study-react-router-v6", "study-react-masterclass-without-ts", "study-gatsby-DevStickers-clone"]],
+    ["maker", "Maker 마스터클래스", "maker-masterclass", ["React Router Framework", "Supabase·Drizzle", "WeMake"], ["wemake"]],
+    ["css", "CSS Layout 마스터클래스", "css-layout-masterclass", ["Flexbox", "Grid", "SCSS·Practice Projects"], data.journey.filter((item) => item.name.startsWith("study-scss-") || item.id === "css-challenge").map((item) => item.id)],
+    ["es6", "ES6의 정석", "es6-once-and-for-all", ["Destructuring·Rest/Spread", "Promises·Async/Await", "Classes"], ["study-js-es6"]],
+    ["canvas", "바닐라 JS로 그림 앱 만들기", "javascript-for-beginners-2", ["Canvas API", "Painting Board", "Meme Maker"], ["study-js-meme-maker-clone"]],
+    ["react-basic", "ReactJS로 영화 웹 서비스 만들기", "react-for-beginners", ["State·Props", "Effects", "Movie App·Routing"], ["study-react-movie-app-clone", "study-react-movie-app-clone-2019"]],
+    ["rn-basic", "React Native 101", "react-native-for-beginners", ["Weather App", "Work Hard Travel Hard App"], ["Learning-React-Native", "WorkHardTravelHardApp"]],
+    ["rn", "React Native 마스터클래스", "react-native-masterclass", ["Movie App", "Animations and Interactions", "Diary·Crypto App"], ["noovies", "langApp", "nomad-diary", "social-coin"]],
+    ["hooks", "실전형 리액트 Hooks 10개", "react-hooks-introduction", ["useState", "useEffect"], ["study-react-hooks"]],
+    ["redux", "초보자를 위한 리덕스 101", "redux-for-beginners", ["Store·Actions·Reducer", "React Redux", "Redux Toolkit"], ["study-vanilla-redux"]],
+    ["gulp", "Gulp 90분 마스터하기", "gulp-for-beginners", ["Tasks", "Asset Pipeline", "Deployment"], ["study-gulp", "study-gulp-recap"]],
+    ["typescript", "타입스크립트로 블록체인 만들기", "typescript-for-beginners", ["Types", "Classes·Interfaces", "Blockchain"], ["study-ts-blockchain"]],
+    ["graphql", "GraphQL로 영화 API 만들기", "graphql-for-beginners", ["Schema", "Queries·Mutations", "Resolvers"], ["Learning-GraphQL"]],
+    ["graphql-react", "GraphQL로 영화 웹 앱 만들기", "react-graphql-for-beginners", ["Apollo Client", "Queries", "Routing"], ["Movie-App-with-GraphQL"]],
+    ["python", "Python으로 웹 스크래퍼 만들기", "python-for-beginners", ["Job Scraper", "Flask"], ["dynamic-scrapper"]],
+    ["selenium", "초보를 위한 셀레니움", "selenium-for-beginners", ["Browser Automation", "Data Extraction"], ["seleniumpro"]],
+    ["dataviz", "초보를 위한 데이터 시각화", "data-viz-for-beginners", ["Data Processing", "Charts·Dashboard"], ["data-visualization"]],
+    ["firebase", "트위터 클론코딩", "nwitter", ["Authentication", "Tweeting", "User Profile"], ["study-firebase-nwitter", "nwitter-challenge-firebase"]],
+    ["zoom", "줌 클론코딩", "noom", ["Chat with WebSockets", "SocketIO", "Video Call"], ["study-js-zoom-clone"]],
+    ["next", "Next.js 시작하기", "nextjs-for-beginners", ["Routing", "Data Fetching", "Next 12 Practice Project"], ["study-next-v14", "study-next-v12", "next-challenge-1", "next-challenge-2"]],
+    ["carrot", "캐럿마켓 풀스택", "carrot-market", ["Server Actions", "Products·Caching", "Deployment"], ["carrot", "carrot-market-next12", "cloudflare-workers"]],
+    ["gpt", "풀스택 GPT", "fullstack-gpt", ["RAG", "DocumentGPT", "PrivateGPT"], ["Fullstack-GPT"]],
+    ["sql", "SQL 마스터클래스", "sql-masterclass", ["SQLite·PostgreSQL", "ORM", "MongoDB"], ["SQL-masterclass"]],
+  ];
+  data.courseReview = { checkedAt: "2026-10-23", courseCount: courses.length };
+  for (const [id, title, slug, topics, projectIds] of courses) {
+    for (const projectId of projectIds) {
+      const project = data.journey.find((item) => item.id === projectId);
+      if (project) project.course = { id, title, url: `https://nomadcoders.co/${slug}`, topics };
+    }
+  }
+})();
