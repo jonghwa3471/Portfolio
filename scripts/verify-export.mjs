@@ -15,6 +15,7 @@ const pages = [
 let references = 0;
 for (const file of pages) {
   const html = await readFile(path.join("out", file), "utf8");
+  assert.match(html, /<link\b[^>]*rel="icon"[^>]*>/, `${file}: missing favicon`);
   assert.ok(
     !html.includes('src="./app.js"') && !html.includes('src="./detail.js"'),
     file,
