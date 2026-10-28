@@ -119,6 +119,33 @@ export default function EokkaContent() {
                 height={1650}
               />
             </div>
+            <ul
+              className="project-core-summary"
+              aria-label="EOKKA 핵심 구현 요약"
+            >
+              <li>
+                <strong>데이터 UX</strong>
+                <span>
+                  5,000개 경로의 P20·P50·P80을 세 가지 시나리오로 시각화
+                </span>
+              </li>
+              <li>
+                <strong>프론트엔드</strong>
+                <span>
+                  무료 최대 10개·Pro 최대 20개 종목의 동적 입력과 오류·복원 흐름
+                </span>
+              </li>
+              <li>
+                <strong>데이터 연동</strong>
+                <span>
+                  10년 시세 캐시와 최근 구간 증분 갱신으로 반복 API 호출 감소
+                </span>
+              </li>
+              <li>
+                <strong>운영 안정성</strong>
+                <span>Zod·요청 제한·RLS·Sentry를 통한 검증과 장애 대응</span>
+              </li>
+            </ul>
           </div>
         </header>
         <div className={"detail-body container"}>
@@ -164,7 +191,7 @@ export default function EokkaContent() {
               <div className={"reason-grid"}>
                 <article className={"reason-card"}>
                   <span>{"01 · 동적 입력"}</span>
-                  <h3>{"서로 다른 최대 10개 종목을 하나의 폼으로"}</h3>
+                  <h3>{"무료 최대 10개·Pro 최대 20개 종목을 하나의 폼으로"}</h3>
                   <p>
                     {
                       "종목별 자동완성·평균 매수가·수량을 독립적으로 관리하고, 전체 폼의 유효성을 함께 판단했습니다. 시장 모드에 따라 통화와 선택 가능한 종목을 제한해 잘못된 요청을 UI 단계에서 막았습니다."
@@ -203,13 +230,30 @@ export default function EokkaContent() {
                 <h3>{"편의성과 민감한 정보 보존 사이의 선택"}</h3>
                 <p>
                   {
-                    "새로고침으로 작업을 잃지 않도록 입력과 분석 결과를 현재 탭의 "
+                    "새로고침으로 작업을 잃지 않도록 입력과 분석 결과를 현재 탭에서만 유지되는 "
                   }
                   <code>{"sessionStorage"}</code>
                   {
-                    "에 보존했습니다. 영구 저장은 사용하지 않고, 저장 데이터의 구조와 시장 모드가 현재 화면과 맞을 때만 복원해 편의와 정보 보존 범위를 함께 고려했습니다."
+                    "에 보존했습니다. 브라우저를 닫아도 남는 localStorage와 달리 탭을 닫으면 데이터가 사라져, 투자 정보를 장기간 기기에 남기지 않으면서 새로고침에는 대응할 수 있습니다."
                   }
                 </p>
+                <p>
+                  <strong>{"복원 조건:"}</strong>
+                  {
+                    " 저장된 값이 현재 코드가 기대하는 항목과 자료형을 갖췄는지 확인하고, 결과를 만든 시장 모드가 현재 화면과 같을 때만 복원합니다. 예전 형식의 데이터나 국내·해외 모드가 다른 결과는 삭제해 잘못된 값이 화면에 표시되지 않도록 했습니다."
+                  }
+                </p>
+                <div className={"project-evidence"}>
+                  <a
+                    href={
+                      "https://github.com/jonghwa3471/EOKKA/commit/1ce692f546ad622c7b8592a1d5375ae9df7dcfa7"
+                    }
+                    target={"_blank"}
+                    rel={"noreferrer"}
+                  >
+                    {"입력·분석 결과 세션 저장 구현 커밋 ↗"}
+                  </a>
+                </div>
               </div>
             </div>
           </section>
@@ -396,7 +440,7 @@ export default function EokkaContent() {
                   }
                 </p>
                 <p>
-                  <strong>{"구현 방식."}</strong>
+                  <strong>{"구현 방식:"}</strong>
                   {" 글자를 입력할 때마다 요청하지 않고, 입력이 멈춘 뒤 "}
                   <strong>{"250ms를 기다리는 디바운스"}</strong>
                   {
@@ -432,7 +476,7 @@ export default function EokkaContent() {
                   }
                 </p>
                 <p>
-                  <strong>{"구현 방식."}</strong>
+                  <strong>{"구현 방식:"}</strong>
                   {" 화면 상태를 먼저 변경한 뒤 "}
                   <code>{"useFetcher"}</code>
                   {
@@ -535,7 +579,59 @@ export default function EokkaContent() {
                 </a>
               </article>
               <article>
-                <span className={"case-kicker"}>{"02 · 운영 환경 디버깅"}</span>
+                <span className={"case-kicker"}>
+                  {"02 · 외부 API 호출 최적화"}
+                </span>
+                <h3>
+                  {"10년치 시세를 매번 요청하지 않도록 데이터 갱신 구조를 개선"}
+                </h3>
+                <p>
+                  <strong>{"문제:"}</strong>
+                  {
+                    " 분석할 때마다 금융위원회 API에서 장기간의 시세를 다시 가져오면 응답이 느려지고, 동일한 과거 데이터에 외부 API 호출이 반복됩니다. 주말·공휴일처럼 새 거래 데이터가 없는 날에도 같은 요청이 계속 발생할 수 있었습니다."
+                  }
+                </p>
+                <p>
+                  <strong>{"구현 방식:"}</strong>
+                  {
+                    " 종목의 캐시가 없을 때만 최근 10년 시세를 페이지 단위로 조회해 Supabase의 stock_prices 테이블에 저장했습니다. 이후에는 최근 21일 구간만 조회하고, 종목 ID와 거래일의 복합 고유 키를 기준으로 upsert해 기존 거래일은 갱신하고 새 거래일은 추가했습니다."
+                  }
+                </p>
+                <p>
+                  <strong>{"갱신 조건:"}</strong>
+                  {
+                    " 한국시간 오후 2시를 기준으로 하루의 갱신 주기를 나눴습니다. 현재 주기에 이미 확인한 종목은 DB 캐시를 그대로 사용하므로 같은 날의 반복 분석에서는 외부 API를 다시 호출하지 않습니다. 주말·공휴일에도 첫 확인 이후에는 기존 캐시를 재사용합니다."
+                  }
+                </p>
+                <div
+                  className={"route-behavior"}
+                  aria-label={"시세 데이터 캐시와 증분 갱신 처리"}
+                >
+                  <div>
+                    <strong>{"최초 분석"}</strong>
+                    <p>{"최근 10년 시세 조회 후 DB에 저장"}</p>
+                  </div>
+                  <div>
+                    <strong>{"다음 갱신 주기"}</strong>
+                    <p>{"최근 21일만 조회해 신규·변경 거래일 upsert"}</p>
+                  </div>
+                  <div>
+                    <strong>{"같은 주기 재분석"}</strong>
+                    <p>{"외부 API 호출 없이 저장된 시세 재사용"}</p>
+                  </div>
+                </div>
+                <a
+                  href={
+                    "https://github.com/jonghwa3471/EOKKA/commit/f3a8aa5269947589f677c5a7a20fe5877bf679bc"
+                  }
+                  target={"_blank"}
+                  rel={"noreferrer"}
+                >
+                  {"시세 캐시·증분 갱신 구현 커밋 ↗"}
+                </a>
+              </article>
+              <article>
+                <span className={"case-kicker"}>{"03 · 운영 환경 디버깅"}</span>
                 <h3>{"로컬에서는 성공하던 분석 요청이 운영환경에서만 실패"}</h3>
                 <p>
                   <strong>{"문제:"}</strong>
@@ -605,7 +701,7 @@ export default function EokkaContent() {
               </article>
               <article>
                 <span className={"case-kicker"}>
-                  {"03 · 데이터 제공 범위 조정"}
+                  {"04 · 데이터 제공 범위 조정"}
                 </span>
                 <h3>
                   {"한국투자 API의 시세 제공 제약으로 공개 서비스 운영에 한계"}
@@ -639,7 +735,7 @@ export default function EokkaContent() {
               </article>
               <article>
                 <span className={"case-kicker"}>
-                  {"04 · 인증 메일 발송 확장"}
+                  {"05 · 인증 메일 발송 확장"}
                 </span>
                 <h3>
                   {"기본 인증 메일 발송만으로는 원하는 템플릿 연동에 한계"}
@@ -899,7 +995,7 @@ export default function EokkaContent() {
                 </p>
                 <p>
                   {
-                    "서버에서 받아오는 데이터와 입력값·모달 같은 화면 상태는 역할이 다릅니다. AI의 도움을 받은 공유 로직을 포함해, 각 상태가 어디에 저장되고 어떤 화면에 영향을 주는지 확인하는 기준으로 삼고 있습니다."
+                    "서버에서 가져온 분석 기록과 화면에서만 사용하는 입력값·모달 상태를 구분했습니다. 공통 캐시와 알림 동기화 로직은 AI의 도움을 받아 구현했으며, 상태가 한 화면에서만 필요한지 여러 화면이 공유해야 하는지, 데이터 변경 후 어떤 화면을 갱신해야 하는지를 직접 확인했습니다."
                   }
                 </p>
               </div>
@@ -981,6 +1077,17 @@ export default function EokkaContent() {
                     활용했습니다. 비밀 API 키는 브라우저가 아닌 서버 전용
                     코드에서 사용합니다.
                   </p>
+                  <div className={"project-evidence"}>
+                    <a
+                      href={
+                        "https://github.com/jonghwa3471/EOKKA/commit/5451b358eb112eb9cbdad1fc6b47759b82cda1e9"
+                      }
+                      target={"_blank"}
+                      rel={"noreferrer"}
+                    >
+                      {"분석 API 요청 제한과 서버 검증 강화 커밋 ↗"}
+                    </a>
+                  </div>
                 </div>
               </details>
               <details className="project-disclosure">
