@@ -16,6 +16,8 @@ let references = 0;
 for (const file of pages) {
   const html = await readFile(path.join("out", file), "utf8");
   assert.match(html, /<link\b[^>]*rel="icon"[^>]*>/, `${file}: missing favicon`);
+  const head = html.slice(0, html.indexOf("</head>"));
+  assert.match(head, /<link\b[^>]*rel="icon"[^>]*href="[^"]*favicon-coffee\.ico/, `${file}: ICO fallback must be in initial head`);
   assert.ok(
     !html.includes('src="./app.js"') && !html.includes('src="./detail.js"'),
     file,

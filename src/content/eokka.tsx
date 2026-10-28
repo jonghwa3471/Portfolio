@@ -2,6 +2,8 @@ import Link from "next/link";
 import { assetPath } from "@/lib/portfolio";
 import { SiteHeader } from "@/components/site-header";
 import { ZoomImage } from "@/components/image-viewer";
+import { ScrollToTop } from "@/components/scroll-to-top";
+import { ReadingProgress } from "@/components/reading-progress";
 
 export default function EokkaContent() {
   return (
@@ -14,7 +16,9 @@ export default function EokkaContent() {
 
       <SiteHeader project />
 
-      <main id={"main"}>
+      <ScrollToTop />
+      <ReadingProgress />
+      <main id={"main"} tabIndex={-1}>
         <header className={"detail-header"}>
           <div className={"container"}>
             <Link className={"back-link"} href={"/#projects"}>
@@ -27,13 +31,11 @@ export default function EokkaContent() {
               </div>
               <div>
                 <p className={"project-summary"}>
-                  {"“이대로 계속 투자하면, 언제쯤 얼마가 될까?”"}
+                  {"복잡한 투자 데이터를 입력·검증·시각화해"}
                   <br />
-                  {"과거 투자 데이터를 여러 시나리오로 풀어내어,"}
+                  {"초보 투자자가 현재 상태와 목표까지의 거리를"}
                   <br />
-                  {
-                    "막연한 미래를 조금 더 구체적으로 바라보게 돕는 서비스입니다."
-                  }
+                  {"쉽게 이해하도록 설계한 반응형 웹 서비스입니다."}
                 </p>
                 <div className={"project-links"}>
                   <a
@@ -62,7 +64,7 @@ export default function EokkaContent() {
               <div>
                 <span>{"인원과 역할"}</span>
                 <strong>{"1인 · 기획 / 디자인 / 풀스택 개발"}</strong>
-                <small>{"Codex를 AI 개발 도구로 활용"}</small>
+                <small>{"Supaplate 기반 · Codex를 활용한 구현"}</small>
               </div>
               <div>
                 <span>{"주요 기술"}</span>
@@ -75,6 +77,11 @@ export default function EokkaContent() {
                 <small>{"eokka.qualius.co"}</small>
               </div>
             </div>
+            <p className="project-contribution">
+              <strong>주요 역할:</strong> 투자 분석 사용자 경험 기획 · 동적 입력
+              폼과 데이터 시각화 중심의 반응형 UI 구현 · 서버 데이터 연동 및
+              상태·로딩·오류 처리 · 보안과 실제 운영을 고려한 서비스 개선
+            </p>
             <div
               className={"project-cover"}
               aria-label={"EOKKA 서비스 미리보기"}
@@ -116,7 +123,7 @@ export default function EokkaContent() {
         </header>
         <div className={"detail-body container"}>
           <section className={"detail-block"} id={"motivation"}>
-            <h2>{"시작한 이유"}</h2>
+            <h2>{"기획 배경과 해결하려는 문제"}</h2>
             <div>
               <h3>
                 {"수익률을 보는 것만으로는"}
@@ -146,11 +153,126 @@ export default function EokkaContent() {
               </p>
             </div>
           </section>
-          <section className={"detail-block"} id={"experience"}>
-            <h2>{"서비스 경험"}</h2>
+          <section className={"detail-block"} id={"frontend-decisions"}>
+            <h2>{"프론트엔드 핵심 역량"}</h2>
             <div>
-              <h3>{"빠르게 확인하고, 기록하며, 꾸준함을 쌓도록"}</h3>
+              <h3>
+                {"계산 결과를 나열하지 않고,"}
+                <br />
+                {"사용자가 판단할 수 있는 흐름으로 재구성했습니다."}
+              </h3>
+              <div className={"reason-grid"}>
+                <article className={"reason-card"}>
+                  <span>{"01 · 동적 입력"}</span>
+                  <h3>{"서로 다른 최대 10개 종목을 하나의 폼으로"}</h3>
+                  <p>
+                    {
+                      "종목별 자동완성·평균 매수가·수량을 독립적으로 관리하고, 전체 폼의 유효성을 함께 판단했습니다. 시장 모드에 따라 통화와 선택 가능한 종목을 제한해 잘못된 요청을 UI 단계에서 막았습니다."
+                    }
+                  </p>
+                </article>
+                <article className={"reason-card"}>
+                  <span>{"02 · 정보 시각화"}</span>
+                  <h3>{"금액·기간·확률을 읽는 순서로 계층화"}</h3>
+                  <p>
+                    {
+                      "보수적·평균·낙관적 시나리오에 일관된 색상과 순서를 적용했습니다. 억 단위 금액과 개월 단위 기간을 읽기 쉬운 자연어로 바꾸고, 차트에서 시점별 예상 자산을 비교하도록 구성했습니다."
+                    }
+                  </p>
+                </article>
+                <article className={"reason-card"}>
+                  <span>{"03 · 비동기 UX"}</span>
+                  <h3>{"요청 중·입력 오류·서버 오류를 각각 정의"}</h3>
+                  <p>
+                    {
+                      "분석 중에는 중복 요청을 막고 버튼과 로딩 상태를 연결했습니다. 요청이 실패해도 입력은 유지하고, 서버의 오류 이유를 표시해 수정하거나 다시 시도할 수 있게 했습니다."
+                    }
+                  </p>
+                </article>
+                <article className={"reason-card"}>
+                  <span>{"04 · 설명과 신뢰"}</span>
+                  <h3>{"통계 결과의 기준과 한계를 결과 안에서 확인"}</h3>
+                  <p>
+                    {
+                      "분석 기준일, 5,000개 경로와 P20·P50·P80의 의미, 세금·수수료 등 분석의 한계를 설명했습니다. 결과값만 보여주기보다 사용자가 근거를 확인하고 오해하지 않도록 하는 것을 핵심 UX로 봤습니다."
+                    }
+                  </p>
+                </article>
+              </div>
+              <div className={"technical-note"}>
+                <h3>{"편의성과 민감한 정보 보존 사이의 선택"}</h3>
+                <p>
+                  {
+                    "새로고침으로 작업을 잃지 않도록 입력과 분석 결과를 현재 탭의 "
+                  }
+                  <code>{"sessionStorage"}</code>
+                  {
+                    "에 보존했습니다. 영구 저장은 사용하지 않고, 저장 데이터의 구조와 시장 모드가 현재 화면과 맞을 때만 복원해 편의와 정보 보존 범위를 함께 고려했습니다."
+                  }
+                </p>
+              </div>
+            </div>
+          </section>
+          <section className={"detail-block"} id={"experience"}>
+            <h2>{"핵심 기능"}</h2>
+            <div>
+              <h3 className="feature-intro-title">
+                {"빠르게 확인하고, 기록하며, 꾸준함을 쌓도록"}
+              </h3>
               <div className={"feature-list"}>
+                <article>
+                  <h3>자산 성장 흐름과 목표 도달 시나리오</h3>
+                  <p>
+                    이대로 투자하면 자산이 어떻게 늘어날지, 목표 금액까지 얼마나
+                    걸릴지를 차트로 확인하는 핵심 기능입니다. 보수적·평균·낙관적
+                    시나리오의 자산 변화를 비교하고, 매월 추가 투자금을 반영했을
+                    때 목표 도달 기간이 어떻게 달라지는지도 살펴볼 수 있습니다.
+                    과거 데이터와 입력 조건에 따른 시뮬레이션으로 미래의 흐름을
+                    가늠하도록 구성했습니다.
+                  </p>
+                  <div
+                    className="analysis-gallery"
+                    data-image-gallery
+                    aria-label="분석 결과 화면 모음"
+                  >
+                    <figure className="context-shot">
+                      <ZoomImage
+                        src={assetPath(
+                          "/projects/eokka/images/asset-growth-scenarios.jpg",
+                        )}
+                        alt="분석 결과의 시나리오별 자산 성장 곡선과 목표 도달 기간"
+                      />
+                      <figcaption>자산 성장 시나리오</figcaption>
+                    </figure>
+                    <figure className="context-shot">
+                      <ZoomImage
+                        src={assetPath(
+                          "/projects/eokka/images/analysis-goal-comparison.jpg",
+                        )}
+                        alt="매월 추가 투자에 따른 목표 도달 기간 비교"
+                      />
+                      <figcaption>월 투자금과 목표 도달 기간</figcaption>
+                    </figure>
+                    <figure className="context-shot">
+                      <ZoomImage
+                        src={assetPath(
+                          "/projects/eokka/images/analysis-ai-committee.jpg",
+                        )}
+                        alt="AI 투자위원회의 포트폴리오 총평과 투자 대가 캐릭터"
+                      />
+                      <figcaption>AI 투자위원회 총평</figcaption>
+                    </figure>
+                    <figure className="context-shot">
+                      <ZoomImage
+                        src={assetPath(
+                          "/projects/eokka/images/analysis-committee-discussion.jpg",
+                        )}
+                        alt="서로 다른 투자 철학으로 포트폴리오를 살펴보는 AI 투자위원회 분석 과정"
+                      />
+                      <figcaption>투자 관점별 AI 분석</figcaption>
+                    </figure>
+                  </div>
+                </article>
                 <article>
                   <h3>{"빠른 분석"}</h3>
                   <p>
@@ -233,222 +355,38 @@ export default function EokkaContent() {
                     </figcaption>
                   </figure>
                 </article>
+                <article id={"daily-eokka"}>
+                  <h3>{"오늘의 억까"}</h3>
+                  <p>
+                    {
+                      "직전 거래일 종가와 최근 종가를 비교해, 내 자산이 하루 동안 얼마나 늘거나 줄었는지 쉽게 확인할 수 있습니다. 수익·손실을 무선 이어폰이나 운동화처럼 익숙한 물건의 가격에 빗대어 보여주고, 최근 기록과 목표 도달 기간 변화도 함께 배치해 하루의 투자 흐름을 직관적으로 돌아보도록 구성했습니다."
+                    }
+                  </p>
+                  <figure className={"context-shot"}>
+                    <ZoomImage
+                      src={assetPath(
+                        "/photos/KakaoTalk_Photo_2026-10-27-14-12-58 001.jpeg",
+                      )}
+                      alt={
+                        "오늘의 억까 · 투자 성과를 일상 속 물건과 목표 도달 기간으로 표현한 화면"
+                      }
+                    />
+                    <figcaption>
+                      {
+                        "일상 속 물건으로 표현한 투자 성과와 목표 도달 기간 · 클릭하면 크게 보기"
+                      }
+                    </figcaption>
+                  </figure>
+                  <p className="feature-footnote">
+                    미국 종목이 포함된 화면 예시입니다. 공개 베타의 분석 지원
+                    범위는 국내 주식·ETF·ETN입니다.
+                  </p>
+                </article>
               </div>
             </div>
           </section>
-          <section className={"detail-block"} id={"loading"}>
-            <h2>{"개발 과정에서 마주한 문제와 해결"}</h2>
-            <div className={"story-list"}>
-              <article>
-                <span className={"case-kicker"}>
-                  {"01 · 로딩과 데이터 최신성"}
-                </span>
-                <h3>
-                  {"페이지 이동마다 반복되는 로딩과 갱신되지 않는 분석 결과"}
-                </h3>
-                <p>
-                  <strong>{"문제."}</strong>
-                  {
-                    " 페이지 이동마다 화면 전체가 로딩되고, 분석을 저장한 후에는 일부 화면에 이전 값이 남았습니다."
-                  }
-                </p>
-                <p>
-                  <strong>{"개선 방향."}</strong>
-                  {
-                    " 화면 전체를 가리는 대신 데이터 영역에 스켈레톤을 표시하고, 이미 조회한 데이터는 재사용하도록 했습니다. 다만 분석을 저장한 뒤에도 이전 값이 남지 않도록, 관련 화면의 캐시를 무효화하고 다시 조회하는 조건이 필요했습니다."
-                  }
-                </p>
-                <p>
-                  <strong>{"구현과 동작 확인."}</strong>
-                  {" React Router의 "}
-                  <code>{"loader"}</code>
-                  {
-                    "로 데이터를 조회하던 중, 반복 조회를 줄이기 위해 캐싱을 떠올렸고 AI의 도움으로 빠르게 구현했습니다. 캐시가 의도대로 동작하는지 테스트한 뒤 정상 동작을 확인하고 다음 작업으로 넘어갔습니다."
-                  }
-                </p>
-                <div
-                  className={"route-behavior"}
-                  aria-label={"방문 상황별 캐시 처리"}
-                >
-                  <div>
-                    <strong>{"최초 조회"}</strong>
-                    <p>
-                      {"서버에서 받은 데이터를 화면에 표시하고 캐시에 등록"}
-                    </p>
-                  </div>
-                  <div>
-                    <strong>{"재방문"}</strong>
-                    <p>{"사용 가능한 캐시가 있으면 서버 조회 대신 재사용"}</p>
-                  </div>
-                  <div>
-                    <strong>{"분석 변경"}</strong>
-                    <p>
-                      {
-                        "대시보드·기록·인사이트 등 관련 캐시를 무효화해 다음 조회에서 갱신"
-                      }
-                    </p>
-                  </div>
-                </div>
-                <p>
-                  <strong>{"처음 AI와 개발하며 놓친 점."}</strong>
-                  {
-                    " 그동안 학습한 지식을 바탕으로, 처음 Codex를 도입해 실제 서비스를 만들어 보고자 했습니다. 예상보다 기능을 잘 구현해 주자 점차 결과를 신뢰하게 됐고, 구현 과정까지 검증해야 한다는 필요성을 덜 느끼게 됐습니다. 이후 코드를 다시 살펴보니 React Query가 아닌 "
-                  }
-                  <code>{"Map"}</code>
-                  {
-                    " 기반 자체 캐시가 구현되어 있어 당황했습니다. 자체 구현의 잘못이 아니라, AI 활용에 익숙하지 않아 구현 방식과 선택 근거를 확인하지 않은 채 동작 검증에 그쳤던 제 작업 방식의 한계였습니다."
-                  }
-                </p>
-                <p>
-                  <strong>{"배운 점과 다음 기준."}</strong>
-                  {
-                    " AI가 기능을 완성해 주더라도 구현을 이해하고 판단하는 책임은 개발자에게 있다는 점을 배웠습니다. 앞으로는 구현 전 접근 방식과 선택 근거를 확인하고, 라이브러리 활용과 직접 구현의 유지보수 부담을 비교한 뒤 코드 검토와 테스트를 함께 진행하려고 합니다. 이 경험은 AI 활용과 AX를 공부하며, 개발 과정에 AI를 도입하고 검증하는 방법을 체계적으로 익히겠다고 다짐한 계기가 됐습니다."
-                  }
-                </p>
-                <a
-                  href={
-                    "https://github.com/jonghwa3471/EOKKA/commit/75c51f32893aa1b53c5921ceb835fffe51ffc7cb"
-                  }
-                  target={"_blank"}
-                  rel={"noreferrer"}
-                >
-                  {"페이지 데이터 캐싱·스켈레톤 최초 구현 커밋 ↗"}
-                </a>
-              </article>
-              <article>
-                <span className={"case-kicker"}>{"02 · 운영 환경 디버깅"}</span>
-                <h3>{"로컬에서는 성공하던 분석 요청이 운영환경에서만 실패"}</h3>
-                <p>
-                  <strong>{"문제와 초기 확인."}</strong>
-                  {
-                    " 배포 후 사용자 테스트에서 분석이 실패했습니다. 운영 로그에 ‘공공데이터 시세 조회 실패(400)’가 반복되어 환경변수와 API 키가 정상인지 먼저 확인했지만, 설정에 문제가 없는데도 오류가 계속됐습니다."
-                  }
-                </p>
-                <figure className={"context-shot debug-shot"}>
-                  <ZoomImage
-                    src={assetPath("/projects/eokka/images/analysis-error.png")}
-                    alt={
-                      "빠른 분석 실행 후 분석 처리 중 오류가 발생했다는 안내 화면"
-                    }
-                  />
-                  <figcaption>
-                    {"사용자 화면에 나타난 분석 실패 안내"}
-                  </figcaption>
-                </figure>
-                <figure className={"context-shot debug-shot"}>
-                  <ZoomImage
-                    src={assetPath(
-                      "/projects/eokka/images/analysis-error-logs.png",
-                    )}
-                    alt={
-                      "공공데이터 시세 조회 실패 400과 FSC 조회 HTTP 400이 반복된 운영 로그"
-                    }
-                  />
-                  <figcaption>
-                    {"시세 조회 실패와 관련된 운영 로그 발췌"}
-                  </figcaption>
-                </figure>
-                <p>
-                  <strong>{"AI와 원인 추적."}</strong>
-                  {
-                    " 로그를 바탕으로 AI의 도움을 받아 원인을 좁혀 가며, 오류·성능 모니터링 도구인 Sentry가 외부 요청에 추적 헤더를 추가한다는 점을 알게 됐습니다. 같은 키와 요청 조건에서 헤더 유무를 비교한 결과, "
-                  }
-                  <strong>
-                    {"추적 헤더 없음 → 200 / 추적 헤더 있음 → 400"}
-                  </strong>
-                  {"으로 갈렸습니다. 외부 API가 "}
-                  <code>{"sentry-trace"}</code>
-                  {"·"}
-                  <code>{"baggage"}</code>
-                  {" 헤더가 포함된 요청을 거부하는 문제였습니다."}
-                </p>
-                <p>
-                  <strong>{"수정과 검증."}</strong>
-                  {" 서버 Sentry는 "}
-                  <code>{"tracePropagationTargets"}</code>
-                  {
-                    " 설정을 생략하면 기본적으로 추적 헤더를 전파합니다. 이를 빈 배열("
-                  }
-                  <code>{"[]"}</code>
-                  {
-                    ")로 지정해 전파 대상을 없애고, 외부 API 요청에 추적 헤더가 추가되지 않도록 했습니다. 오류 수집은 유지했으며, 재배포 후 운영 서비스의 ETF 분석이 200 응답으로 성공하는 것을 확인했습니다."
-                  }
-                </p>
-                <a
-                  href={
-                    "https://github.com/jonghwa3471/EOKKA/commit/2a662d9e8e8b25b9351d27b261017bfebe780e9f"
-                  }
-                  target={"_blank"}
-                  rel={"noreferrer"}
-                >
-                  {"원인과 수정이 남아 있는 커밋 ↗"}
-                </a>
-              </article>
-              <article>
-                <span className={"case-kicker"}>
-                  {"03 · 데이터 제공 범위 조정"}
-                </span>
-                <h3>
-                  {"한국투자 API의 시세 제공 제약으로 공개 서비스 운영에 한계"}
-                </h3>
-                <p>
-                  {
-                    "처음에는 한국투자증권 API로 국내·미국 주식을 분석하려 했습니다. 그러나 개인용 시세를 제3자에게 제공하는 제약 때문에 해당 모드를 공개 서비스에서 그대로 사용할 수 없었습니다. 운영은 "
-                  }
-                  <strong>{"금융위원회 주식·증권상품 시세 API"}</strong>
-                  {
-                    "를 사용하도록 전환하고, KIS 모드는 로컬 테스트 용도로 남겨 프로덕션 실행을 차단했습니다."
-                  }
-                </p>
-                <p>
-                  {
-                    "이에 맞춰 베타 서비스의 지원 범위를 국내 주식·ETF·ETN과 확정 종가 기반 분석으로 명확히 안내했습니다. 원하는 기능을 모두 노출하기보다 실제 제공 가능한 데이터 범위에 맞춰 제품을 조정했습니다."
-                  }
-                </p>
-              </article>
-              <article>
-                <span className={"case-kicker"}>
-                  {"04 · 인증 메일 발송 확장"}
-                </span>
-                <h3>
-                  {"기본 인증 메일 발송만으로는 원하는 템플릿 연동에 한계"}
-                </h3>
-                <p>
-                  <strong>{"배경."}</strong>
-                  {
-                    " 이메일의 링크를 눌러 로그인하는 매직 링크에 서비스 전용 디자인을 적용하고 싶었습니다. Supabase Auth의 기본 발송 흐름 대신 React Email 템플릿을 렌더링해 Resend API로 보내도록 확장했습니다. Supabase에서 매직 링크나 템플릿을 지원하지 않는다는 뜻이 아니라, 코드로 관리하는 이메일 생성·발송 흐름을 연결한 것입니다."
-                  }
-                </p>
-                <p>
-                  <strong>{"구현 과정."}</strong>
-                  {
-                    " 로그인 화면에서 Supabase Auth에 매직 링크 발송을 요청하면, Auth의 "
-                  }
-                  <code>{"Send Email Hook"}</code>
-                  {
-                    "이 Edge Function을 호출합니다. 함수는 요청 서명을 확인하고 전달받은 토큰 해시로 인증 링크를 구성합니다. 이 링크를 React Email 템플릿에 넣어 HTML로 만든 뒤 Resend API로 발송하도록 연결했습니다."
-                  }
-                </p>
-                <p>
-                  <strong>{"역할 분리."}</strong>
-                  {
-                    " 사용자가 메일의 링크를 누르면 앱의 인증 경로에서 Supabase Auth로 토큰을 검증하고 세션을 생성합니다. 인증은 Supabase Auth에 맡기고, 이메일 내용 구성과 발송은 Edge Function·Resend가 담당하도록 나눴습니다."
-                  }
-                </p>
-                <figure className={"context-shot"}>
-                  <ZoomImage
-                    src={assetPath("/projects/eokka/images/login.jpg")}
-                    alt={"이메일 로그인 링크 요청과 소셜 로그인 화면"}
-                  />
-                  <figcaption>
-                    {"이메일 로그인 링크를 요청하는 화면"}
-                  </figcaption>
-                </figure>
-              </article>
-            </div>
-          </section>
           <section className={"detail-block"} id={"frontend"}>
-            <h2>{"화면 설계의 디테일"}</h2>
+            <h2>{"구현 디테일과 UX 개선"}</h2>
             <div className={"story-list"}>
               <article>
                 <h3>{"종목 자동완성으로 간편하게 입력"}</h3>
@@ -532,8 +470,369 @@ export default function EokkaContent() {
               </article>
             </div>
           </section>
+          <section className={"detail-block"} id={"loading"}>
+            <h2>{"개발 중 발생한 문제와 해결"}</h2>
+            <div className={"story-list"}>
+              <article>
+                <span className={"case-kicker"}>
+                  {"01 · 로딩과 데이터 최신성"}
+                </span>
+                <h3>
+                  {"페이지 이동마다 반복되는 로딩과 갱신되지 않는 분석 결과"}
+                </h3>
+                <p>
+                  <strong>{"문제:"}</strong>
+                  {
+                    " 페이지 이동마다 화면 전체가 로딩되고, 분석을 저장한 후에는 일부 화면에 이전 값이 남았습니다."
+                  }
+                </p>
+                <p>
+                  <strong>{"개선 방향:"}</strong>
+                  {
+                    " 화면 전체를 가리는 대신 데이터 영역에 스켈레톤을 표시하고, 이미 조회한 데이터는 재사용하도록 했습니다. 다만 분석을 저장한 뒤에도 이전 값이 남지 않도록, 관련 화면의 캐시를 무효화하고 다시 조회하는 조건이 필요했습니다."
+                  }
+                </p>
+                <p>
+                  <strong>{"구현과 동작 확인:"}</strong>
+                  {" React Router의 "}
+                  <code>{"loader"}</code>
+                  {
+                    "로 데이터를 조회하던 중, 반복 조회를 줄이기 위해 캐싱을 떠올렸고 AI의 도움으로 빠르게 구현했습니다. 캐시가 의도대로 동작하는지 테스트한 뒤 정상 동작을 확인하고 다음 작업으로 넘어갔습니다."
+                  }
+                </p>
+                <div
+                  className={"route-behavior"}
+                  aria-label={"방문 상황별 캐시 처리"}
+                >
+                  <div>
+                    <strong>{"최초 조회"}</strong>
+                    <p>
+                      {"서버에서 받은 데이터를 화면에 표시하고 캐시에 등록"}
+                    </p>
+                  </div>
+                  <div>
+                    <strong>{"재방문"}</strong>
+                    <p>{"사용 가능한 캐시가 있으면 서버 조회 대신 재사용"}</p>
+                  </div>
+                  <div>
+                    <strong>{"분석 변경"}</strong>
+                    <p>
+                      {
+                        "대시보드·기록·인사이트 등 관련 캐시를 무효화해 다음 조회에서 갱신"
+                      }
+                    </p>
+                  </div>
+                </div>
+
+                <a
+                  href={
+                    "https://github.com/jonghwa3471/EOKKA/commit/75c51f32893aa1b53c5921ceb835fffe51ffc7cb"
+                  }
+                  target={"_blank"}
+                  rel={"noreferrer"}
+                >
+                  {"페이지 데이터 캐싱·스켈레톤 최초 구현 커밋 ↗"}
+                </a>
+              </article>
+              <article>
+                <span className={"case-kicker"}>{"02 · 운영 환경 디버깅"}</span>
+                <h3>{"로컬에서는 성공하던 분석 요청이 운영환경에서만 실패"}</h3>
+                <p>
+                  <strong>{"문제:"}</strong>
+                  {
+                    " 배포 후 사용자 테스트에서 분석이 실패했습니다. 운영 로그에 ‘공공데이터 시세 조회 실패(400)’가 반복되어 환경변수와 API 키가 정상인지 먼저 확인했지만, 설정에 문제가 없는데도 오류가 계속됐습니다."
+                  }
+                </p>
+                <figure className={"context-shot debug-shot"}>
+                  <ZoomImage
+                    src={assetPath("/projects/eokka/images/analysis-error.png")}
+                    alt={
+                      "빠른 분석 실행 후 분석 처리 중 오류가 발생했다는 안내 화면"
+                    }
+                  />
+                  <figcaption>
+                    {"사용자 화면에 나타난 분석 실패 안내"}
+                  </figcaption>
+                </figure>
+                <figure className={"context-shot debug-shot"}>
+                  <ZoomImage
+                    src={assetPath(
+                      "/projects/eokka/images/analysis-error-logs.png",
+                    )}
+                    alt={
+                      "공공데이터 시세 조회 실패 400과 FSC 조회 HTTP 400이 반복된 운영 로그"
+                    }
+                  />
+                  <figcaption>
+                    {"시세 조회 실패와 관련된 운영 로그 발췌"}
+                  </figcaption>
+                </figure>
+                <p>
+                  <strong>{"개선 방향:"}</strong>
+                  {
+                    " 로그를 바탕으로 AI의 도움을 받아 원인을 좁혀 가며, 오류·성능 모니터링 도구인 Sentry가 외부 요청에 추적 헤더를 추가한다는 점을 알게 됐습니다. 같은 키와 요청 조건에서 헤더 유무를 비교한 결과, "
+                  }
+                  <strong>
+                    {"추적 헤더 없음 → 200 / 추적 헤더 있음 → 400"}
+                  </strong>
+                  {"으로 갈렸습니다. 외부 API가 "}
+                  <code>{"sentry-trace"}</code>
+                  {"·"}
+                  <code>{"baggage"}</code>
+                  {" 헤더가 포함된 요청을 거부하는 문제였습니다."}
+                </p>
+                <p>
+                  <strong>{"구현과 동작 확인:"}</strong>
+                  {" 서버 Sentry는 "}
+                  <code>{"tracePropagationTargets"}</code>
+                  {
+                    " 설정을 생략하면 기본적으로 추적 헤더를 전파합니다. 이를 빈 배열("
+                  }
+                  <code>{"[]"}</code>
+                  {
+                    ")로 지정해 전파 대상을 없애고, 외부 API 요청에 추적 헤더가 추가되지 않도록 했습니다. 오류 수집은 유지했으며, 재배포 후 운영 서비스의 ETF 분석이 200 응답으로 성공하는 것을 확인했습니다."
+                  }
+                </p>
+                <a
+                  href={
+                    "https://github.com/jonghwa3471/EOKKA/commit/2a662d9e8e8b25b9351d27b261017bfebe780e9f"
+                  }
+                  target={"_blank"}
+                  rel={"noreferrer"}
+                >
+                  {"원인과 수정이 남아 있는 커밋 ↗"}
+                </a>
+              </article>
+              <article>
+                <span className={"case-kicker"}>
+                  {"03 · 데이터 제공 범위 조정"}
+                </span>
+                <h3>
+                  {"한국투자 API의 시세 제공 제약으로 공개 서비스 운영에 한계"}
+                </h3>
+                <p>
+                  <strong>{"문제:"}</strong>
+                  {
+                    " 처음에는 한국투자증권 API로 국내·미국 주식을 분석하려 했지만, 개인용 시세를 제3자에게 제공하는 제약 때문에 해당 모드를 공개 서비스에서 그대로 사용할 수 없었습니다."
+                  }
+                </p>
+                <p>
+                  <strong>{"개선 방향:"}</strong>
+                  {" 공개 서비스에서 제공할 수 있는 데이터 범위에 맞추기 위해 "}
+                  <strong>{"금융위원회 주식·증권상품 시세 API"}</strong>
+                  {
+                    "로 전환하고, 지원 종목과 분석 기준도 함께 조정하기로 했습니다."
+                  }
+                </p>
+                <p>
+                  <strong>{"구현과 동작 확인:"}</strong>
+                  {
+                    " 운영은 공공데이터 API를 사용하도록 바꾸고, KIS 모드는 로컬 테스트 용도로 남겨 프로덕션 실행을 차단했습니다. 베타 서비스에서는 국내 주식·ETF·ETN과 확정 종가 기반 분석을 지원하도록 구성하고, 제공 범위를 화면에 안내했습니다."
+                  }
+                </p>
+                <p>
+                  <strong>{"배운 점:"}</strong>
+                  {
+                    " 원하는 기능을 모두 노출하기보다 실제 제공 가능한 데이터 범위에 맞춰 제품을 조정해야 한다는 점을 배웠습니다."
+                  }
+                </p>
+              </article>
+              <article>
+                <span className={"case-kicker"}>
+                  {"04 · 인증 메일 발송 확장"}
+                </span>
+                <h3>
+                  {"기본 인증 메일 발송만으로는 원하는 템플릿 연동에 한계"}
+                </h3>
+                <p>
+                  <strong>{"문제:"}</strong>
+                  {
+                    " 매직 링크 메일에 서비스 전용 디자인을 적용하려 했지만, 코드로 작성한 React Email 템플릿을 렌더링해 Resend API로 전달하는 흐름은 별도로 연결해야 했습니다. Supabase가 매직 링크나 템플릿을 지원하지 않는다는 뜻은 아닙니다."
+                  }
+                </p>
+                <p>
+                  <strong>{"개선 방향:"}</strong>
+                  {
+                    " 인증 토큰과 세션 관리는 Supabase Auth에 맡기고, 이메일 내용 구성과 발송은 Edge Function·Resend가 담당하도록 역할을 나눴습니다."
+                  }
+                </p>
+                <p>
+                  <strong>{"구현과 동작 확인:"}</strong>
+                  {
+                    " 로그인 화면에서 Supabase Auth에 매직 링크 발송을 요청하면, Auth의 "
+                  }
+                  <code>{"Send Email Hook"}</code>
+                  {
+                    "이 Edge Function을 호출합니다. 함수가 요청 서명을 확인하고 토큰 해시로 만든 인증 링크를 React Email 템플릿에 넣어 Resend로 발송하도록 연결했습니다. 링크를 누르면 앱의 인증 경로에서 Supabase Auth로 토큰을 검증하고 세션을 생성하는 흐름입니다."
+                  }
+                </p>
+                <p>
+                  <strong>{"배운 점:"}</strong>
+                  {
+                    " 인증 기능 전체를 새로 만드는 대신, 기존 인증 서비스에 필요한 이메일 발송 처리를 연결하는 방식으로 확장했습니다."
+                  }
+                </p>
+                <figure className={"context-shot"}>
+                  <ZoomImage
+                    src={assetPath("/projects/eokka/images/login.jpg")}
+                    alt={"이메일 로그인 링크 요청과 소셜 로그인 화면"}
+                  />
+                  <figcaption>
+                    {"이메일 로그인 링크를 요청하는 화면"}
+                  </figcaption>
+                </figure>
+              </article>
+            </div>
+          </section>
+          <section className="detail-block" id="architecture">
+            <h2>서비스 구조와 데이터 흐름</h2>
+            <div>
+              <h3>입력에서 분석, 기록과 화면까지</h3>
+              <ol
+                className="project-flow"
+                aria-label="EOKKA 분석 요청 처리 순서"
+              >
+                <li>
+                  <span className="project-flow-step">01 · 브라우저</span>
+                  <div>
+                    <h4>사용자가 보유 종목과 목표 입력</h4>
+                    <p>
+                      React 화면에서 종목·매수가·수량·목표 금액을 입력하고
+                      분석을 요청합니다.
+                    </p>
+                    <small>React · TypeScript</small>
+                  </div>
+                </li>
+                <li>
+                  <span className="project-flow-step">02 · 서버</span>
+                  <div>
+                    <h4>입력을 확인하고 시세 조회·분석</h4>
+                    <p>
+                      action에서 입력값과 이용 조건을 확인한 뒤 금융위원회 시세
+                      API를 조회하고 분석 결과를 계산합니다. AI 요약은 별도
+                      처리로 연결합니다.
+                    </p>
+                    <small>React Router action · Zod · 외부 시세 API</small>
+                  </div>
+                </li>
+                <li>
+                  <span className="project-flow-step">03 · 데이터</span>
+                  <div>
+                    <h4>이용 조건에 따라 분석 기록 저장</h4>
+                    <p>
+                      저장 대상인 결과를 사용자 ID와 연결해 DB에 보관합니다.
+                      비로그인 빠른 분석은 개인 기록으로 저장하지 않습니다.
+                    </p>
+                    <small>Drizzle ORM · PostgreSQL / Supabase</small>
+                  </div>
+                </li>
+                <li>
+                  <span className="project-flow-step">04 · 브라우저</span>
+                  <div>
+                    <h4>분석 결과 표시와 기록 돌아보기</h4>
+                    <p>
+                      서버 응답으로 수익률과 목표 시나리오를 표시합니다. 저장된
+                      기록은 loader로 조회해 대시보드·인사이트·도전과제 등의
+                      화면에 연결합니다.
+                    </p>
+                    <small>결과 화면 · loader 조회 · 공통 메모리 캐시</small>
+                  </div>
+                </li>
+              </ol>
+              <div className="project-flow-support">
+                <div>
+                  <h4>인증·메일</h4>
+                  <p>
+                    Supabase Auth → Send Email Hook → Edge Function → Resend
+                  </p>
+                  <small>
+                    메일 링크 클릭 후 Supabase Auth에서 토큰 검증·세션 생성
+                  </small>
+                </div>
+                <div>
+                  <h4>운영 확인</h4>
+                  <p>
+                    Sentry: 오류 모니터링
+                    <br />
+                    Google Tag Manager · GA4: 이용 흐름 관찰
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className="detail-block" id="backend">
+            <h2>서버 처리와 데이터 저장</h2>
+            <div className="story-list">
+              <p>
+                화면에서 입력한 정보가 서버의 분석과 기록 저장으로 이어지는
+                구조입니다. 복잡한 서버 구현은 Codex의 도움을 받았으며, 아래는
+                실제 코드에 구성된 역할을 정리한 내용입니다.
+              </p>
+              <div
+                className="route-behavior"
+                aria-label="분석 요청과 결과 전달 흐름"
+              >
+                <div>
+                  <strong>프론트엔드</strong>
+                  <p>종목·수량·목표 금액 입력 후 분석 요청</p>
+                </div>
+                <div>
+                  <strong>서버</strong>
+                  <p>입력 확인 → 외부 시세 조회 → 분석 처리</p>
+                </div>
+                <div>
+                  <strong>결과 전달</strong>
+                  <p>분석 결과를 화면에 반환하고 이용 조건에 따라 기록 저장</p>
+                </div>
+              </div>
+              <article>
+                <h3>화면 표시와 외부 API 처리를 분리</h3>
+                <p>
+                  프론트엔드는 입력과 로딩·결과 표시를 맡고, React Router의{" "}
+                  <code>action</code>은 분석 요청을 받아 서버의 분석 함수를
+                  호출합니다. 외부 시세 API 호출과 비밀 API 키 사용은{" "}
+                  <code>.server.ts</code> 모듈에서 처리해 브라우저 코드에 키를
+                  넣지 않도록 구성했습니다.
+                </p>
+                <a
+                  href="https://github.com/jonghwa3471/EOKKA/blob/master/app/features/stocks/api/analyze.ts"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  분석 요청 처리 코드 ↗
+                </a>
+              </article>
+              <article>
+                <h3>입력값과 개인 데이터 접근을 서버에서 확인</h3>
+                <p>
+                  입력창에서 안내하는 것과 별개로, 서버에서도 Zod로
+                  종목·가격·수량 등의 값이 허용 범위인지 확인합니다. 빠른 분석은
+                  로그인 없이 이용할 수 있지만, 개인 기록처럼 사용자에게 속한
+                  데이터는 서버에서 로그인 사용자를 확인하고 해당 사용자
+                  기준으로 조회하도록 구분했습니다.
+                </p>
+              </article>
+              <article>
+                <h3>분석 결과를 사용자별 기록으로 연결</h3>
+                <p>
+                  기록 저장 로직은 분석 결과와 사용자 ID를 연결해 PostgreSQL에
+                  보관합니다. 저장된 기록을 대시보드와 인사이트에서 다시 조회해,
+                  한 번의 분석 결과뿐 아니라 시간에 따른 변화를 보여주는
+                  기반으로 활용했습니다. DB 조회·저장은 Drizzle ORM을
+                  사용합니다.
+                </p>
+                <a
+                  href="https://github.com/jonghwa3471/EOKKA/blob/master/app/features/stocks/history/analysis-history.server.ts"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  분석 기록 저장·조회 코드 ↗
+                </a>
+              </article>
+            </div>
+          </section>
           <section className={"detail-block"} id={"technical"}>
-            <h2>{"기술 구성과 상태 관리"}</h2>
+            <h2>{"기술 스택과 상태 관리"}</h2>
             <div>
               <div className={"reason-grid"}>
                 <article className={"reason-card"}>
@@ -572,9 +871,21 @@ export default function EokkaContent() {
                     }
                   </p>
                 </article>
+                <article className="reason-card">
+                  <span>OpenAI API</span>
+                  <h3>분석 수치를 이해하기 쉬운 AI 설명으로</h3>
+                  <p>
+                    Codex의 도움으로 OpenAI API를 연동해 포트폴리오 총평과 투자
+                    원칙별 점검 내용을 제공했습니다. 서버에서 계산한 수익률·종목
+                    비중·목표 시나리오 등을 전달하고, 정해진 응답 형식으로 받은
+                    설명을 화면에 표시합니다. 자산 성장 수치는 별도 계산 로직이
+                    담당하며, AI는 계산 결과의 해석을 돕는 역할입니다. AI 응답에
+                    실패하더라도 기본 분석 결과는 제공하도록 구성했습니다.
+                  </p>
+                </article>
               </div>
               <div className={"technical-note"}>
-                <h3>{"상태 관리 방식도 직접 확인해야 한다는 배움"}</h3>
+                <h3>{"서버 데이터와 화면 상태의 구분"}</h3>
                 <p>
                   {"조회·변경은 React Router의 "}
                   <code>{"loader/action"}</code>
@@ -583,25 +894,19 @@ export default function EokkaContent() {
                   {", 입력·모달은 "}
                   <code>{"useState"}</code>
                   {
-                    ", 재방문 데이터는 공통 메모리 캐시로 처리했습니다. 이후 AI가 작성한 코드를 살펴보며, 이전에 학습했던 Recoil·Redux 같은 전역 상태 관리 라이브러리 없이 알림 동기화와 캐시 공유가 구현돼 있다는 점을 뒤늦게 알게 됐습니다."
+                    ", 재방문 데이터는 공통 메모리 캐시로 처리했습니다. 별도 Recoil·Redux 스토어 없이 알림 동기화와 캐시 공유를 처리하는 코드가 구성돼 있습니다."
                   }
                 </p>
                 <p>
                   {
-                    "라이브러리를 사용하지 않은 것 자체가 문제는 아니지만, 상태를 어디에 저장하고 어떻게 공유하는지 충분히 확인하지 못했다는 점을 돌아봤습니다."
-                  }
-                </p>
-                <p>
-                  <strong>{"다음 학습 목표."}</strong>
-                  {
-                    " 최근 실무에서 Zustand·Jotai를 활용한다는 이야기를 듣고, 두 도구를 다음 학습 목표로 정했습니다. 기존에 배운 Recoil·Redux와 상태를 구성하고 공유하는 방식, 사용 편의성, 유지보수 측면을 비교하며 어떤 상황에서 Zustand·Jotai가 더 선호되는지 알아볼 계획입니다. 다음 프로젝트에서는 직접 적용해 보며 프로젝트에 맞는 도구를 선택하는 기준을 쌓고자 합니다."
+                    "서버에서 받아오는 데이터와 입력값·모달 같은 화면 상태는 역할이 다릅니다. AI의 도움을 받은 공유 로직을 포함해, 각 상태가 어디에 저장되고 어떤 화면에 영향을 주는지 확인하는 기준으로 삼고 있습니다."
                   }
                 </p>
               </div>
             </div>
           </section>
           <section className={"detail-block"} id={"verification"}>
-            <h2>{"구현과 검증"}</h2>
+            <h2>{"개발 방식과 테스트"}</h2>
             <div className={"story-list"}>
               <article>
                 <h3>{"직접 판단한 부분과 AI의 도움을 받은 부분"}</h3>
@@ -612,7 +917,7 @@ export default function EokkaContent() {
                 </p>
                 <p>
                   {
-                    "구현 결과는 직접 사용하며 확인했습니다. 짧은 기간의 수익률이 과도하게 연환산되는 문제를 발견하고 표시 기준을 바꾸는 등, 계산 결과가 실제 사용자에게 어떻게 전달되는지도 살펴봤습니다. 모든 내부 구현을 직접 설계한 것은 아니며, 캐시와 상태 관리 방식은 뒤늦게 확인하며 검토 범위의 한계를 배웠습니다."
+                    "구현 결과는 직접 사용하며 확인했습니다. 짧은 기간의 수익률이 과도하게 연환산되는 문제를 발견하고 표시 기준을 바꾸는 등, 계산 결과가 실제 사용자에게 어떻게 전달되는지도 살펴봤습니다."
                   }
                 </p>
               </article>
@@ -625,126 +930,91 @@ export default function EokkaContent() {
                 </p>
                 <p>
                   {
-                    "이는 캐시 함수의 동작을 확인하는 테스트이며, 실제 브라우저에서 분석 저장부터 화면 갱신까지 모두 검증한 것은 아닙니다. "
+                    "캐시 저장·조회·무효화 동작을 단위 테스트로 확인했습니다. 분석 저장부터 화면 갱신까지 이어지는 전체 흐름은 실제 서비스를 직접 사용하며 확인했습니다."
                   }
-                  <strong>
-                    {"테스트 통과와 구현 방식에 대한 이해를 구분해야 한다"}
-                  </strong>
-                  {"는 점을 배웠습니다."}
+                </p>
+              </article>
+              <article>
+                <h3>AI 구현을 검토하며 배운 점</h3>
+                <p>
+                  처음 Codex를 도입했을 때 예상보다 구현이 잘 되어, 동작
+                  확인만으로 다음 작업으로 넘어간 적이 있습니다. 이후 코드를
+                  살펴보며 React Query가 아닌 Map 기반 캐시와 별도 전역 상태
+                  관리 라이브러리 없는 공유 로직을 확인했습니다. 특정
+                  라이브러리를 쓰지 않은 것이 문제가 아니라, 구현 방식과 선택
+                  근거까지 검토하지 못했던 경험입니다.
+                </p>
+                <p>
+                  <strong>다음 기준:</strong> AI 활용과 AX를 공부하며, 구현 전
+                  접근 방식을 확인하고 라이브러리 활용과 직접 구현의 유지보수
+                  부담을 비교하려 합니다. 테스트 통과 여부뿐 아니라 코드의
+                  데이터 흐름도 검토하는 습관을 쌓고자 합니다.
+                </p>
+                <p>
+                  <strong>학습 계획:</strong> 실무에서 활용한다는 이야기를 들은
+                  Zustand·Jotai를 학습 목표로 잡았습니다. 기존에 배운
+                  Recoil·Redux와 상태 구성·공유 방식, 사용 편의성, 유지보수
+                  측면을 비교하고 다음 프로젝트에서 필요에 맞게 적용해 볼
+                  계획입니다.
                 </p>
               </article>
             </div>
           </section>
-          <section className={"detail-block"} id={"operations"}>
-            <h2>{"운영·보안 상세"}</h2>
+          <section className="detail-block" id="operations">
+            <h2>운영과 보안</h2>
             <div>
-              <p className={"disclosure-intro"}>
-                {
-                  "인증·보안·외부 연동의 구현 근거는 필요한 항목을 펼쳐 확인할 수 있습니다."
-                }
+              <p className="disclosure-intro">
+                운영에 연결한 기능의 목적과 역할을 정리했습니다. 세부 구현은
+                Codex의 도움을 받았습니다.
               </p>
-              <details className={"project-disclosure"}>
-                <summary>
-                  {"보안 · Turnstile, 요청 제한과 서버·DB 권한 검사"}
-                </summary>
-                <div className={"project-disclosure__body"}>
-                  <article>
-                    <h3>
-                      {"Cloudflare Turnstile과 요청 제한으로 인증 메일 보호"}
-                    </h3>
-                    <p>
-                      {"이메일 로그인·회원가입·매직 링크 요청에 "}
-                      <strong>{"Cloudflare Turnstile"}</strong>
-                      {
-                        "을 연결하는 코드를 구현했습니다. 사이트 키가 설정된 환경에서 CAPTCHA 응답을 폼의 "
-                      }
-                      <code>{"captchaToken"}</code>
-                      {
-                        "으로 받고, 서버 action에서 토큰 누락을 확인한 뒤 Supabase Auth에 전달하는 구조입니다. 인증 시도 후에는 위젯을 초기화하고 만료된 토큰을 갱신하도록 구성했습니다."
-                      }
-                    </p>
-                    <p>
-                      {"CAPTCHA에만 의존하지 않고 인증 메일 요청을 "}
-                      <strong>{"IP 기준 분당 5회"}</strong>
-                      {
-                        "로 제한했습니다. 운영에서는 IP 원문 대신 해시와 시간 구간별 카운터를 DB에 저장해 서버리스 인스턴스가 달라도 제한을 공유합니다. 초과 시 429와 "
-                      }
-                      <code>{"Retry-After"}</code>
-                      {
-                        "를 반환하며, DB 장애 시에는 현재 인스턴스의 메모리 제한으로 보완합니다."
-                      }
-                    </p>
-                  </article>
-                  <article>
-                    <h3>{"화면에서 숨기는 것과 데이터 접근 권한을 구분"}</h3>
-                    <p>
-                      {"Supabase의 "}
-                      <strong>{"RLS"}</strong>
-                      {
-                        "로 사용자별 데이터 접근을 제한하고, 서버 loader/action에서도 로그인·데이터 소유자·관리자 권한을 확인했습니다. 관리자 권한은 사용자가 수정할 수 있는 프로필 정보가 아니라 별도 관리자 테이블의 사용자 UUID로 판단합니다. DB 비밀키와 외부 API 키는 서버 전용 코드에서 다룹니다."
-                      }
-                    </p>
-                  </article>
+              <details className="project-disclosure">
+                <summary>인증 보호와 사용자별 데이터 접근</summary>
+                <div className="project-disclosure__body">
+                  <p>
+                    인증 메일의 반복 요청을 줄이기 위해 Cloudflare Turnstile과
+                    요청 제한을 연결했습니다. 화면에서 입력을 받는 것에 그치지
+                    않고, 서버에서 인증 정보를 확인하는 흐름을 구성했습니다.
+                  </p>
+                  <p>
+                    개인 기록은 로그인 사용자 기준으로 조회하고, Supabase의
+                    RLS를 통해 사용자별 DB 접근 범위를 제한하는 구조를
+                    활용했습니다. 비밀 API 키는 브라우저가 아닌 서버 전용
+                    코드에서 사용합니다.
+                  </p>
                 </div>
               </details>
-              <details className={"project-disclosure"}>
-                <summary>
-                  {"운영 관찰 · GA4 이용 흐름과 Sentry 오류 모니터링"}
-                </summary>
-                <div className={"project-disclosure__body"}>
-                  <article>
-                    <h3>{"Google Tag Manager와 GA4로 이용 흐름 관찰"}</h3>
-                    <p>
-                      {
-                        "배포 후 사용자가 어떤 기능을 이용하고 어디에서 흐름이 끊기는지 확인할 수 있도록 Google Tag Manager와 Google Analytics를 설정했습니다. 페이지 이동과 가입·로그인·빠른 분석 완료·정밀 분석 완료 등의 이벤트를 "
-                      }
-                      <code>{"dataLayer"}</code>
-                      {"에 전달해 GA4 리포트에서 살펴볼 기반을 마련했습니다."}
-                    </p>
-                    <p>
-                      {
-                        "이벤트 이름은 TypeScript에서 공통 관리하고, 페이지 조회에는 쿼리 문자열을 제외해 인증 관련 정보 등이 측정 데이터에 섞이지 않도록 했습니다."
-                      }
-                    </p>
-                  </article>
-                  <article>
-                    <h3>{"Sentry로 사용자 환경의 오류를 확인"}</h3>
-                    <p>
-                      {
-                        "브라우저와 서버에 Sentry를 연결하고 환경·릴리스 정보로 배포별 오류를 구분했습니다. 오류 발생 시 세션 리플레이를 수집하되 텍스트를 마스킹하고 미디어를 차단했으며, 요청 데이터·쿠키와 URL 쿼리를 제거하도록 설정했습니다. 실제 배포 후 분석 오류도 외부 요청 로그와 대조하며 추적했습니다."
-                      }
-                    </p>
-                  </article>
+              <details className="project-disclosure">
+                <summary>GA4 이용 흐름 관찰과 Sentry 오류 모니터링</summary>
+                <div className="project-disclosure__body">
+                  <p>
+                    Google Tag Manager와 GA4를 설정해 페이지 이동과 로그인·분석
+                    완료 등의 이벤트를 리포트로 확인할 기반을 마련했습니다. 분석
+                    도구를 연결한 것과 사용자 행동을 분석해 개선 효과를 확인한
+                    것은 구분합니다.
+                  </p>
+                  <p>
+                    Sentry는 브라우저·서버 오류를 확인하기 위해 연결했습니다.
+                    배포 후 분석 요청 실패는 운영 로그와 함께 원인을 좁혀
+                    해결했으며, 자세한 과정은 위의 문제 해결 사례에 담았습니다.
+                  </p>
                 </div>
               </details>
-              <details className={"project-disclosure"}>
-                <summary>
-                  {"추가 구현 경험 · 결제 테스트와 무료 베타 전환"}
-                </summary>
-                <div className={"project-disclosure__body"}>
-                  <article>
-                    <h3>{"결제 구현 경험과 실제 서비스 운영을 구분"}</h3>
-                    <p>
-                      {
-                        "유료 서비스의 전체 흐름을 경험하기 위해 Toss Payments 기반 카드 등록·정기결제·구독 상태·결제 내역을 구현하고 테스트했습니다. 빌링키 암호화, 결제 결과와 권한의 트랜잭션 처리, 중복 처리 방지 등 결제 이후의 데이터 일관성도 다뤘습니다."
-                      }
-                    </p>
-                    <p>
-                      {
-                        "다만 투자 관련 서비스의 결제 도입 제약과 사업자·결제 심사 준비 조건 때문에 실제 유료 운영에는 연결하지 않았습니다. 현재는 "
-                      }
-                      <code>{"PAYMENTS_ENABLED=false"}</code>
-                      {
-                        "로 결제 진입을 막고 무료 베타 체험으로 제공하며, 향후 조건을 갖췄을 때 검토할 수 있도록 구현을 보존했습니다. 테스트 환경의 확인과 운영 실결제 승인은 구분했습니다."
-                      }
-                    </p>
-                  </article>
+              <details className="project-disclosure">
+                <summary>결제 연동 테스트와 무료 베타 운영</summary>
+                <div className="project-disclosure__body">
+                  <p>
+                    Codex의 도움으로 Toss Payments의 카드 등록·구독·결제 내역
+                    흐름을 구현하고 테스트했습니다. 다만 결제 도입 제약과
+                    사업자·심사 준비 조건 때문에 실제 유료 운영으로 연결하지
+                    않았습니다.
+                  </p>
+                  <p>현재 결제 진입은 비활성화하고 무료 베타로 제공합니다.</p>
                 </div>
               </details>
             </div>
           </section>
           <section className={"detail-block"} id={"feedback"}>
-            <h2>{"사용자에게서 배운 것"}</h2>
+            <h2>{"사용자 피드백과 배운 점"}</h2>
             <div>
               <h3>{"미래의 윤곽과, 꾸준히 이어갈 이유"}</h3>
               <p>

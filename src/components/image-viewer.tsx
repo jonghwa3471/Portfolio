@@ -10,7 +10,8 @@ import {
 } from "react";
 import { usePathname } from "next/navigation";
 
-type Selection = { src: string; caption: string };
+type Slide = { src: string; caption: string };
+type Selection = Slide & { slides?: Slide[]; index?: number };
 const ImageContext = createContext<(image: Selection) => void>(() => {});
 
 export function ImageViewer({ children }: { children: ReactNode }) {
@@ -18,11 +19,21 @@ export function ImageViewer({ children }: { children: ReactNode }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const opener = useRef<HTMLElement | null>(null);
   const pathname = usePathname();
+  const isOpen = image !== null;
+  const move = (direction: number) => {
+    setImage((current) => {
+      if (!current?.slides?.length) return current;
+      const index =
+        ((current.index ?? 0) + direction + current.slides.length) %
+        current.slides.length;
+      return { ...current.slides[index], slides: current.slides, index };
+    });
+  };
   useEffect(() => {
     setImage(null);
   }, [pathname]);
   useEffect(() => {
-    if (!image) {
+    if (!isOpen) {
       dialog.current?.close();
       return;
     }
@@ -33,7 +44,7 @@ export function ImageViewer({ children }: { children: ReactNode }) {
     return () => {
       document.body.style.overflow = previous;
     };
-  }, [image]);
+  }, [isOpen]);
   return (
     <ImageContext.Provider value={setImage}>
       {children}
@@ -42,6 +53,13 @@ export function ImageViewer({ children }: { children: ReactNode }) {
         aria-label="프로젝트 이미지 크게 보기"
         ref={dialog}
         onCancel={() => setImage(null)}
+        onKeyDown={(event) => {
+          if (!image?.slides || image.slides.length < 2) return;
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            move(event.key === "ArrowLeft" ? -1 : 1);
+          }
+        }}
         onClick={(event) => {
           if (event.target === event.currentTarget) setImage(null);
         }}
@@ -62,6 +80,27 @@ export function ImageViewer({ children }: { children: ReactNode }) {
           <>
             <img src={image.src} alt={image.caption} />
             <p>{image.caption}</p>
+            {image.slides && image.slides.length > 1 && (
+              <div className="image-gallery-navigation" aria-label="사진 탐색">
+                <button
+                  type="button"
+                  aria-label="이전 사진"
+                  onClick={() => move(-1)}
+                >
+                  ← 이전
+                </button>
+                <span aria-live="polite" aria-atomic="true">
+                  {(image.index ?? 0) + 1} / {image.slides.length}
+                </span>
+                <button
+                  type="button"
+                  aria-label="다음 사진"
+                  onClick={() => move(1)}
+                >
+                  다음 →
+                </button>
+              </div>
+            )}
           </>
         )}
       </dialog>
@@ -116,7 +155,17 @@ export function ZoomImage({
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
           return;
         event.preventDefault();
-        open({ src, caption: alt });
+        const gallery = event.currentTarget.closest("[data-image-gallery]");
+        const slides = gallery
+          ? Array.from(gallery.querySelectorAll<HTMLImageElement>("a img")).map(
+              (item) => ({
+                src: item.getAttribute("src") ?? item.src,
+                caption: item.alt,
+              }),
+            )
+          : undefined;
+        const index = slides?.findIndex((item) => item.src === src);
+        open({ src, caption: alt, slides, index });
       }}
     >
       {image}

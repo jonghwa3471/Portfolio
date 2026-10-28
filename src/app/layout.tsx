@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ImageViewer } from "@/components/image-viewer";
+import { assetPath } from "@/lib/portfolio";
 import "../../styles.css";
 import "./migration.css";
 
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="ko" data-scroll-behavior="smooth">
       <head>
+        <link rel="icon" href={assetPath("/assets/favicon-coffee.ico")} sizes="32x32" type="image/x-icon" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

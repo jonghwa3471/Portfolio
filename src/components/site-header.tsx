@@ -11,11 +11,11 @@ const homeItems = [
   ["contact", "연락처"],
 ];
 const projectItems = [
-  ["motivation", "시작 계기"],
-  ["experience", "주요 기능"],
-  ["loading", "문제 해결"],
-  ["technical", "설계·검증"],
-  ["feedback", "사용자 후기"],
+  ["motivation", "기획·핵심 역량"],
+  ["experience", "핵심 기능"],
+  ["frontend", "구현·문제 해결"],
+  ["architecture", "구조·검증"],
+  ["feedback", "사용자 피드백"],
 ];
 
 export function SiteHeader({ project = false }: { project?: boolean }) {
@@ -28,10 +28,35 @@ export function SiteHeader({ project = false }: { project?: boolean }) {
         (document.querySelector(".site-header")?.getBoundingClientRect()
           .height || 72) + (project ? 100 : innerHeight * 0.28);
       let current = "";
-      for (const [id] of items) {
-        const section = document.getElementById(id);
-        if (section && section.getBoundingClientRect().top <= marker)
-          current = id;
+      if (project) {
+        const owners: Record<string, string> = {
+          motivation: "motivation",
+          "frontend-decisions": "motivation",
+          experience: "experience",
+          frontend: "frontend",
+          loading: "frontend",
+          architecture: "architecture",
+          backend: "architecture",
+          technical: "architecture",
+          verification: "architecture",
+          operations: "architecture",
+          feedback: "feedback",
+        };
+        for (const section of document.querySelectorAll<HTMLElement>(
+          "section[id]",
+        )) {
+          if (
+            owners[section.id] &&
+            section.getBoundingClientRect().top <= marker
+          )
+            current = owners[section.id];
+        }
+      } else {
+        for (const [id] of items) {
+          const section = document.getElementById(id);
+          if (section && section.getBoundingClientRect().top <= marker)
+            current = id;
+        }
       }
       setActive(current);
     };

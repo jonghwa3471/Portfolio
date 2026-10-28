@@ -14,7 +14,7 @@ const collect = (value) => {
     Object.values(value).forEach(collect);
 };
 collect(JSON.parse(await readFile("src/content/portfolio.json", "utf8")));
-for (const file of ["src/content/home.tsx", "src/content/eokka.tsx"]) {
+for (const file of ["src/content/home.tsx", "src/content/eokka.tsx", "src/app/layout.tsx"]) {
   const source = await readFile(file, "utf8");
   for (const match of source.matchAll(/assetPath\(\s*("(?:[^"\\]|\\.)*")\s*,?\s*\)/g)) {
     const asset = JSON.parse(match[1]);

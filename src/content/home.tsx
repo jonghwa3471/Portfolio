@@ -2,6 +2,8 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/portfolio";
 import { SiteHeader } from "@/components/site-header";
+import { ReadingProgress } from "@/components/reading-progress";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import JourneyArchive, {
   ArchiveSearchButton,
 } from "@/components/journey-archive";
@@ -22,7 +24,9 @@ export default function HomeContent() {
 
       <SiteHeader />
 
-      <main id={"main"}>
+      <ReadingProgress />
+      <ScrollToTop />
+      <main id={"main"} tabIndex={-1}>
         <section className={"hero section"} id={"top"}>
           <div className={"spectrum spectrum-a"} aria-hidden={"true"}></div>
           <div className={"spectrum spectrum-b"} aria-hidden={"true"}></div>
@@ -566,7 +570,7 @@ export default function HomeContent() {
                   {"“이대로 계속 투자하면, 언제쯤 얼마가 될까?”"}
                   <br />
                   {
-                    "보유 주식과 투자 기록을 바탕으로 목표 도달 시나리오와 자산 흐름을 보여주는 서비스입니다. 가족과 지인에게 배포해 사용 의견을 듣고, 로딩 경험과 분석 흐름을 개선했습니다."
+                    "복수 종목 입력과 검증, 5,000개 미래 경로의 통계 결과를 한 흐름으로 설계한 투자 분석 서비스입니다. 금액·기간·확률을 읽기 쉬운 시나리오로 시각화하고, 로딩·실패·재시도까지 고려했습니다."
                   }
                 </p>
                 <div className={"badges"}>
