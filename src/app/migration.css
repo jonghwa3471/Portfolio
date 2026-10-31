@@ -269,3 +269,52 @@
     grid-template-columns: 1fr;
   }
 }
+
+.learning-highlight-title-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.learning-highlight-title-link i {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--cyan);
+  font-size: 11px;
+  font-style: normal;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.learning-highlight-title-link:hover,
+.learning-highlight-title-link:focus-visible {
+  color: var(--cyan);
+}
+
+.learning-highlight a.learning-highlight-title-link:hover,
+.learning-highlight a.learning-highlight-title-link:focus-visible {
+  text-decoration: none;
+}
+
+.learning-highlight-title-link:hover i,
+.learning-highlight-title-link:focus-visible i {
+  border-color: var(--cyan);
+  transform: translate(2px, -2px);
+}
+
+.learning-reflection-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--cyan);
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

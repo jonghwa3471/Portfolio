@@ -7,16 +7,20 @@ import {
   type Reflection,
 } from "@/lib/portfolio";
 import { LearningImage } from "./image-viewer";
+import { ScrollToTop } from "./scroll-to-top";
+import { ReadingProgress } from "./reading-progress";
+import { LearningBackLink } from "./learning-back-link";
 import type { ReactNode } from "react";
 
 const formatDate = (value: string) => value.replaceAll("-", ".");
 const challenges = new Set([
-  "반응형 디자인의 가능성과 어려움",
+  "화면 크기별 레이아웃을 자연스럽게 조정하는 어려움",
   "DOM을 직접 다루며 느낀 번거로움",
   "구현하지 못한 기능에서 남은 과제",
   "재생바와 실제 영상 상태를 맞추는 어려움",
   "이벤트별 역할을 나누며 다듬은 조작 경험",
-  "강의와 다른 환경에서 직접 해결책 찾기",
+  "달라진 S3 업로드 방식 적용",
+  "영상 수정 오류 원인 찾기",
 ]);
 const category = (reflection: Reflection) =>
   reflection.category ||
@@ -38,15 +42,15 @@ export function LearningDetail({ item }: { item: LearningProject }) {
   return (
     <div className="detail-page learning-detail">
       <div className="noise" aria-hidden="true" />
+      <ScrollToTop />
+      <ReadingProgress key={item.id} />
       <a className="skip-link" href="#main">
         본문으로 이동
       </a>
       <main id="main">
         <header className="detail-header">
           <div className="container">
-            <Link className="back-link" href="/#journey">
-              ← 학습 여정으로 돌아가기
-            </Link>
+            <LearningBackLink />
             <div className="detail-title">
               <div>
                 <p className="label">
@@ -124,6 +128,20 @@ export function LearningDetail({ item }: { item: LearningProject }) {
                         <article key={reflection.title}>
                           <h4>{reflection.title}</h4>
                           <p>{reflection.text}</p>
+                          {reflection.code && (
+                            <div className="learning-reflection-code">
+                              <div className="learning-code-label">
+                                {reflection.codeLanguage || "코드"} · 핵심 코드
+                                발췌
+                              </div>
+                              <pre>
+                                <code>{reflection.code}</code>
+                              </pre>
+                              {reflection.codeTakeaway && (
+                                <p>{reflection.codeTakeaway}</p>
+                              )}
+                            </div>
+                          )}
                           {reflection.image && (
                             <figure>
                               <LearningImage
@@ -135,11 +153,13 @@ export function LearningDetail({ item }: { item: LearningProject }) {
                               <figcaption>{reflection.imageCaption}</figcaption>
                             </figure>
                           )}
-                          {reflection.link?.startsWith("https://") && (
+                          {(reflection.link?.startsWith("https://") ||
+                            reflection.link?.startsWith("/")) && (
                             <a
-                              href={reflection.link}
-                              target="_blank"
-                              rel="noreferrer"
+                              className="learning-reflection-link"
+                              href={reflection.link.startsWith("/") ? assetPath(reflection.link) : reflection.link}
+                              target={reflection.link.startsWith("https://") ? "_blank" : undefined}
+                              rel={reflection.link.startsWith("https://") ? "noreferrer" : undefined}
                             >
                               {reflection.linkLabel || "관련 기록"} ↗
                             </a>
@@ -174,7 +194,7 @@ export function LearningDetail({ item }: { item: LearningProject }) {
           {!!item.images?.length && (
             <Block title="프로젝트 화면">
               <div
-                className={`learning-gallery${item.galleryLayout === "landscape" ? " learning-gallery--landscape" : ""}`}
+                className={`learning-gallery${item.galleryLayout === "landscape" ? " learning-gallery--landscape" : ""}${item.galleryLayout === "comparison" ? " learning-gallery--comparison" : ""}`}
               >
                 {item.images.map((image) => (
                   <figure key={image.src}>
@@ -207,7 +227,11 @@ export function LearningDetail({ item }: { item: LearningProject }) {
                       href={blog.url}
                       target="_blank"
                       rel="noreferrer"
+                      className={blog.image ? "has-preview" : undefined}
                     >
+                      {blog.image && (
+                        <img className="learning-blog-preview" src={assetPath(blog.image)} alt={`${blog.title} 미리보기`} loading="lazy" width={160} height={100} />
+                      )}
                       <span>{blog.kind}</span>
                       <strong>{blog.title}</strong>
                       <i aria-hidden="true">↗</i>
@@ -219,21 +243,7 @@ export function LearningDetail({ item }: { item: LearningProject }) {
           )}
           <Block title="코드에서 확인하기">
             <div>
-              {item.course ? (
-                <>
-                  <p className="learning-course">
-                    <a href={item.course.url} target="_blank" rel="noreferrer">
-                      관련 강의 · {item.course.title} ↗
-                    </a>
-                  </p>
-                  <p className="learning-date-note">
-                    커리큘럼과 구현 파일을 대조해 정리한 학습 기록입니다. 강의
-                    전체 기능의 구현·완성을 의미하지 않습니다.
-                  </p>
-                </>
-              ) : (
-                <p>실제 구현 파일을 바탕으로 정리한 학습 기록입니다.</p>
-              )}
+              <p>실제 구현 파일을 바탕으로 정리한 학습 기록입니다.</p>
               {!!item.sources.length && (
                 <details className="learning-evidence">
                   <summary>
@@ -280,6 +290,18 @@ export function LearningDetail({ item }: { item: LearningProject }) {
               <div className="learning-related">
                 {related.map((project) => (
                   <Link href={projectPath(project.id)} key={project.id}>
+                    {project.images?.[0] && (
+                      <div className="journey-card-preview" aria-hidden="true">
+                        <img
+                          src={assetPath(project.images[0].src)}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          width={720}
+                          height={450}
+                        />
+                      </div>
+                    )}
                     <span>
                       {project.year} · {project.group}
                     </span>

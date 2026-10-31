@@ -5,7 +5,7 @@ import path from "node:path";
 const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 const projects = JSON.parse(
   await readFile("src/content/portfolio.json", "utf8"),
-).journey.filter((item) => item.id !== "eokka");
+).journey.filter((item) => !["eokka", "study-scss-layout-masterclass", "css-challenge", "html-challenge"].includes(item.id));
 const pages = [
   "index.html",
   "projects/eokka/index.html",

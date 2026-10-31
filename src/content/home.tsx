@@ -398,6 +398,12 @@ export default function HomeContent() {
                     />
                     <img
                       src={assetPath(
+                        "https://img.shields.io/badge/react--beautiful--dnd-00C4CC?style=flat-square&logo=react&logoColor=white",
+                      )}
+                      alt={"react-beautiful-dnd"}
+                    />
+                    <img
+                      src={assetPath(
                         "https://img.shields.io/badge/GraphQL-E10098?style=flat-square&logo=GraphQL&logoColor=white",
                       )}
                       alt={"GraphQL"}

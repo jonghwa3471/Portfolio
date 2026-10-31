@@ -46,7 +46,13 @@ export function LearningHighlights() {
                 0{index + 1} · {project.year} · {project.kind}
               </span>
               <h4>
-                <Link href={projectPath(project.id)}>{project.title}</Link>
+                <Link
+                  className="learning-highlight-title-link"
+                  href={projectPath(project.id)}
+                >
+                  <span>{project.title}</span>
+                  <i aria-hidden="true">↗</i>
+                </Link>
               </h4>
               <p>{highlight.feature}</p>
               <div className="learning-point">
@@ -115,6 +121,9 @@ export function LearningWriting() {
         const blog = blogs.find((item) => item.url.endsWith("/" + id));
         return blog ? (
           <a href={blog.url} target="_blank" rel="noreferrer" key={id}>
+            {blog.image && (
+              <img className="learning-writing-preview" src={assetPath(blog.image)} alt={`${blog.title} 미리보기`} loading="lazy" width={320} height={160} />
+            )}
             <span>{blog.kind}</span>
             <strong>{blog.title}</strong>
             <i aria-hidden="true">↗</i>

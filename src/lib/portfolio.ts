@@ -9,6 +9,9 @@ export interface Reflection {
   title: string;
   text: string;
   category?: string;
+  code?: string;
+  codeLanguage?: string;
+  codeTakeaway?: string;
   image?: string;
   imageCaption?: string;
   link?: string;
@@ -30,7 +33,7 @@ export interface LearningProject {
   stack: string[];
   learned: string[];
   sources: string[];
-  blogs: { title: string; url: string; kind: string }[];
+  blogs: { title: string; url: string; kind: string; image?: string }[];
   images?: ProjectImage[];
   reflections?: Reflection[];
   motivation?: string;
@@ -51,7 +54,7 @@ export interface LearningProject {
 }
 export const projects = raw.journey as LearningProject[];
 export const learningProjects = projects.filter(
-  (project) => project.id !== "eokka",
+  (project) => !["eokka", "study-scss-layout-masterclass", "css-challenge", "html-challenge"].includes(project.id),
 );
 export const groups = raw.groups;
 export const projectPath = (id: string) =>

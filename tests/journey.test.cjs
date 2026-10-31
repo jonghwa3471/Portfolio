@@ -238,7 +238,7 @@ test("모든 이미지·상세 페이지 파일이 존재하고 이미지 출처
 });
 
 test("블로그는 검증한 개별 글 링크이고 기술 글과 회고가 구분된다", () => {
-  assert.equal(journey.filter((item) => item.blogs.length).length, 33);
+  assert.equal(journey.filter((item) => item.blogs.length).length, 34);
   for (const item of journey)
     for (const blog of item.blogs) {
       assert.match(blog.url, /^https:\/\/j2yonghwa\.tistory\.com\/\d+$/);

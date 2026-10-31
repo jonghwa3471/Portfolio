@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   assetPath,
   groups,
@@ -15,19 +15,19 @@ import { useArchiveSearch } from "./learning-archive-scope";
 export function JourneyCard({ item }: { item: LearningProject }) {
   return (
     <article className="journey-card">
+      {item.images?.[0] && (
+        <div className="journey-card-preview" aria-hidden="true">
+          <img
+            src={assetPath(item.images[0].src)}
+            alt=""
+            loading="lazy"
+            decoding="async"
+            width="720"
+            height="450"
+          />
+        </div>
+      )}
       <Link className="journey-card-link" href={projectPath(item.id)}>
-        {item.images?.[0] && (
-          <div className="journey-thumb">
-            <img
-              src={assetPath(item.images[0].src)}
-              alt={`${item.title} 실행 화면`}
-              loading="lazy"
-              decoding="async"
-              width="720"
-              height="450"
-            />
-          </div>
-        )}
         <div className="journey-card-body">
           <div className="card-top">
             <time dateTime={item.created}>
@@ -35,7 +35,9 @@ export function JourneyCard({ item }: { item: LearningProject }) {
             </time>
             <span>{item.kind}</span>
           </div>
-          <h3>{item.title}</h3>
+          <div className="journey-card-heading">
+            <h3>{item.title}</h3>
+          </div>
           <p>{item.purpose}</p>
           <div className="mini-badges">
             {item.stack.slice(0, 4).map((tech) => (
@@ -43,9 +45,12 @@ export function JourneyCard({ item }: { item: LearningProject }) {
             ))}
             {item.stack.length > 4 && <span>+{item.stack.length - 4}</span>}
           </div>
-          <span className="journey-detail-link">학습 내용 보기 ↗</span>
         </div>
       </Link>
+      <div className="journey-card-actions">
+        <Link className="journey-detail-link" href={projectPath(item.id)}>
+          학습 내용 보기 ↗
+        </Link>
       {item.blogs.length > 0 && (
         <a
           className="journey-blog-link"
@@ -54,9 +59,10 @@ export function JourneyCard({ item }: { item: LearningProject }) {
           rel="noreferrer"
           aria-label={`${item.title} 관련 블로그: ${item.blogs[0].title}`}
         >
-          {item.blogs[0].kind} · 블로그 {item.blogs.length}편 ↗
+          {item.blogs[0].kind === "학습 회고" ? "학습 회고" : "블로그"} {item.blogs.length}편 ↗
         </a>
       )}
+      </div>
     </article>
   );
 }
@@ -69,6 +75,42 @@ export default function JourneyArchive() {
   const archive = useRef<HTMLDetailsElement>(null);
   const catalog = useRef<HTMLDivElement>(null);
   const nextFocus = useRef<number | null>(null);
+  const restoreY = useRef<number | null>(null);
+  const restoreGroups = useRef<string[]>([]);
+  const [restoreReady, setRestoreReady] = useState(false);
+  useLayoutEffect(() => {
+    try {
+      const saved = JSON.parse(sessionStorage.getItem("journey-list-state") || "null");
+      if (!saved || !["date", "tech"].includes(saved.view) ||
+          typeof saved.search !== "string" || !Number.isFinite(saved.limit) ||
+          !Number.isFinite(saved.scrollY)) return;
+      setView(saved.view);
+      setSearch(saved.search);
+      setLimit(Math.max(9, Math.min(learningProjects.length, saved.limit)));
+      if (archive.current) {
+        archive.current.open = saved.open;
+      }
+      restoreGroups.current = Array.isArray(saved.groups) ? saved.groups : [];
+      restoreY.current = saved.scrollY;
+      setRestoreReady(true);
+    } catch {}
+  }, []);
+  useLayoutEffect(() => {
+    if (!restoreReady || restoreY.current === null) return;
+    archive.current?.querySelectorAll<HTMLDetailsElement>(".journey-tech-group").forEach((group) => {
+      group.open = restoreGroups.current.includes(group.dataset.group || "");
+    });
+    window.scrollTo({ top: restoreY.current, behavior: "instant" });
+    restoreY.current = null;
+  }, [restoreReady, view, search, limit]);
+  const savePosition = () => {
+    try {
+      sessionStorage.setItem("journey-list-state", JSON.stringify({
+        view, search, limit, scrollY: window.scrollY, open: archive.current?.open,
+        groups: Array.from(archive.current?.querySelectorAll<HTMLDetailsElement>(".journey-tech-group[open]") || []).map((group) => group.dataset.group),
+      }));
+    } catch {}
+  };
   useEffect(() => {
     const query = new URLSearchParams(window.location.search).get(
       "learningSearch",
@@ -110,7 +152,10 @@ export default function JourneyArchive() {
       ? [...new Set(visible.map((item) => item.year))]
       : groups.map((group) => group.id);
   return (
-    <details className="learning-archive" id="learning-archive" ref={archive}>
+    <details className="learning-archive" id="learning-archive" ref={archive} open
+      onClickCapture={(event) => {
+        if ((event.target as HTMLElement).closest(".journey-card-link, .journey-detail-link")) savePosition();
+      }}>
       <summary>
         <span>
           <strong>전체 학습 기록 살펴보기</strong>
@@ -199,6 +244,7 @@ export default function JourneyArchive() {
             return (
               <details
                 className="journey-group journey-tech-group"
+                data-group={key}
                 key={`${key}:${query}`}
                 open={query ? true : undefined}
               >
