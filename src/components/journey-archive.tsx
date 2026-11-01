@@ -13,12 +13,13 @@ import { searchProjects } from "@/lib/journey-query";
 import { useArchiveSearch } from "./learning-archive-scope";
 
 export function JourneyCard({ item }: { item: LearningProject }) {
+  const preview = item.id === "kakao" ? item.headerImage || item.images?.[0]?.src : item.images?.[0]?.src;
   return (
     <article className="journey-card">
-      {item.images?.[0] && (
+      {preview && (
         <div className="journey-card-preview" aria-hidden="true">
           <img
-            src={assetPath(item.images[0].src)}
+            src={assetPath(preview)}
             alt=""
             loading="lazy"
             decoding="async"

@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { ZoomImage } from "@/components/image-viewer";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { ReadingProgress } from "@/components/reading-progress";
+import { DetailHeaderBackground } from "@/components/detail-header-background";
 
 export default function EokkaContent() {
   return (
@@ -20,6 +21,7 @@ export default function EokkaContent() {
       <ReadingProgress />
       <main id={"main"} tabIndex={-1}>
         <header className={"detail-header"}>
+          <DetailHeaderBackground src="projects/eokka/images/home-desktop-clean.jpg" />
           <div className={"container"}>
             <Link className={"back-link"} href={"/#projects"}>
               {"← 프로젝트로 돌아가기"}

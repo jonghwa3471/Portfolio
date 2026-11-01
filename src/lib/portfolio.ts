@@ -35,6 +35,7 @@ export interface LearningProject {
   sources: string[];
   blogs: { title: string; url: string; kind: string; image?: string }[];
   images?: ProjectImage[];
+  headerImage?: string;
   reflections?: Reflection[];
   motivation?: string;
   nextDirection?: string;
@@ -54,7 +55,7 @@ export interface LearningProject {
 }
 export const projects = raw.journey as LearningProject[];
 export const learningProjects = projects.filter(
-  (project) => !["eokka", "study-scss-layout-masterclass", "css-challenge", "html-challenge"].includes(project.id),
+  (project) => !["eokka", "study-scss-layout-masterclass", "css-challenge", "html-challenge", "js-challenge", "nwitter-challenge-firebase"].includes(project.id),
 );
 export const groups = raw.groups;
 export const projectPath = (id: string) =>

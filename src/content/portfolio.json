@@ -155,6 +155,7 @@
     },
     {
       "id": "wemake",
+      "headerImage": "journey/images/wemake-community.png",
       "name": "wemake",
       "title": "Wemake",
       "purpose": "React Router의 loader·action으로 데이터 조회·폼 제출·오류 표시를 연결하고, 기능별로 라우트를 구성한 풀스택 학습 프로젝트입니다.",
@@ -279,7 +280,9 @@
           "image": "journey/images/blog-preview-214c6c5934e3.png"
         }
       ],
-      "runtimeNote": "현재 배포는 Supabase 무료 플랜의 프로젝트 수 제한과 Vercel 무료 사용량 문제로 중지되어 있습니다. 실행 화면은 실제 배포 당시 캡처한 이미지로 확인할 수 있습니다.",
+      "demo": "https://wemake-teal.vercel.app",
+      "demoStatus": "서비스 화면을 직접 둘러볼 수 있습니다. 비용 관리를 위해 예약 작업(Cron)과 AI 콘텐츠 자동 생성 기능은 비활성화했습니다.",
+      "runtimeNote": "이전에 Supabase 무료 플랜의 프로젝트 수 제한과 Vercel 사용량 문제로 배포를 중지했으나, 현재는 예약 작업(Cron)과 AI 콘텐츠 자동 생성 기능을 비활성화하고 배포를 유지하고 있습니다.",
       "course": {
         "id": "maker",
         "title": "Maker 마스터클래스",
@@ -451,6 +454,7 @@
     {
       "id": "dynamic-scrapper",
       "name": "dynamic-scrapper",
+      "demo": "https://jonghwa3471.github.io/dynamic-scrapper/",
       "title": "채용 공고 스크래퍼",
       "purpose": "여러 사이트의 채용 정보를 키워드별로 모아 보여줍니다.",
       "group": "Python · AI",
@@ -752,6 +756,7 @@
     {
       "id": "WorkHardTravelHardApp",
       "name": "WorkHardTravelHardApp",
+      "demo": "https://jonghwa3471.github.io/WorkHardTravelHardApp/",
       "title": "Work Hard · Travel Hard",
       "purpose": "일과 여행 할 일을 나누어 관리하는 앱을 구현했습니다.",
       "group": "React Native",
@@ -928,6 +933,42 @@
       "name": "Movie-App-with-GraphQL",
       "title": "GraphQL 영화 앱",
       "purpose": "GraphQL 서버의 영화 데이터를 React 화면에 연결했습니다.",
+      "motivation": "이전 React 프로젝트에서 API 응답을 받아 화면에 연결했던 경험을 바탕으로, GraphQL로 데이터를 요청하는 방식과 Apollo Client의 캐시 관리를 공부했습니다.",
+      "reflections": [
+        {
+          "title": "화면에 필요한 필드를 직접 선택하는 요청",
+          "text": "이전 React 프로젝트에서는 API가 반환한 응답 전체를 받은 뒤, 그중 화면에 필요한 데이터를 골라 가공했습니다. GraphQL에서는 서버 스키마가 제공하는 필드 중 필요한 항목을 쿼리에 직접 적어 요청할 수 있다는 점이 좋았습니다. 영화 목록과 상세 화면에서 필요한 데이터의 형태를 코드로 명확하게 표현할 수 있었습니다."
+        },
+        {
+          "title": "브라우저에서 쿼리를 시험하고 코드로 연결하기",
+          "text": "GraphiQL의 Explorer UI에서 필요한 필드를 선택하고 요청을 실행해 응답을 확인하는 과정이 편했습니다. 동작을 확인한 쿼리를 복사해 프로젝트에 바로 적용할 수 있어, 요청 코드를 작성하기 전에 데이터 구조와 결과를 살펴볼 수 있었습니다.",
+          "image": "journey/images/graphql-graphiql-explorer.jpg",
+          "imageCaption": "참고 화면 · GraphiQL Explorer에서 영화의 title 필드를 선택하고 쿼리와 응답을 확인한 모습(SWAPI 예제)",
+          "link": "https://graphql.org/swapi-graphql/",
+          "linkLabel": "GraphiQL에서 쿼리 직접 시험하기"
+        },
+        {
+          "title": "Fragment로 특정 영화의 캐시를 갱신하기",
+          "category": "challenge",
+          "text": "브라우저 개발자 도구에서 Apollo Client Devtools 확장 도구를 열고, 저장된 캐시를 살펴보며 갱신할 영화 객체와 필드를 찾는 과정이 처음에는 낯설었습니다. 도구에 표시된 캐시 항목을 코드의 Movie:${id}와 연결하고, 그 안에서 변경할 isLiked 필드를 확인하는 데 익숙해져야 했습니다. 확장 도구를 활용해 캐시 구조를 탐색하고 코드의 갱신 대상과 맞춰 보는 경험이 어려웠던 부분입니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "필요한 영화 정보와 클라이언트 상태를 쿼리로 표현하기",
+          "language": "JavaScript",
+          "description": "영화 ID를 변수로 전달하고 상세 화면에 필요한 필드를 선택합니다. isLiked의 @client는 해당 필드를 서버에 요청하지 않고 클라이언트에서 처리하도록 표시합니다.",
+          "code": "const GET_MOVIE = gql`\n  query getMovie($movieId: String!) {\n    movie(id: $movieId) {\n      id\n      title\n      medium_cover_image\n      rating\n      isLiked @client\n    }\n  }\n`;",
+          "takeaway": "응답을 받은 뒤 필요한 값을 골라내던 경험에서 나아가, 요청 단계에서 원하는 데이터의 형태를 표현할 수 있다는 점이 인상 깊었습니다."
+        },
+        {
+          "title": "writeFragment로 좋아요 상태 변경하기",
+          "language": "JavaScript",
+          "description": "캐시의 Movie:${id} 객체에서 isLiked 필드만 선택해 현재 값의 반대로 갱신한 코드입니다.",
+          "code": "const onClick = () => {\n  cache.writeFragment({\n    id: `Movie:${id}`,\n    fragment: gql`\n      fragment MovieFragment on Movie {\n        isLiked\n      }\n    `,\n    data: {\n      isLiked: !data?.movie?.isLiked,\n    },\n  });\n};",
+          "takeaway": "캐시 ID로 대상을 찾고 fragment로 변경할 필드를 지정한다는 흐름을 익혔습니다. 서버 Mutation 없이 로컬 좋아요 상태를 바꾸고 버튼 표시와 연결하는 방식을 이해할 수 있었습니다."
+        }
+      ],
       "group": "React",
       "year": "2026",
       "created": "2026-01-07",
@@ -942,6 +983,8 @@
       ],
       "learned": [
         "Apollo Client 설정과 쿼리 기반 데이터 요청",
+        "화면에 필요한 필드 선택과 쿼리 변수 전달",
+        "@client 필드와 writeFragment를 이용한 로컬 캐시 상태 변경",
         "useQuery의 loading 상태에 따라 대기 UI와 영화 목록 분리",
         "영화 목록·상세 라우트 분리"
       ],
@@ -951,6 +994,7 @@
       "kind": "학습 프로젝트",
       "sources": [
         "src/client.js",
+        "src/routes/Movie.jsx",
         "src/routes/Movies.jsx"
       ],
       "blogs": [
@@ -1121,6 +1165,7 @@
     },
     {
       "id": "carrot",
+      "headerImage": "journey/images/carrot-login.jpg",
       "name": "carrot-market-next14",
       "title": "당근마켓 · Next14",
       "purpose": "Next12와 Next14의 차이를 비교하며, 폼 검증·로딩 UI·캐시 갱신 등 사용자의 입력과 대기 경험을 다룬 풀스택 학습 프로젝트입니다.",
@@ -2071,6 +2116,7 @@
     {
       "id": "kakao-challenge-2024-recap",
       "name": "kakao-challenge-2024-recap",
+      "demo": "https://jonghwa3471.github.io/kakao-challenge-2024-recap/",
       "title": "카카오톡 · 복습",
       "purpose": "2022년에 만들었던 카카오톡 프로젝트를 다시 구현하며 HTML·CSS를 복습했습니다.",
       "motivation": "2022년에 처음 만들었던 카카오톡 프로젝트를 돌아보며 HTML과 CSS의 기초를 다시 다지는 시간을 가졌습니다. 익숙한 화면을 다시 구현하면서 여러 페이지에서 반복되는 공통 스타일과 화면별 스타일을 분리하는 방법을 복습했습니다.",
@@ -2323,6 +2369,7 @@
     {
       "id": "study-gulp",
       "name": "study-gulp",
+      "demo": "https://jonghwa3471.github.io/study-gulp/",
       "title": "Gulp 빌드 환경",
       "purpose": "Pug·SCSS·JavaScript 변환과 이미지 최적화를 Gulp 작업으로 연결하며 개발·빌드·배포 자동화를 학습했습니다.",
       "motivation": "작성한 소스가 브라우저에서 실행할 파일로 변환되는 과정을 익히기 위해 Gulp로 개발 환경을 구성했습니다. 파일 변환과 최적화, 개발 서버, 배포 작업을 각각 정의하고 하나의 실행 흐름으로 연결했습니다.",
@@ -2387,9 +2434,10 @@
     },
     {
       "id": "kakao",
+      "headerImage": "journey/images/kakao-preview-1.png",
       "name": "study-html-kakao-clone",
       "title": "카카오톡",
-      "purpose": "HTML과 CSS로 로그인·친구·채팅 화면을 구현했습니다.",
+      "purpose": "상태바·하단 내비게이션과 친구·채팅 목록을 배치하고, 말풍선이 있는 대화 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2022",
       "created": "2022-09-29",
@@ -2842,6 +2890,7 @@
     {
       "id": "react-challenge-toDoList",
       "name": "react-challenge-toDoList",
+      "demo": "https://jonghwa3471.github.io/react-challenge-toDoList/",
       "title": "React 투두리스트",
       "purpose": "할 일과 카테고리를 컴포넌트로 나누어 관리했습니다.",
       "group": "React",
@@ -3017,7 +3066,7 @@
       "id": "study-scss-concert-poster-clone",
       "name": "study-scss-concert-poster-clone",
       "title": "Concert Poster",
-      "purpose": "콘서트 포스터를 재현하며 SCSS와 Grid·Flexbox 레이아웃을 연습했습니다.",
+      "purpose": "굵은 밴드명과 공연 정보를 색상 블록·테두리 안에 배치한 세로형 콘서트 포스터를 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2024",
       "created": "2024-03-10",
@@ -3070,7 +3119,7 @@
       "id": "study-scss-pixies-poster-clone",
       "name": "study-scss-pixies-poster-clone",
       "title": "Pixies Poster",
-      "purpose": "Pixies 포스터를 재현하며 SCSS 반복문과 Grid·Flexbox 레이아웃을 연습했습니다.",
+      "purpose": "상단의 공연 정보와 하단의 원형 패턴을 나누고, 원을 격자로 반복 배치한 포스터를 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2024",
       "created": "2024-03-10",
@@ -3124,7 +3173,7 @@
       "id": "study-scss-error-404-clone",
       "name": "study-scss-error-404-clone",
       "title": "Error 404",
-      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "purpose": "큰 ERROR 404 제목 아래 기사·이미지를 여러 열로 나누고, 테두리와 띠 형태의 문구로 신문형 레이아웃을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2024",
       "created": "2024-03-09",
@@ -3176,9 +3225,10 @@
     },
     {
       "id": "study-scss-museum-clone",
+      "headerImage": "journey/images/museum-result.jpg",
       "name": "study-scss-museum-clone",
       "title": "Museum",
-      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "purpose": "전시 제목·소개 문구·작품 이미지를 서로 다른 크기의 격자에 배치한 미술관 안내 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2024",
       "created": "2024-03-07",
@@ -3232,7 +3282,7 @@
       "id": "study-scss-mac-os-clone",
       "name": "study-scss-mac-os-clone",
       "title": "macOS",
-      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "purpose": "시계·음악·날씨 위젯과 색상별 목록 패널을 좌우로 나눈 데스크톱 대시보드 레이아웃을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2024",
       "created": "2024-03-06",
@@ -3285,7 +3335,7 @@
       "id": "study-scss-architect-studio-clone",
       "name": "study-scss-architect-studio-clone",
       "title": "Architect Studio",
-      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "purpose": "건축 분야별 메뉴를 가로 구획으로 쌓고, 소개 문구와 정보를 열로 나눈 스튜디오 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2024",
       "created": "2024-03-03",
@@ -3338,7 +3388,7 @@
       "id": "study-scss-design-agency-clone",
       "name": "study-scss-design-agency-clone",
       "title": "Design Agency",
-      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "purpose": "큰 소개 문구와 프로젝트 이미지·컬러 카드를 비대칭으로 배치한 디자인 에이전시 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2024",
       "created": "2024-03-01",
@@ -3391,7 +3441,7 @@
       "id": "study-scss-beauty-store-clone",
       "name": "study-scss-beauty-store-clone",
       "title": "Beauty Store",
-      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "purpose": "상단 내비게이션 아래 제품 이미지와 상품명·설명을 좌우로 나눈 뷰티 스토어 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2024",
       "created": "2024-03-01",
@@ -3444,7 +3494,7 @@
       "id": "study-scss-fashion-store-clone",
       "name": "study-scss-fashion-store-clone",
       "title": "Fashion Store",
-      "purpose": "서로 다른 화면을 재현하며 SCSS와 레이아웃 구성을 연습했습니다.",
+      "purpose": "모바일 폭의 화면에 상품 정보와 이미지를 배치하고, 테두리로 나눈 상품 목록 레이아웃을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2024",
       "created": "2024-02-27",
@@ -3497,7 +3547,7 @@
       "id": "study-scss-education-courses-app-clone",
       "name": "study-scss-education-courses-app-clone",
       "title": "Education Courses",
-      "purpose": "강의 목록 앱 화면을 재현하며 SCSS와 Grid·Flexbox 레이아웃을 연습했습니다.",
+      "purpose": "모바일 화면에 학습 메뉴와 파스텔색 강의 카드를 배치하고, 카드 크기를 달리한 강의 목록을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2024",
       "created": "2024-02-27",
@@ -3614,6 +3664,7 @@
     {
       "id": "study-gulp-recap",
       "name": "study-gulp-recap",
+      "demo": "https://jonghwa3471.github.io/study-gulp-recap/",
       "title": "Gulp 빌드 환경 · 복습",
       "purpose": "기존 Gulp 개발 환경을 다시 구성하며 빌드 흐름을 복습하고, SCSS 컴파일러를 node-sass에서 Dart Sass로 변경했습니다.",
       "group": "HTML · CSS",
@@ -3698,7 +3749,7 @@
       "id": "study-scss-won-hundred-clone",
       "name": "study-scss-won-hundred-clone",
       "title": "Won Hundred",
-      "purpose": "패션 브랜드 화면을 재현하며 SCSS와 Grid 기반 내비게이션·이미지 배치를 연습했습니다.",
+      "purpose": "상단 메뉴·브랜드 로고와 시즌 제목 아래 패션 이미지를 여러 열로 배치한 브랜드 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2023",
       "created": "2023-06-06",
@@ -3747,7 +3798,7 @@
       "id": "study-scss-donica-clone",
       "name": "study-scss-donica-clone",
       "title": "Donica",
-      "purpose": "타이포그래피 중심의 포트폴리오 화면을 재현하며 SCSS와 목록 레이아웃을 연습했습니다.",
+      "purpose": "큰 소개 문구 아래 프로젝트명·작업 분야·연도를 행과 열로 정렬한 텍스트 중심 포트폴리오를 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2023",
       "created": "2023-06-06",
@@ -3794,8 +3845,9 @@
     {
       "id": "personal-project-AvanteN",
       "name": "personal-project-AvanteN",
+      "demo": "https://jonghwa3471.github.io/personal-project-AvanteN/",
       "title": "Avante N 페이지",
-      "purpose": "자동차 주제의 개인 정적 웹 페이지를 만들었습니다.",
+      "purpose": "CSS Grid 배치를 연습하며 친구 사진과 문구를 격자에 넣어 재미로 만든 페이지입니다.",
       "group": "HTML · CSS",
       "year": "2023",
       "created": "2023-06-03",
@@ -3806,8 +3858,8 @@
         "CSS"
       ],
       "learned": [
-        "이미지와 텍스트를 활용한 HTML 구성",
-        "페이지 전용 CSS와 정적 자산 관리"
+        "CSS Grid로 이미지와 문구를 행·열에 배치",
+        "친구 사진을 활용해 자유롭게 레이아웃 구성"
       ],
       "repo": "https://github.com/jonghwa3471/personal-project-AvanteN",
       "galleryLayout": "comparison",
@@ -3830,7 +3882,7 @@
       "id": "study-scss-rodic-davidson-clone",
       "name": "study-scss-rodic-davidson-clone",
       "title": "Rodic Davidson",
-      "purpose": "건축 스튜디오 화면을 재현하며 SCSS와 프로젝트 이미지 목록 배치를 연습했습니다.",
+      "purpose": "프로젝트 이미지와 설명을 두 열로 반복 배치하고, 여백으로 구분한 건축 스튜디오 목록 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2023",
       "created": "2023-06-02",
@@ -3879,7 +3931,7 @@
       "id": "study-scss-tolv-clone",
       "name": "study-scss-tolv-clone",
       "title": "Tolv",
-      "purpose": "가구 브랜드 화면을 재현하며 SCSS와 이미지·텍스트 분할 레이아웃을 연습했습니다.",
+      "purpose": "이미지 영역과 큰 소개 문구를 좌우로 나누고, 넓은 여백을 둔 가구 브랜드 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2023",
       "created": "2023-05-30",
@@ -3928,7 +3980,7 @@
       "id": "study-scss-schwartz-clone",
       "name": "study-scss-schwartz-clone",
       "title": "Schwartz",
-      "purpose": "미디어 소개 화면을 재현하며 SCSS와 이미지·본문 섹션 구성을 연습했습니다.",
+      "purpose": "상단 메뉴와 브랜드명 아래 대표 이미지·소개 글을 배치하고, 콘텐츠 섹션을 이어 붙인 미디어 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2023",
       "created": "2023-05-27",
@@ -3978,7 +4030,7 @@
       "id": "study-scss-zoo-clone",
       "name": "study-scss-zoo-clone",
       "title": "Zoo",
-      "purpose": "이미지 갤러리 화면을 재현하며 SCSS와 Grid 기반 반복 카드 배치를 연습했습니다.",
+      "purpose": "상단 내비게이션 아래 프로젝트 사진을 세 열의 동일한 크기로 반복 배치한 갤러리 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2023",
       "created": "2023-05-26",
@@ -4027,7 +4079,7 @@
       "id": "study-scss-10x19-clone",
       "name": "study-scss-10x19-clone",
       "title": "10×19",
-      "purpose": "앨범 소개 화면을 재현하며 SCSS와 Grid·CSS 텍스트 애니메이션을 연습했습니다.",
+      "purpose": "중앙 앨범 이미지 양옆에 순위 목록을 두고, 세로 문구와 테두리로 둘러싼 음악 소개 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2023",
       "created": "2023-05-23",
@@ -4076,8 +4128,9 @@
     {
       "id": "paintbox",
       "name": "study-scss-paint-box-clone",
+      "demo": "https://jonghwa3471.github.io/study-scss-paint-box-clone/",
       "title": "Paintbox",
-      "purpose": "네일 브랜드 화면을 재현하며 SCSS와 이미지·텍스트 섹션 배치를 연습했습니다.",
+      "purpose": "큰 이미지 위 소개 문구를 겹치고, 이미지와 텍스트 섹션을 이어 배치한 네일 브랜드 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2023",
       "created": "2023-05-22",
@@ -4127,7 +4180,7 @@
       "id": "study-scss-best-horror-scenes-clone",
       "name": "study-scss-best-horror-scenes-clone",
       "title": "Best Horror Scenes",
-      "purpose": "영화 장면 소개 화면을 재현하며 SCSS와 좌우 분할 레이아웃을 연습했습니다.",
+      "purpose": "왼쪽의 서비스 소개와 오른쪽의 영화 제목·영상 목록을 나눈 공포 영화 소개 화면을 구현했습니다.",
       "group": "HTML · CSS",
       "year": "2023",
       "created": "2023-05-17",

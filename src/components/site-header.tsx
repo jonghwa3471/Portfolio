@@ -75,7 +75,18 @@ export function SiteHeader({ project = false }: { project?: boolean }) {
   }, [items, project]);
   return (
     <header className="site-header">
-      <Link className="logo" href="/">
+      <Link
+        className="logo"
+        href={project ? "/" : "#top"}
+        onClick={(event) => {
+          if (project || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+          event.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+          });
+        }}
+      >
         <span className="logo-triangle" />
         <span>송종화</span>
       </Link>

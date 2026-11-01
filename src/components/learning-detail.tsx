@@ -9,6 +9,7 @@ import {
 import { LearningImage } from "./image-viewer";
 import { ScrollToTop } from "./scroll-to-top";
 import { ReadingProgress } from "./reading-progress";
+import { DetailHeaderBackground } from "./detail-header-background";
 import { LearningBackLink } from "./learning-back-link";
 import type { ReactNode } from "react";
 
@@ -49,6 +50,9 @@ export function LearningDetail({ item }: { item: LearningProject }) {
       </a>
       <main id="main">
         <header className="detail-header">
+          {(item.headerImage || item.images?.[0]) && (
+            <DetailHeaderBackground src={item.headerImage || item.images![0].src} />
+          )}
           <div className="container">
             <LearningBackLink />
             <div className="detail-title">
@@ -60,6 +64,14 @@ export function LearningDetail({ item }: { item: LearningProject }) {
               </div>
               <p>{item.purpose}</p>
             </div>
+            {item.demo && (
+              <div className="learning-demo-entry">
+                <a href={item.demo} target="_blank" rel="noreferrer">
+                  프로젝트 직접 사용해 보기 <span aria-hidden="true">↗</span>
+                </a>
+                {item.demoStatus && <p>{item.demoStatus}</p>}
+              </div>
+            )}
             <div className="detail-meta">
               <div>
                 <span>저장소 생성일</span>
@@ -293,7 +305,7 @@ export function LearningDetail({ item }: { item: LearningProject }) {
                     {project.images?.[0] && (
                       <div className="journey-card-preview" aria-hidden="true">
                         <img
-                          src={assetPath(project.images[0].src)}
+                          src={assetPath(project.id === "kakao" ? project.headerImage || project.images[0].src : project.images[0].src)}
                           alt=""
                           loading="lazy"
                           decoding="async"
