@@ -78,6 +78,14 @@
       "path": "src/Routes/Home.tsx"
     },
     {
+      "id": "noovies",
+      "feature": "영화·TV·검색 화면과 상세 모달을 연결한 모바일 앱을 만들었습니다.",
+      "point": "웹에서 익힌 React를 모바일의 탭·스택 내비게이션과 스크롤 목록으로 확장",
+      "tags": ["React Native", "TypeScript", "Expo", "TanStack Query"],
+      "evidence": "탭과 상세 화면의 내비게이션 구성",
+      "path": "navigation/Root.tsx"
+    },
+    {
       "id": "carrot",
       "feature": "상품 등록 폼을 서버 처리와 데이터베이스에 연결했습니다.",
       "point": "입력 검증과 서버·클라이언트의 역할 분리",

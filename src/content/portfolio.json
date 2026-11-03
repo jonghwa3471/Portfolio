@@ -26,8 +26,12 @@
       "description": "기기 API·내비게이션·저장소와 모바일 인터랙션"
     },
     {
-      "id": "Python · AI",
-      "description": "데이터 수집·시각화에서 문서 기반 AI 앱까지"
+      "id": "Python",
+      "description": "AI 학습에 앞서 익힌 Python 기초와 데이터 수집·자동화·시각화"
+    },
+    {
+      "id": "AI",
+      "description": "LangChain·RAG로 모델과 문서를 연결하는 AI 앱 학습"
     },
     {
       "id": "데이터 · 백엔드",
@@ -96,8 +100,42 @@
       "id": "Fullstack-GPT",
       "name": "Fullstack-GPT",
       "title": "Fullstack GPT",
-      "purpose": "문서 내용을 검색해 답하는 AI 앱의 데이터 흐름을 학습했습니다.",
-      "group": "Python · AI",
+      "images": [
+        {
+          "src": "journey/images/fullstackgpt-quiz.png",
+          "caption": "QuizGPT · chapter_one.txt로 생성한 질문",
+          "source": "https://github.com/jonghwa3471/Fullstack-GPT/blob/master/pages/03_QuizGPT.py"
+        }
+      ],
+      "purpose": "Python·Streamlit·LangChain으로 AI 모델을 웹 서비스에 연결하는 방법을 학습 중인 프로젝트입니다.",
+      "motivation": "LangChain을 사용하고 Python으로 간단한 웹 화면을 만들면서, 웹을 바탕으로 AI 모델을 다루는 방법을 배우고 싶어 시작했습니다. 완성된 AI 서비스를 사용하는 것에서 더 나아가, 모델에 어떤 정보를 전달하고 어떤 형태의 답변을 받게 할지 직접 구성하는 방법을 공부하고 있습니다.",
+      "reflections": [
+        {
+          "title": "AI를 사용하는 사람에서 흐름을 구성하는 사람으로",
+          "text": "AI를 서비스로 사용만 하다가, 직접 모델에 전달할 정보와 답변 형식을 구성해 볼 수 있다는 점이 좋았습니다. 참고할 파일을 임베딩해 검색하고, 필요한 내용을 답변의 근거로 전달하거나 출력 형식을 구조화하면서 AI에 휘둘리기보다 제가 원하는 용도로 활용한다는 느낌을 받았습니다. 모델 자체를 재학습시키기보다는 프롬프트와 검색 문맥, 출력 형식을 조절하는 경험입니다."
+        },
+        {
+          "title": "Chain 안에서 데이터가 전달되는 흐름 이해하기",
+          "category": "challenge",
+          "text": "Chain을 구성하며 각 단계에 어떤 입력이 들어가고, 그 결과를 다음 단계로 어떻게 전달하는지 이해하는 것이 헷갈렸습니다. 특히 검색한 문서를 context로 넘기는 과정에서 RunnableLambda로 함수를 연결하고, RunnablePassthrough로 원래 질문을 그대로 전달하는 역할을 구분하며 흐름을 따라가야 했습니다."
+        },
+        {
+          "title": "문서 검색부터 답변 생성까지 이어지는 RAG 흐름 이해하기",
+          "category": "challenge",
+          "text": "문서를 분할하고 임베딩해 벡터 저장소에 넣는 과정과, 질문에 맞는 내용을 검색해 모델의 답변에 연결하는 과정을 한 번에 이해하기 어려웠습니다. 각 단계가 왜 필요한지, 검색한 정보가 어떤 형태로 프롬프트에 전달되는지 구분하는 데 시간이 필요했습니다. 아직 학습 중이지만, 단계를 하나씩 따라가며 원리를 이해하는 과정에는 흥미를 느끼고 있습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "업로드한 파일을 검색 가능한 문서로 바꾸기",
+          "language": "Python",
+          "description": "DocumentGPT에서 업로드한 파일을 분할·임베딩하고, FAISS 검색기로 연결하는 코드입니다.",
+          "code": "@st.cache_data(show_spinner=\"Embedding File...\")\ndef embed_file(file):\n    file_content = file.read()\n    file_path = f\"./.cache/files/{file.name}\"\n    with open(file_path, \"wb\") as f:\n        f.write(file_content)\n\n    cache_dir = LocalFileStore(f\"./.cache/embeddings/{file.name}\")\n\n    splitter = CharacterTextSplitter.from_tiktoken_encoder(\n        separator=\"\\n\", chunk_size=600, chunk_overlap=100\n    )\n    loader = UnstructuredFileLoader(file_path)\n    docs = loader.load_and_split(text_splitter=splitter)\n    embeddings = OpenAIEmbeddings()\n    cached_embeddings = CacheBackedEmbeddings.from_bytes_store(embeddings, cache_dir)\n    vectorstore = FAISS.from_documents(docs, cached_embeddings)\n    retriever = vectorstore.as_retriever()\n    return retriever",
+          "takeaway": "파일을 단순히 업로드하는 것에서 끝나지 않고, 내용을 나누고 임베딩해 질문과 관련된 정보를 검색할 수 있도록 바꾸는 과정이 가장 인상 깊었습니다. AI가 참고할 자료를 제가 직접 준비한다는 느낌을 받았고, 임베딩 결과를 캐시해 재사용하는 부분까지 보며 문서를 AI 서비스에 연결하는 흐름을 이해하는 데 도움이 됐습니다."
+        }
+      ],
+      "nextDirection": "현재 진행 중인 학습을 이어 가며 Chain과 RAG의 데이터 흐름을 더 익히고자 합니다. 참고 문서를 검색하는 과정과 답변 형식을 조절하는 과정을 직접 이해하고 구성하는 데 초점을 두고 공부하고 있습니다.",
+      "group": "AI",
       "year": "2026",
       "created": "2026-08-14",
       "updated": "2026-10-12",
@@ -117,7 +155,7 @@
       "repo": "https://github.com/jonghwa3471/Fullstack-GPT",
       "branch": "master",
       "commits": 45,
-      "kind": "학습 프로젝트",
+      "kind": "학습 프로젝트 · 진행 중",
       "sources": [
         "Home.py",
         "pages/01_DocumentGPT.py"
@@ -298,8 +336,50 @@
       "id": "data-visualization",
       "name": "data-visualization",
       "title": "코로나 데이터 대시보드",
-      "purpose": "CSV 데이터를 가공해 지도와 차트로 시각화했습니다.",
-      "group": "Python · AI",
+      "images": [
+        {
+          "src": "journey/images/corona-overview.png",
+          "caption": "저장된 CSV 기반 국가별 지도와 현황 표",
+          "source": "https://github.com/jonghwa3471/data-visualization/blob/master/main.py"
+        },
+        {
+          "src": "journey/images/corona-korea.png",
+          "caption": "한국 선택 시 확진·사망·회복 추이",
+          "source": "https://github.com/jonghwa3471/data-visualization/blob/master/main.py"
+        }
+      ],
+      "purpose": "Python 학습을 목적으로 코로나 CSV 데이터를 가공하고, 지도·차트·표로 표현한 대시보드입니다.",
+      "motivation": "Python을 더 익히면서, 데이터를 가공하고 그 결과를 화면으로 표현하는 방법도 배워 보고 싶었습니다. pandas로 코로나 CSV 데이터를 정리하고 Plotly와 Dash로 지도·차트·표를 만드는 과정을 통해, Python으로 데이터를 다루는 경험을 쌓고자 공부를 시작했습니다.",
+      "reflections": [
+        {
+          "title": "데이터 가공 결과를 그래프로 확인하기",
+          "text": "CSV의 숫자를 읽는 것에서 끝내지 않고, 국가별로 합산한 결과를 지도와 막대 그래프로 확인할 수 있다는 점이 좋았습니다. pandas로 필요한 열을 고르고 집계한 결과를 Plotly에 전달하면서, 데이터를 가공하는 Python 코드가 화면에 어떻게 반영되는지 살펴볼 수 있었습니다."
+        },
+        {
+          "title": "Python으로 화면과 상호작용 연결하기",
+          "text": "Dash의 컴포넌트로 화면을 구성하고, 콜백의 Input과 Output을 지정해 국가 선택에 따라 그래프를 바꿀 수 있다는 점이 흥미로웠습니다. JavaScript로 화면 동작을 작성하던 방식과 비교하며, Python으로도 사용자 입력과 데이터 시각화를 연결할 수 있다는 것을 경험했습니다."
+        },
+        {
+          "title": "가공 단계마다 달라지는 데이터 형태 따라가기",
+          "category": "challenge",
+          "text": "열을 선택하고 groupby·sum·reset_index·rename을 거치면서 데이터의 형태와 열 이름이 어떻게 바뀌는지 따라가는 과정이 필요했습니다. 특히 날짜가 열로 들어 있는 시계열 CSV를 날짜별 행으로 바꾸고, 확진·사망·회복 데이터를 하나로 병합해 그래프에 맞는 형태를 만드는 부분을 익히는 데 신경을 써야 했습니다."
+        },
+        {
+          "title": "선택값과 차트의 연결 관계 이해하기",
+          "category": "challenge",
+          "text": "드롭다운의 value를 입력으로 받고 그래프의 figure를 출력으로 연결하는 콜백 방식이 처음에는 낯설었습니다. 국가를 선택했을 때와 선택하지 않았을 때 각각 국가별·전 세계 데이터를 준비한 뒤, 같은 그래프 구성에 전달하는 흐름으로 나누어 이해했습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "국가 선택을 Python 콜백으로 그래프에 반영하기",
+          "language": "Python",
+          "description": "main.py에서 드롭다운 선택에 따라 데이터를 준비하고 그래프를 반환하는 핵심 부분입니다. 차트 스타일 옵션은 생략했습니다.",
+          "code": "@app.callback(Output(\"country_graph\", \"figure\"), [Input(\"country\", \"value\")])\ndef update_hello(value):\n    if value:\n        df = make_country_df(value)\n    else:\n        df = make_global_df()\n\n    fig = px.line(\n        df,\n        x=\"date\",\n        y=[\"confirmed\", \"deaths\", \"recovered\"],\n        template=\"plotly_dark\",\n    )\n    fig.update_xaxes(rangeslider_visible=True)\n    return fig",
+          "takeaway": "Python 함수에 입력과 출력 대상을 지정하는 것만으로, 국가 선택이 그래프 변경으로 이어진다는 점이 기억에 남았습니다. 데이터를 가공하는 함수와 차트를 만드는 함수를 연결하며 Python을 계산뿐 아니라 사용자와 상호작용하는 화면에도 활용해 볼 수 있었습니다."
+        }
+      ],
+      "group": "Python",
       "year": "2026",
       "created": "2026-04-17",
       "updated": "2026-04-23",
@@ -350,8 +430,45 @@
       "id": "seleniumpro",
       "name": "seleniumpro",
       "title": "Selenium 브라우저 자동화",
+      "images": [
+        {
+          "src": "journey/images/selenium-csv-report.png",
+          "caption": "dog-report.csv 원본 수집 결과",
+          "source": "https://github.com/jonghwa3471/seleniumpro/blob/master/dog-report.csv"
+        }
+      ],
       "purpose": "검색 결과와 해시태그 수집을 브라우저 자동화로 연습했습니다.",
-      "group": "Python · AI",
+      "motivation": "Python의 활용 방법을 더 익히기 위해, 브라우저에서 반복하던 작업을 코드로 자동화하는 방법을 공부했습니다. 검색어 입력과 결과 캡처, 화면 크기별 스크린샷, 해시태그 수집을 실습하며 Selenium으로 브라우저를 제어하는 흐름을 배웠습니다.",
+      "reflections": [
+        {
+          "title": "직접 하던 브라우저 작업을 코드로 연결하기",
+          "text": "브라우저를 열고 검색어를 입력한 뒤, 결과 요소를 찾아 각각 이미지로 저장하는 과정을 Python으로 연결할 수 있다는 점이 흥미로웠습니다. 반복 작업을 클래스로 묶고 검색어를 바꿔 실행하면서, Python을 브라우저 작업에도 활용해 볼 수 있었습니다."
+        },
+        {
+          "title": "여러 화면 크기의 캡처 반복하기",
+          "text": "화면 너비를 480·960·1366·1920으로 바꾸고, 페이지 높이에 따라 스크롤하며 캡처하는 흐름을 연습했습니다. 같은 페이지를 여러 크기에서 확인하는 반복 작업을 코드로 구성하며, 자동화를 화면 확인에도 활용할 수 있다는 점이 좋았습니다."
+        },
+        {
+          "title": "요소가 나타나는 시점과 선택자 맞추기",
+          "category": "challenge",
+          "text": "페이지를 열었다고 필요한 요소가 곧바로 준비되는 것은 아니라, 요소를 찾는 시점과 대기 조건을 고려해야 했습니다. 클래스명·이름·태그·XPath·CSS 선택자 중 어떤 방식으로 대상을 찾을지 확인하고, WebDriverWait로 요소가 나타날 때까지 기다리는 흐름을 익혔습니다."
+        },
+        {
+          "title": "외부 사이트 구조에 의존하는 수집의 한계",
+          "category": "challenge",
+          "text": "인스타그램 게시물을 돌아다니며 해시태그와 관련 정보를 가져오는 동작을 구현했습니다. 하지만 인스타그램의 화면 구조가 바뀌면서 게시물 수는 가져올 수 없었습니다. 외부 사이트의 구조에 의존하는 자동화는 사이트가 변경되면 기존 코드가 동작하지 않을 수 있고, 그에 맞춰 요소를 찾는 방식을 다시 확인해야 한다는 점을 경험했습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "검색 결과가 준비되면 요소별로 캡처하기",
+          "language": "Python",
+          "description": "google.py에서 검색 결과 요소를 기다리고, 화면에 표시된 요소만 이미지로 저장하는 부분입니다.",
+          "code": "search_results = WebDriverWait(self.browser, 10).until(\n    EC.presence_of_all_elements_located((By.CLASS_NAME, \"MjjYud\"))\n)\n\nfor index, search_result in enumerate(search_results):\n    if search_result.is_displayed() and search_result.size[\"height\"] > 0:\n        search_result.screenshot(\n            f\"{self.screenshots_dir}/{self.keyword}x{index}.png\"\n        )",
+          "takeaway": "페이지 전체뿐 아니라 검색 결과의 각 요소도 따로 캡처할 수 있다는 점이 인상 깊었습니다. 요소가 존재하는지 기다리는 것과 실제 화면에 보이는지 확인하는 것을 나누어 처리하며, 자동화에서도 화면의 상태를 고려해야 한다는 점을 배웠습니다."
+        }
+      ],
+      "group": "Python",
       "year": "2026",
       "created": "2026-04-06",
       "updated": "2026-04-17",
@@ -362,7 +479,10 @@
       ],
       "learned": [
         "WebDriverWait로 요소가 준비될 때까지 대기",
-        "검색 결과 캡처와 수집 데이터 CSV 저장"
+        "검색어 입력과 화면에 표시된 결과 요소별 캡처",
+        "화면 너비 변경과 스크롤 구간별 스크린샷 저장",
+        "여러 탭 전환과 방문한 해시태그의 중복 처리",
+        "수집 결과를 CSV로 저장하는 흐름 구성"
       ],
       "repo": "https://github.com/jonghwa3471/seleniumpro",
       "branch": "master",
@@ -370,7 +490,8 @@
       "kind": "학습 프로젝트",
       "sources": [
         "google.py",
-        "instamining.py"
+        "instamining.py",
+        "responsive.py"
       ],
       "blogs": [
         {
@@ -457,7 +578,7 @@
       "demo": "https://jonghwa3471.github.io/dynamic-scrapper/",
       "title": "채용 공고 스크래퍼",
       "purpose": "여러 사이트의 채용 정보를 키워드별로 모아 보여줍니다.",
-      "group": "Python · AI",
+      "group": "Python",
       "year": "2026",
       "created": "2026-03-13",
       "updated": "2026-03-26",
@@ -521,7 +642,49 @@
       "id": "social-coin",
       "name": "social-coin",
       "title": "Social Coin",
+      "images": [
+        {
+          "src": "journey/images/social-coin-home.png",
+          "caption": "코인 목록 · iOS 시뮬레이터",
+          "source": "https://github.com/jonghwa3471/social-coin/blob/master/screens/Home.tsx"
+        },
+        {
+          "src": "journey/images/social-coin-chart.png",
+          "caption": "비트코인 가격 차트",
+          "source": "https://github.com/jonghwa3471/social-coin/blob/master/screens/Detail.tsx"
+        },
+        {
+          "src": "journey/images/social-coin-join.png",
+          "caption": "회원가입 · iOS 시뮬레이터",
+          "source": "https://github.com/jonghwa3471/social-coin/blob/master/screens/Join.tsx"
+        }
+      ],
       "purpose": "인증과 코인 데이터를 결합한 모바일 앱을 학습했습니다.",
+      "motivation": "React를 어느 정도 공부한 뒤, 모바일 앱도 React로 만들 수 있다는 React Native가 궁금해졌습니다. 웹에서 익힌 React 지식을 모바일에서는 어떻게 사용하는지 경험해 보고 싶어, Social Coin을 만들며 React Native의 기초를 공부했습니다.",
+      "reflections": [
+        {
+          "title": "익숙한 React 코드로 모바일 앱 시작하기",
+          "text": "React를 공부하며 익숙해진 상태 관리와 컴포넌트 구성, Hooks 사용 방식이 코드에서 눈에 잘 들어온다는 점이 좋았습니다. 모바일 개발을 처음 접해도 알고 있던 React 개념을 바탕으로 코드를 읽고 기능을 연결해 볼 수 있었습니다."
+        },
+        {
+          "title": "Expo Go의 편리함과 네이티브 빌드 전환의 아쉬움",
+          "text": "처음에는 Expo Go에서 QR 코드를 스캔하는 것만으로 휴대폰에서 앱을 쉽게 실행하고 테스트할 수 있어 편했습니다. 하지만 네이티브 빌드가 필요한 기능을 사용한 뒤에는 Expo Go로 바로 확인할 수 없게 되어 아쉬웠습니다. 별도로 앱을 빌드해야 하면서, 초기에 느꼈던 간편한 테스트 방식과 차이가 생겼습니다."
+        },
+        {
+          "title": "모바일 환경만의 속성과 기능 익히기",
+          "category": "challenge",
+          "text": "React와 익숙한 부분이 많았지만, 모바일 환경에서만 사용하는 속성과 기능도 있어 처음에는 헷갈렸습니다. 웹에서 사용하던 방식과 어떤 부분이 같고 다른지 구분하며, React Native의 화면 구성과 동작 방식에 익숙해지는 과정이 필요했습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "코인 목록을 표시하고 터치로 상세 화면 열기",
+          "language": "TSX",
+          "description": "FlatList로 코인을 세 열에 나열하고, 카드를 누르면 선택한 코인의 정보를 상세 화면에 전달하는 코드입니다.",
+          "code": "// Home.tsx\n<List\n  numColumns={3}\n  columnWrapperStyle={{ justifyContent: \"space-between\" }}\n  contentContainerStyle={{ gap: 10 }}\n  data={cleanData}\n  keyExtractor={(item) => item.id}\n  renderItem={({ item, index }) => (\n    <Coin index={index} coinId={item.id} symbol={item.symbol} />\n  )}\n/>\n\n// Coin.tsx\n<TouchableOpacity\n  style={{ flex: 0.3 }}\n  onPress={() => navigation.navigate(\"Detail\", { symbol, coinId })}\n>\n  {/* 코인 카드 */}\n</TouchableOpacity>",
+          "takeaway": "익숙한 React의 컴포넌트와 props를 사용하면서도, 목록은 FlatList로 표시하고 클릭 대신 onPress로 터치를 처리한다는 차이가 기억에 남았습니다. 코인 카드를 누르면 상세 화면이 열리도록 연결하며, 웹에서 배운 React를 모바일에서는 어떻게 사용하는지 이해할 수 있었습니다."
+        }
+      ],
       "group": "React Native",
       "year": "2026",
       "created": "2026-02-25",
@@ -538,7 +701,11 @@
       ],
       "learned": [
         "Firebase 인증 상태에 따른 내비게이션 분기",
-        "TanStack Query로 코인 목록 요청"
+        "TanStack Query로 코인 목록·상세·가격 이력 요청",
+        "FlatList의 3열 목록과 TouchableOpacity 터치 처리",
+        "네이티브 스택 내비게이션과 타입이 지정된 화면 파라미터",
+        "Animated로 목록 카드의 순차 등장 효과 구성",
+        "가격 이력을 좌표로 변환해 Victory Native 차트에 전달"
       ],
       "repo": "https://github.com/jonghwa3471/social-coin",
       "branch": "master",
@@ -546,7 +713,12 @@
       "kind": "학습 프로젝트",
       "sources": [
         "App.tsx",
-        "screens/Home.tsx"
+        "screens/Home.tsx",
+        "screens/Detail.tsx",
+        "screens/Join.tsx",
+        "navigators/InNav.tsx",
+        "navigators/OutNav.tsx",
+        "components/Coin.tsx"
       ],
       "blogs": [
         {
@@ -589,8 +761,46 @@
     {
       "id": "nomad-diary",
       "name": "nomad-diary",
-      "title": "Nomad Diary",
+      "title": "Diary",
+      "images": [
+        {
+          "src": "journey/images/nomad-diary-home.png",
+          "caption": "저장된 일기 목록 · 테스트 광고",
+          "source": "https://github.com/jonghwa3471/nomad-diary/blob/master/screens/Home.tsx"
+        },
+        {
+          "src": "journey/images/nomad-diary-write.png",
+          "caption": "감정 선택과 일기 작성",
+          "source": "https://github.com/jonghwa3471/nomad-diary/blob/master/screens/Write.tsx"
+        }
+      ],
       "purpose": "기기 내 데이터 저장과 광고 SDK 연결을 연습한 일기 앱입니다.",
+      "motivation": "React Native로 화면을 만드는 것에서 더 나아가, 작성한 내용을 기기에 저장하고 다시 불러오는 흐름을 익히고자 공부했습니다. 감정과 짧은 메모를 남기는 앱을 만들며 Realm을 이용한 로컬 데이터 관리와 네이티브 광고 SDK 연결을 연습했습니다.",
+      "reflections": [
+        {
+          "title": "기기에 저장한 데이터를 화면으로 연결하기",
+          "text": "React의 상태로만 다루던 입력값을 Realm에 저장하고, 저장된 기록을 목록으로 다시 보여주는 흐름이 흥미로웠습니다. 데이터 변경을 감지하는 리스너를 연결하면 작성 화면에서 추가한 기록을 홈 목록에 반영할 수 있어, 화면 상태와 기기에 보존되는 데이터의 역할을 구분해 볼 수 있었습니다."
+        },
+        {
+          "title": "DB 연결과 변경 감지의 순서 이해하기",
+          "category": "challenge",
+          "text": "Realm 연결을 비동기로 준비한 뒤 Context로 전달하고, 각 화면에서 사용하는 흐름을 이해하는 데 신경을 써야 했습니다. 특히 DB가 아직 준비되지 않은 시점과 준비된 뒤를 구분하고, 변경 리스너를 등록한 다음 화면이 정리될 때 해제하는 과정까지 함께 살펴볼 필요가 있었습니다."
+        },
+        {
+          "title": "광고의 여러 이벤트를 저장 흐름에 연결하기",
+          "category": "challenge",
+          "text": "저장 버튼을 누르는 순간 바로 기록하는 대신, 광고 로드·보상 획득·닫힘에 따라 동작을 나누는 부분이 복잡하게 느껴졌습니다. 보상 이벤트에서는 Realm에 기록하고, 광고가 닫히면 리스너를 해제한 뒤 이전 화면으로 돌아가도록 연결하며 이벤트가 발생하는 순서를 익혔습니다. 실제 광고 대신 테스트 광고 ID를 사용했습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "Realm의 변경을 감지해 기록 목록 갱신하기",
+          "language": "TSX",
+          "description": "Home.tsx에서 Realm 조회 결과에 리스너를 등록하고, 변경된 기록을 최신순으로 화면에 반영하는 핵심 부분입니다.",
+          "code": "useEffect(() => {\n  const results = realm?.objects<Feeling>(\"Feeling\");\n  results?.addListener((feelings, changes) => {\n    setFeelings(feelings.sorted(\"_id\", true));\n  });\n  return () => {\n    results?.removeAllListeners();\n  };\n}, [realm]);",
+          "takeaway": "기록을 저장한 화면에서 홈의 상태를 직접 바꾸지 않아도, DB의 변경을 감지해 목록을 갱신할 수 있다는 점이 인상 깊었습니다. React의 useEffect 안에서 구독과 해제를 함께 작성하며, 컴포넌트의 생명주기와 데이터 변경 감지가 어떻게 연결되는지 살펴볼 수 있었습니다."
+        }
+      ],
       "group": "React Native",
       "year": "2026",
       "created": "2026-02-22",
@@ -606,7 +816,11 @@
       ],
       "learned": [
         "Realm 데이터베이스 연결과 일기 화면 구성",
-        "네이티브 광고 SDK 초기화와 화면 연결"
+        "Context와 useDB로 화면 간 Realm 연결 공유",
+        "감정 선택·메모 입력과 Realm 쓰기 트랜잭션",
+        "변경 리스너를 통한 기록 목록 갱신과 최신순 정렬",
+        "기본 키로 기록을 찾아 삭제하는 흐름",
+        "AdMob 테스트 광고의 보상·닫힘 이벤트와 저장 흐름 연결"
       ],
       "repo": "https://github.com/jonghwa3471/nomad-diary",
       "branch": "master",
@@ -614,7 +828,10 @@
       "kind": "학습 프로젝트",
       "sources": [
         "app/index.tsx",
-        "screens/Home.tsx"
+        "screens/Home.tsx",
+        "screens/Write.tsx",
+        "context.ts",
+        "components/navigator.tsx"
       ],
       "blogs": [
         {
@@ -646,7 +863,40 @@
       "id": "langApp",
       "name": "langApp",
       "title": "카드 스와이프 학습 앱",
+      "images": [
+        {
+          "src": "journey/images/langapp-home.png",
+          "caption": "카드 스와이프 학습 화면 · Expo Go",
+          "source": "https://github.com/jonghwa3471/langApp/blob/master/App.tsx"
+        }
+      ],
       "purpose": "알고 있는 항목을 제스처로 분류하는 인터랙션을 구현했습니다.",
+      "motivation": "React Native에서 터치와 드래그에 반응하는 화면을 연습하기 위한 프로젝트입니다. 아이콘 카드를 위아래로 움직이는 간단한 구성을 통해, 손가락의 이동을 화면 좌표로 연결하고 여러 애니메이션을 조합하는 방식을 익혔습니다.",
+      "reflections": [
+        {
+          "title": "손가락의 움직임을 화면의 반응으로 연결하기",
+          "text": "카드를 움직이는 거리에 맞춰 위쪽의 ‘알아’와 아래쪽의 ‘몰라’ 영역이 커지도록 연결한 부분이 흥미로웠습니다. Animated의 interpolate로 이동 값을 크기 변화에 연결하면서, 하나의 값을 여러 시각적 반응에 활용할 수 있다는 점을 배웠습니다."
+        },
+        {
+          "title": "드래그를 끝냈을 때의 동작 나누기",
+          "category": "challenge",
+          "text": "손가락을 따라 카드가 움직이는 것뿐 아니라, 손을 뗐을 때 어느 위치로 돌아가야 하는지도 고려해야 했습니다. 화면 높이를 기준으로 이동 거리의 경계를 정하고, 경계를 넘으면 다음 카드로 전환하고 그렇지 않으면 원래 위치로 복귀하도록 동작을 나누었습니다."
+        },
+        {
+          "title": "여러 애니메이션의 실행 순서 맞추기",
+          "category": "challenge",
+          "text": "카드가 작아지고 사라지는 효과와 위치 초기화, 다음 카드의 등장을 어떤 순서로 실행할지 생각해야 했습니다. 함께 실행할 효과는 Animated.parallel로 묶고, 순서가 필요한 과정은 Animated.sequence로 연결하며 애니메이션의 흐름을 구성하는 연습을 했습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "손을 뗀 위치에 따라 카드 전환과 복귀 나누기",
+          "language": "TSX",
+          "description": "App.tsx의 PanResponder에서 드래그 좌표를 반영하고, 놓은 위치에 따라 애니메이션을 선택하는 부분입니다.",
+          "code": "onPanResponderMove: (_, { dx, dy }) => {\n  position.setValue({ x: dx, y: dy });\n},\nonPanResponderRelease: (_, { dy }) => {\n  if (dy < topLimit || dy > bottomLimit) {\n    Animated.sequence([\n      Animated.parallel([onDropOpacity, onDropScale]),\n      onDropPosition,\n    ]).start(nextIcon);\n  } else {\n    Animated.parallel([onPressOut, goHome]).start();\n  }\n},",
+          "takeaway": "손가락의 이동 거리인 dx·dy를 카드 위치에 연결하고, 손을 떼는 순간의 dy로 다음 동작을 정할 수 있다는 점이 인상 깊었습니다. 단순히 모양을 움직이는 것을 넘어, 사용자의 동작과 판단 기준을 애니메이션에 연결하는 흐름을 이해할 수 있었습니다."
+        }
+      ],
       "group": "React Native",
       "year": "2026",
       "created": "2026-02-11",
@@ -661,7 +911,10 @@
       ],
       "learned": [
         "PanResponder로 이동 거리와 드롭 방향 판별",
-        "Animated 값으로 위치·크기·투명도 연결"
+        "Animated.ValueXY로 드래그 좌표와 카드 위치 연결",
+        "interpolate와 clamp로 드래그 방향에 따른 영역 크기 조절",
+        "spring으로 카드 축소와 원래 위치 복귀 구성",
+        "parallel·sequence로 사라짐·위치 초기화·다음 카드 등장 연결"
       ],
       "repo": "https://github.com/jonghwa3471/langApp",
       "branch": "master",
@@ -695,7 +948,60 @@
       "id": "noovies",
       "name": "noovies",
       "title": "Noovies",
+      "nextDirection": "React Native를 공부하면서 앱 개발에 대한 호기심이 더 커졌고, Flutter로 앱을 만드는 방식도 배워 보고 싶어졌습니다. 다만 당시에는 새로운 기술까지 바로 공부하기에는 부담이 있어 시작하지 못했습니다. 앞으로 여유와 기회가 생긴다면 Flutter도 꼭 공부해 보고 싶습니다.",
+      "images": [
+        {
+          "src": "journey/images/noovies-home.png",
+          "caption": "상영작 슬라이드와 영화 목록",
+          "source": "https://github.com/jonghwa3471/noovies/blob/master/screens/Movies.tsx"
+        },
+        {
+          "src": "journey/images/noovies-tv.png",
+          "caption": "인기·방영·평점별 TV 시리즈",
+          "source": "https://github.com/jonghwa3471/noovies/blob/master/screens/Tv.tsx"
+        },
+        {
+          "src": "journey/images/noovies-detail.png",
+          "caption": "영화 상세 정보와 예고편 목록",
+          "source": "https://github.com/jonghwa3471/noovies/blob/master/screens/Detail.tsx"
+        },
+        {
+          "src": "journey/images/noovies-search.png",
+          "caption": "영화·TV 시리즈 검색 결과",
+          "source": "https://github.com/jonghwa3471/noovies/blob/master/screens/Search.tsx"
+        }
+      ],
       "purpose": "영화·TV·검색 화면을 갖춘 모바일 콘텐츠 앱을 학습했습니다.",
+      "motivation": "웹뿐 아니라 모바일 앱도 개발해 보고 싶다는 생각이 있었습니다. React를 어느 정도 공부한 시점에, 익숙한 React 기술로 앱을 만들 수 있는 React Native가 궁금해졌습니다. Noovies를 만들며 웹에서 배운 React를 모바일에서는 어떻게 활용하는지 경험해 보고자 공부를 시작했습니다.",
+      "reflections": [
+        {
+          "title": "익숙한 React로 모바일 앱 만들어 보기",
+          "text": "컴포넌트와 상태, Hooks를 사용하는 방식이 React와 크게 다르지 않아 생각보다 빠르게 화면을 만들어 볼 수 있다는 점이 좋았습니다. 처음 접하는 모바일 개발이었지만, 웹에서 공부한 내용을 바탕으로 기능을 연결해 볼 수 있었습니다."
+        },
+        {
+          "title": "모바일에 필요한 스크롤 컴포넌트 활용하기",
+          "text": "웹에서 직접 구현하려면 손이 많이 갔을 스크롤 목록을 ScrollView와 FlatList 같은 기본 컴포넌트로 구성할 수 있다는 점이 놀라웠습니다. 가로 스크롤은 horizontal 속성으로 연결하고, 자동으로 넘어가는 상영작 슬라이드는 Swiper 라이브러리를 사용하며 모바일 인터페이스를 만드는 편리함을 느꼈습니다."
+        },
+        {
+          "title": "목록 컴포넌트와 낯선 속성 구분하기",
+          "category": "challenge",
+          "text": "처음에는 ScrollView와 FlatList의 차이를 비교하고, 상황에 맞는 목록 구성을 선택하는 것이 헷갈렸습니다. FlatList의 renderItem, keyExtractor, ListHeaderComponent, onEndReached처럼 처음 보는 속성도 많아, 각 속성이 어떤 역할을 하는지 확인하며 화면에 적용해야 했습니다."
+        },
+        {
+          "title": "탭과 스택을 연결하는 내비게이션 구조 이해하기",
+          "category": "challenge",
+          "text": "가장 헷갈렸던 부분은 내비게이션 설정이었습니다. Root에서 Tabs와 Stack을 나란히 화면으로 등록한 뒤, 탭 안의 목록에서 부모 내비게이터를 통해 Stack의 Detail 화면을 모달로 여는 구조가 처음에는 낯설었습니다. 두 화면을 동시에 렌더링하는 것이 아니라 이동할 경로로 등록한다는 점과, 현재 화면이 어느 내비게이터에 속하는지 이해하는 과정이 필요했습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "탭과 스택을 나누고 상세 화면으로 연결하기",
+          "language": "TSX",
+          "description": "Root.tsx·Tabs.tsx·Stack.tsx의 내비게이션 설정과 VMedia.tsx의 상세 화면 이동 코드입니다. 화면 옵션은 핵심 부분만 발췌했습니다.",
+          "code": "// Root.tsx — 탭 화면과 상세 화면용 스택 등록\n<Nav.Navigator screenOptions={{ headerShown: false }}>\n  <Nav.Screen name=\"Tabs\" component={Tabs} />\n  <Nav.Screen\n    name=\"Stack\"\n    component={Stack}\n    options={{ presentation: \"modal\" }}\n  />\n</Nav.Navigator>\n\n// Tabs.tsx — 하단 탭별 화면 등록\n<Tab.Navigator>\n  <Tab.Screen name=\"영화\" component={Movies} />\n  <Tab.Screen name=\"시리즈\" component={Tv} />\n  <Tab.Screen name=\"검색\" component={Search} />\n</Tab.Navigator>\n\n// Stack.tsx — 상세 화면 등록\n<NativeStack.Navigator>\n  <NativeStack.Screen name=\"Detail\" component={Detail} />\n</NativeStack.Navigator>\n\n// VMedia.tsx — 탭 안에서 부모를 통해 상세 화면 열기\nconst goToDetail = () => {\n  navigation\n    .getParent()\n    ?.navigate(\"Stack\", {\n      screen: \"Detail\",\n      params: { ...fullData },\n    });\n};",
+          "takeaway": "처음에는 Tabs와 Stack을 나란히 등록해 두고, 탭 안에서 부모 내비게이터를 거쳐 Stack의 Detail로 이동하는 방식이 낯설어 기억에 남았습니다. 각 화면을 동시에 표시하는 코드가 아니라 이동할 경로를 구성하는 코드라는 점을 이해하면서, 하단 탭은 유지하고 상세 화면은 모달로 여는 구조를 조금씩 이해할 수 있었습니다."
+        }
+      ],
       "group": "React Native",
       "year": "2026",
       "created": "2026-01-20",
@@ -711,7 +1017,12 @@
       ],
       "learned": [
         "탭·스택 내비게이션과 목록·상세 화면 분리",
-        "TanStack Query와 초기 폰트·이미지 준비"
+        "TanStack Query로 영화·TV·검색·상세 요청 구분",
+        "useInfiniteQuery와 FlatList로 페이지 추가 로딩",
+        "당겨서 새로고침과 관련 쿼리 재요청",
+        "검색 제출 시 영화·TV 검색 실행",
+        "기기 테마에 따른 화면 색상 전환과 초기 폰트·이미지 준비",
+        "상세 화면의 영상 링크와 네이티브 공유 기능 연결"
       ],
       "repo": "https://github.com/jonghwa3471/noovies",
       "branch": "master",
@@ -719,7 +1030,13 @@
       "kind": "학습 프로젝트",
       "sources": [
         "app/index.tsx",
-        "api.ts"
+        "api.ts",
+        "screens/Movies.tsx",
+        "screens/Tv.tsx",
+        "screens/Search.tsx",
+        "screens/Detail.tsx",
+        "navigation/Root.tsx",
+        "navigation/Tabs.tsx"
       ],
       "blogs": [
         {
@@ -758,7 +1075,49 @@
       "name": "WorkHardTravelHardApp",
       "demo": "https://jonghwa3471.github.io/WorkHardTravelHardApp/",
       "title": "Work Hard · Travel Hard",
+      "images": [
+        {
+          "src": "journey/images/worktravel-work.png",
+          "caption": "Work 할 일 목록",
+          "source": "https://github.com/jonghwa3471/WorkHardTravelHardApp/blob/master/App.js"
+        },
+        {
+          "src": "journey/images/worktravel-travel.png",
+          "caption": "Travel 여행 목록",
+          "source": "https://github.com/jonghwa3471/WorkHardTravelHardApp/blob/master/App.js"
+        }
+      ],
       "purpose": "일과 여행 할 일을 나누어 관리하는 앱을 구현했습니다.",
+      "motivation": "React Native의 기초를 익히기 위해 공부한 프로젝트입니다. 일과 여행에서 할 일을 나누어 기록하는 간단한 앱을 만들면서, 기본 컴포넌트로 화면을 구성하고 입력·터치·데이터 저장을 연결하는 흐름을 연습했습니다.",
+      "reflections": [
+        {
+          "title": "React의 상태 관리로 모바일 기능 연결하기",
+          "text": "웹에서 익숙했던 useState와 useEffect를 사용해 입력값과 목록을 관리할 수 있어 좋았습니다. View·Text·TextInput·TouchableOpacity 같은 기본 컴포넌트를 사용하며, 같은 React 개념을 모바일 화면에서는 어떻게 적용하는지 익혔습니다."
+        },
+        {
+          "title": "화면 상태를 기기에 저장하는 데이터로 확장하기",
+          "text": "할 일을 화면에 추가하는 것에서 끝내지 않고 AsyncStorage에 저장해, 앱을 다시 실행했을 때 목록을 불러오는 흐름을 연습했습니다. Work와 Travel 항목을 하나의 데이터에 저장하고 working 값으로 구분해 보여주면서, 데이터를 보관하는 방식과 화면에서 필터링하는 방식을 나누어 생각해 볼 수 있었습니다."
+        },
+        {
+          "title": "모바일 입력과 터치 속성 익히기",
+          "category": "challenge",
+          "text": "클릭 대신 onPress로 터치를 처리하고, TextInput의 onChangeText와 onSubmitEditing으로 입력과 제출을 연결하는 방식이 처음에는 낯설었습니다. 키보드 동작을 정하는 속성과 작은 삭제 버튼의 터치 범위를 넓히는 hitSlop처럼 모바일에서 사용하는 속성을 하나씩 확인하며 적용했습니다."
+        },
+        {
+          "title": "목록 변경과 저장을 함께 처리하기",
+          "category": "challenge",
+          "text": "할 일을 추가하거나 삭제할 때 React 상태를 바꾸는 것과 AsyncStorage에 변경 내용을 저장하는 것을 함께 챙겨야 했습니다. 객체를 문자열로 변환해 비동기로 저장하고, 다시 읽을 때는 JSON으로 복원하는 흐름을 익혔습니다. 삭제 확인창도 웹에서는 confirm, 모바일에서는 Alert.alert로 나누며 플랫폼 차이를 경험했습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "새 할 일을 화면과 기기 저장소에 함께 반영하기",
+          "language": "JavaScript",
+          "description": "App.js에서 할 일을 추가하고 AsyncStorage에 저장하는 부분입니다.",
+          "code": "const saveToDos = async (toSave) => {\n  await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));\n};\n\nconst addToDo = async () => {\n  if (text === \"\") return;\n\n  const newToDos = {\n    ...toDos,\n    [Date.now()]: { text, working },\n  };\n  setToDos(newToDos);\n  await saveToDos(newToDos);\n  setText(\"\");\n};",
+          "takeaway": "React의 상태를 AsyncStorage에 저장해 앱을 다시 실행해도 목록을 불러올 수 있다는 점이 기억에 남았습니다. 다만 객체를 그대로 저장하지 못하고 JSON.stringify로 문자열로 바꾼 뒤, 불러올 때 JSON.parse로 다시 복원해야 하는 과정은 다소 번거롭게 느껴졌습니다. 저장과 조회마다 변환을 챙겨야 한다는 점은 아쉬웠습니다."
+        }
+      ],
       "group": "React Native",
       "year": "2026",
       "created": "2026-01-19",
@@ -771,7 +1130,11 @@
       ],
       "learned": [
         "React Native 입력·목록·이벤트 처리",
-        "AsyncStorage를 이용한 할 일 저장과 복원"
+        "View·Text·StyleSheet로 기본 모바일 레이아웃 구성",
+        "Work·Travel 상태에 따른 목록 필터링",
+        "AsyncStorage를 이용한 할 일 저장과 복원",
+        "객체 복사와 계산된 속성명으로 항목 추가·삭제",
+        "Platform에 따른 삭제 확인창 분기와 hitSlop 터치 영역 조절"
       ],
       "repo": "https://github.com/jonghwa3471/WorkHardTravelHardApp",
       "branch": "master",
@@ -795,7 +1158,7 @@
           "image": "journey/images/blog-preview-3468f1d6abb2.png"
         }
       ],
-      "runtimeNote": "모바일 학습 앱입니다. Expo 또는 네이티브 개발 환경에서 실행하며, 브라우저 실행 화면으로 대체하지 않았습니다.",
+      "runtimeNote": "Expo Go 또는 네이티브 빌드로 모바일에서 실행할 수 있으며, React Native Web과 Expo 웹 빌드를 사용해 GitHub Pages에도 배포했습니다. 상단의 실행 링크에서 웹 버전을 확인할 수 있습니다. 첨부 이미지는 iOS 시뮬레이터에서 캡처한 화면입니다.",
       "course": {
         "id": "rn-basic",
         "title": "React Native 101",
@@ -810,7 +1173,44 @@
       "id": "Learning-React-Native",
       "name": "Learning-React-Native",
       "title": "위치 기반 날씨 앱",
+      "images": [
+        {
+          "src": "journey/images/weather-forecast.png",
+          "caption": "서울 좌표로 조회한 날씨 예보",
+          "source": "https://github.com/jonghwa3471/Learning-React-Native/blob/master/App.js"
+        }
+      ],
       "purpose": "브라우저 밖의 기기 기능과 모바일 레이아웃을 학습했습니다.",
+      "motivation": "React Native의 기초를 익히며, 웹에서 배운 React로 모바일 화면을 만드는 방법을 경험하기 위해 공부했습니다. 현재 위치를 바탕으로 날씨를 보여주는 앱을 만들면서 기본 컴포넌트와 레이아웃뿐 아니라 기기의 위치 기능도 연결해 보았습니다.",
+      "reflections": [
+        {
+          "title": "기기의 위치를 실제 화면 데이터로 연결하기",
+          "text": "Expo Location으로 현재 좌표를 얻고, 그 좌표로 도시명과 날씨 정보를 가져올 수 있다는 점이 흥미로웠습니다. 화면에 정해진 정보를 넣는 것에서 더 나아가, 기기에서 얻은 정보를 API 요청과 React 상태에 연결하며 모바일 앱을 만드는 느낌을 받을 수 있었습니다."
+        },
+        {
+          "title": "기본 컴포넌트로 가로 넘김 화면 구성하기",
+          "text": "ScrollView의 horizontal과 pagingEnabled 속성으로 예보를 옆으로 넘겨 볼 수 있는 화면을 구성했습니다. Dimensions로 기기의 화면 너비를 구해 각 예보 화면에 적용하면서, 기본 컴포넌트의 속성만으로 모바일에 익숙한 동작을 만들 수 있다는 점이 좋았습니다."
+        },
+        {
+          "title": "권한부터 API 응답까지 순서대로 연결하기",
+          "category": "challenge",
+          "text": "위치 권한을 요청한 뒤 좌표를 가져오고, 좌표를 도시명으로 변환한 다음 날씨 API를 호출하는 순서가 처음에는 낯설었습니다. 여러 비동기 작업의 결과가 다음 작업의 입력으로 이어지기 때문에, 각 단계에서 어떤 값을 받는지 확인하며 연결해야 했습니다."
+        },
+        {
+          "title": "낯선 모바일 컴포넌트와 응답 구조 익히기",
+          "category": "challenge",
+          "text": "View·Text·StyleSheet로 레이아웃을 구성하고, ActivityIndicator로 로딩을 표시하는 등 웹과 다른 컴포넌트에 익숙해지는 과정이 필요했습니다. 날씨 응답에서도 온도·날씨 종류·시간이 각각 어디에 있는지 찾아 화면에 연결하고, 날씨 종류에 맞는 아이콘을 매핑하는 연습을 했습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "기기의 좌표를 가져와 도시명으로 바꾸기",
+          "language": "JavaScript",
+          "description": "App.js에서 위치 권한을 요청하고 현재 좌표와 도시명을 가져오는 핵심 부분입니다.",
+          "code": "const { granted } = await Location.requestForegroundPermissionsAsync();\nif (!granted) {\n  setOk(false);\n}\n\nconst {\n  coords: { latitude, longitude },\n} = await Location.getCurrentPositionAsync({ accuracy: 5 });\n\nconst location = await Location.reverseGeocodeAsync({\n  latitude,\n  longitude,\n});\nsetCity(location[0].city);",
+          "takeaway": "위도·경도라는 숫자를 얻는 것에서 끝나지 않고, reverseGeocodeAsync로 사용자가 읽을 수 있는 도시명으로 바꿀 수 있다는 점이 인상 깊었습니다. 기기의 기능과 화면에 표시할 데이터를 연결하며, React로 모바일 앱도 만들 수 있다는 것을 직접 경험한 부분이었습니다."
+        }
+      ],
       "group": "React Native",
       "year": "2026",
       "created": "2026-01-12",
@@ -823,7 +1223,11 @@
       ],
       "learned": [
         "Expo Location 권한 요청과 현재 위치 사용",
-        "React Native 컴포넌트로 날씨 정보 표현"
+        "역지오코딩으로 위도·경도를 도시명으로 변환",
+        "현재 좌표로 날씨 예보 API 요청과 상태 갱신",
+        "ScrollView의 가로 스크롤과 페이지 단위 넘김 구성",
+        "Dimensions로 화면 너비에 맞는 예보 레이아웃 구성",
+        "온도·날씨 아이콘·예보 날짜와 로딩 표시 연결"
       ],
       "repo": "https://github.com/jonghwa3471/Learning-React-Native",
       "branch": "master",
