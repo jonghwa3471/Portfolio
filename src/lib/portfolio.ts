@@ -55,7 +55,7 @@ export interface LearningProject {
 }
 export const projects = raw.journey as LearningProject[];
 export const learningProjects = projects.filter(
-  (project) => !["eokka", "study-scss-layout-masterclass", "css-challenge", "html-challenge", "js-challenge", "nwitter-challenge-firebase"].includes(project.id),
+  (project) => !["eokka", "study-scss-layout-masterclass", "css-challenge", "html-challenge", "js-challenge", "nwitter-challenge-firebase", "react-challenge-toDoList", "study-react-masterclass-without-ts"].includes(project.id),
 );
 export const groups = raw.groups;
 export const projectPath = (id: string) =>
