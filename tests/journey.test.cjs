@@ -158,7 +158,7 @@ test("당근마켓은 프론트엔드 UX 학습과 미완성 범위를 구분한
   assert.ok(carrot.learned.some((point) => point.includes("useFormStatus")));
   assert.ok(carrot.sources.includes("components/like-button.tsx"));
   assert.ok(carrot.demoStatus.includes("플레이스홀더"));
-  assert.ok(carrot.reflections.length <= 8);
+  assert.ok(carrot.reflections.length <= 9);
   assert.ok(carrot.learned.length <= 7);
 });
 

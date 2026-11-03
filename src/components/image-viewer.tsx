@@ -14,6 +14,15 @@ type Slide = { src: string; caption: string };
 type Selection = Slide & { slides?: Slide[]; index?: number };
 const ImageContext = createContext<(image: Selection) => void>(() => {});
 
+function selectGalleryImage(target: HTMLElement, src: string, caption: string): Selection {
+  const gallery = target.closest(".detail-page") || target.closest("[data-image-gallery]");
+  if (!gallery) return { src, caption };
+  const slides = Array.from(gallery.querySelectorAll<HTMLImageElement>("[data-zoom-image] img"))
+    .map((item) => ({ src: item.getAttribute("src") ?? item.src, caption: item.alt }));
+  const index = slides.findIndex((item) => item.src === src);
+  return index < 0 ? { src, caption } : { src, caption, slides, index };
+}
+
 export function ImageViewer({ children }: { children: ReactNode }) {
   const [image, setImage] = useState<Selection | null>(null);
   const dialog = useRef<HTMLDialogElement>(null);
@@ -141,7 +150,8 @@ export function ZoomImage({
         className="project-cover__image-button"
         aria-label={`${alt} 크게 보기`}
         aria-haspopup="dialog"
-        onClick={() => open({ src, caption: alt })}
+        data-zoom-image
+        onClick={(event) => open(selectGalleryImage(event.currentTarget, src, alt))}
       >
         {image}
       </button>
@@ -151,21 +161,12 @@ export function ZoomImage({
       href={src}
       aria-label={`${alt} 크게 보기`}
       aria-haspopup="dialog"
+      data-zoom-image
       onClick={(event) => {
         if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
           return;
         event.preventDefault();
-        const gallery = event.currentTarget.closest("[data-image-gallery]");
-        const slides = gallery
-          ? Array.from(gallery.querySelectorAll<HTMLImageElement>("a img")).map(
-              (item) => ({
-                src: item.getAttribute("src") ?? item.src,
-                caption: item.alt,
-              }),
-            )
-          : undefined;
-        const index = slides?.findIndex((item) => item.src === src);
-        open({ src, caption: alt, slides, index });
+        open(selectGalleryImage(event.currentTarget, src, alt));
       }}
     >
       {image}
@@ -187,7 +188,8 @@ export function LearningImage({
       className="learning-image"
       aria-label={`${caption} 크게 보기`}
       aria-haspopup="dialog"
-      onClick={() => open({ src, caption })}
+      data-zoom-image
+      onClick={(event) => open(selectGalleryImage(event.currentTarget, src, caption))}
     >
       <img src={src} alt={caption} loading="lazy" />
       <span aria-hidden="true">크게 보기 ↗</span>
