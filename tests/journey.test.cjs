@@ -95,7 +95,7 @@ test("학습 기록은 기본 연도별로 9개를 표시하며 검색 함수가
   assert.match(html, /aria-pressed="true">연도별/);
   assert.match(html, /년 학습/);
   assert.equal((html.match(/class="journey-card"/g) || []).length, 9);
-  assert.equal(searchProjects(journey, "").length, 73);
+  assert.equal(searchProjects(journey, "").length, 71);
   assert.equal(searchProjects(journey, "FAISS").length, 1);
   assert.equal(searchProjects(journey, "no-such-project-12345").length, 0);
   const results = searchProjects(journey, "SCSS");
@@ -125,8 +125,6 @@ test("커리큘럼 연결은 69개 학습 기록에만 적용하고 독립 학�
   }
   for (const id of [
     "coding-test",
-    "study-java-for-oop",
-    "challenge-bookclub-nomad",
     "personal-project-AvanteN",
     "eokka",
   ]) {
@@ -187,8 +185,8 @@ test("카카오톡은 로그인 캡처와 저장소 preview 3개를 모두 표�
     );
 });
 
-test("74개 공개 저장소가 고유한 ID·분야·학습 내용으로 연결된다", () => {
-  assert.equal(journey.length, 74);
+test("72개 공개 저장소가 고유한 ID·분야·학습 내용으로 연결된다", () => {
+  assert.equal(journey.length, 72);
   assert.ok(!journey.some((item) => item.name === "capstone2"));
   assert.equal(new Set(journey.map((item) => item.id)).size, journey.length);
   assert.equal(new Set(journey.map((item) => item.name)).size, journey.length);

@@ -254,7 +254,7 @@ export default function JourneyArchive() {
                     <strong>{key}</strong>
                     <small>
                       {groups.find((group) => group.id === key)?.description} ·
-                      펼치면 연도별로 보기
+                      펼쳐서 연도별로 보기
                     </small>
                   </span>
                   <span className="journey-group-count">

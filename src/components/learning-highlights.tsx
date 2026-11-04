@@ -22,6 +22,14 @@ export function LearningPath() {
           </a>
         </li>
       ))}
+      <li>
+        <div className="learning-path-current">
+          <span className="learning-path-step">0{learning.stages.length + 1} · 현재</span>
+          <h3>AX 학습</h3>
+          <strong>AI 전환</strong>
+          <p>AI를 체계적으로 활용해 개발 업무의 효율을 높이는 방법을 배우고 있습니다.</p>
+        </div>
+      </li>
     </ol>
   );
 }

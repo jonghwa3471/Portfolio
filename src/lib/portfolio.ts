@@ -45,6 +45,12 @@ export interface LearningProject {
   runtimeNote?: string;
   detail?: string;
   course?: { title: string; url: string };
+  practiceProblems?: {
+    title: string;
+    description: string;
+    language: "JavaScript" | "Python";
+    code: string;
+  }[];
   codeHighlights?: {
     title: string;
     description: string;

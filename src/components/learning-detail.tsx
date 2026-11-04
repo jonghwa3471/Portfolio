@@ -1,4 +1,7 @@
 import Link from "next/link";
+import hljs from "highlight.js/lib/core";
+import javascript from "highlight.js/lib/languages/javascript";
+import python from "highlight.js/lib/languages/python";
 import {
   assetPath,
   learningProjects,
@@ -12,6 +15,9 @@ import { ReadingProgress } from "./reading-progress";
 import { DetailHeaderBackground } from "./detail-header-background";
 import { LearningBackLink } from "./learning-back-link";
 import type { ReactNode } from "react";
+
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("python", python);
 
 const formatDate = (value: string) => value.replaceAll("-", ".");
 const challenges = new Set([
@@ -181,6 +187,30 @@ export function LearningDetail({ item }: { item: LearningProject }) {
                     </div>
                   ) : null;
                 })}
+              </div>
+            </Block>
+          )}
+          {!!item.practiceProblems?.length && (
+            <Block title="어려웠던 문제">
+              <div className="learning-code-highlights">
+                {item.practiceProblems.map((problem) => (
+                  <article key={problem.title}>
+                    <h3>{problem.title}</h3>
+                    <p>{problem.description}</p>
+                    <details className="learning-evidence learning-practice-solution">
+                      <summary>풀이보기</summary>
+                      <pre>
+                        <code
+                          dangerouslySetInnerHTML={{
+                            __html: hljs.highlight(problem.code, {
+                              language: problem.language.toLowerCase(),
+                            }).value,
+                          }}
+                        />
+                      </pre>
+                    </details>
+                  </article>
+                ))}
               </div>
             </Block>
           )}

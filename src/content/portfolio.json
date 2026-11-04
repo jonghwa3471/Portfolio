@@ -38,8 +38,8 @@
       "description": "인증·데이터 모델·API와 실시간 통신"
     },
     {
-      "id": "CS · 기초",
-      "description": "객체지향·알고리즘과 기초 학습 기록"
+      "id": "코딩 테스트",
+      "description": "알고리즘 문제 풀이와 구현 연습"
     }
   ],
   "journey": [
@@ -515,7 +515,35 @@
       "id": "SQL-masterclass",
       "name": "SQL-masterclass",
       "title": "데이터베이스 실습",
-      "purpose": "SQL·ORM·문서형 DB의 접근 방식을 코드로 비교했습니다.",
+      "purpose": "SQLite에서 사용자와 댓글의 관계를 정의하고, MongoDB에서는 영화 문서를 추가하고 조회하며 데이터 모델링을 실습했습니다.",
+      "motivation": "SQL 쿼리와 Redis 명령을 직접 작성하고 실행 결과를 확인하면서, 데이터를 조회하고 저장하는 작업에 익숙해지고 싶었습니다.",
+      "reflections": [
+        {
+          "title": "MySQL과 PostgreSQL을 비교하며 실습하기",
+          "text": "MySQL과 PostgreSQL을 각각 다뤄 보면서 트랜잭션처럼 공통으로 쓰는 개념을 익히고, 데이터베이스마다 사용 방식이 달라지는 부분도 직접 비교해 볼 수 있어서 좋았습니다."
+        },
+        {
+          "title": "서브쿼리의 결과를 바깥 쿼리에서 활용하기",
+          "category": "challenge",
+          "text": "바깥 쿼리의 조건에 쓸 값 하나를 얻으려고 서브쿼리에 집계 함수를 썼는데, GROUP BY를 함께 사용하니 그룹마다 결과가 한 행씩 나왔습니다. 집계 함수를 쓰면 결과가 하나일 거라고 생각했던 터라, 여러 행을 반환하는 쿼리와 비교에 쓸 값 하나를 만드는 쿼리를 구분하는 게 헷갈렸습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "서브쿼리로 평균 트랙 에너지가 가장 높은 아티스트 찾기",
+          "language": "SQL",
+          "description": "TablePlus에 남아 있던 Spotify 데이터베이스 실습의 13번 쿼리입니다. 아티스트별 평균 트랙 에너지를 구한 뒤, 그중 최댓값과 같은 아티스트를 조회했습니다.",
+          "code": "SELECT\n  artist_energy.artist_name,\n  artist_energy.avg_energy\nFROM\n  (\n    SELECT\n      artists.id AS artist_id,\n      artists.name AS artist_name,\n      AVG(audio_features.energy) AS avg_energy\n    FROM\n      artists\n      JOIN r_track_artist ON artists.id = r_track_artist.artist_id\n      JOIN tracks ON r_track_artist.track_id = tracks.id\n      JOIN audio_features ON tracks.audio_feature_id = audio_features.id\n    GROUP BY\n      artists.id,\n      artists.name\n  ) AS artist_energy\nWHERE\n  artist_energy.avg_energy = (\n    SELECT\n      MAX(avg_energy)\n    FROM\n      (\n        SELECT\n          AVG(audio_features.energy) AS avg_energy\n        FROM\n          artists\n          JOIN r_track_artist ON artists.id = r_track_artist.artist_id\n          JOIN tracks ON r_track_artist.track_id = tracks.id\n          JOIN audio_features ON tracks.audio_feature_id = audio_features.id\n        GROUP BY\n          artists.id\n      )\n  );",
+          "takeaway": "아티스트별로 집계한 평균은 여러 행이지만, 그 결과에 MAX를 한 번 더 적용하면 바깥 쿼리에서 비교할 기준값 하나를 얻을 수 있다는 점이 인상 깊었습니다."
+        }
+      ],
+      "images": [
+        {
+          "src": "journey/images/sql-masterclass-tableplus.png",
+          "caption": "TablePlus에서 직접 캡처한 Spotify 서브쿼리와 실행 결과",
+          "source": "https://github.com/jonghwa3471/SQL-masterclass"
+        }
+      ],
       "group": "데이터 · 백엔드",
       "year": "2026",
       "created": "2026-04-09",
@@ -526,12 +554,14 @@
         "SQL",
         "SQLite",
         "Drizzle",
+        "Redis",
         "MongoDB",
         "Python"
       ],
       "learned": [
-        "Drizzle 스키마와 SQLite 마이그레이션",
-        "Python의 MongoDB 연결과 문서 추가"
+        "Drizzle 스키마의 외래 키와 SQLite 마이그레이션",
+        "LEFT JOIN으로 댓글과 작성자 조회",
+        "PyMongo로 영화 문서 추가, Mongoose로 스키마 정의와 평점 필터 조회"
       ],
       "repo": "https://github.com/jonghwa3471/SQL-masterclass",
       "branch": "master",
@@ -577,7 +607,28 @@
       "name": "dynamic-scrapper",
       "demo": "https://jonghwa3471.github.io/dynamic-scrapper/",
       "title": "채용 공고 스크래퍼",
-      "purpose": "여러 사이트의 채용 정보를 키워드별로 모아 보여줍니다.",
+      "purpose": "여러 채용 사이트에서 키워드별 공고를 수집하고, Flask로 검색 결과를 표에 보여주는 프로젝트입니다.",
+      "motivation": "Python으로 웹에서 필요한 정보를 모으고, 수집 결과를 직접 검색할 수 있는 화면으로 만들어 보고 싶었습니다. Playwright와 BeautifulSoup으로 공고를 수집하고, Flask에서 검색 키워드에 맞는 목록을 보여주는 흐름을 실습했습니다.",
+      "reflections": [
+        {
+          "title": "여러 사이트의 공고를 한 화면에 모으기",
+          "text": "각 사이트에서 가져온 공고를 포지션·회사명·상세 정보·지원 링크라는 공통 형식으로 맞추니, Flask 템플릿 하나로 여러 출처의 결과를 보여줄 수 있다는 점이 좋았습니다."
+        },
+        {
+          "title": "사이트마다 다른 HTML에서 필요한 정보 찾기",
+          "category": "challenge",
+          "text": "공고 목록과 회사명이 들어 있는 요소가 사이트마다 달라, 각각의 HTML을 살펴보고 선택자를 따로 맞춰야 했습니다. Playwright로 페이지를 열고 스크롤한 뒤, BeautifulSoup으로 가져온 HTML에서 필요한 필드를 골라 같은 형태로 정리했습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "검색 키워드별 수집 결과 재사용하기",
+          "language": "Python",
+          "description": "main.py에서 지원하는 키워드를 확인하고, 수집 결과를 메모리에 저장해 결과 화면에 전달하는 라우트입니다.",
+          "code": "@app.route(\"/search/<keyword>/\")\ndef search(keyword):\n    keyword = keyword.lower()\n\n    if keyword not in KEYWORDS:\n        return redirect(\"/\")\n\n    if keyword not in db:\n        db[keyword] = extract_jobs_by_keyword(keyword)\n\n    return render_template(\"search.html\", keyword=keyword, jobs=db[keyword])",
+          "takeaway": "키워드를 딕셔너리의 키로 사용해 같은 검색이 들어왔을 때 여러 사이트를 다시 방문하지 않아도 된다는 점이 인상 깊었습니다. Frozen-Flask로 키워드별 결과를 정적 HTML로 내보내 GitHub Pages에서도 저장된 공고를 조회할 수 있게 했습니다."
+        }
+      ],
       "group": "Python",
       "year": "2026",
       "created": "2026-03-13",
@@ -590,8 +641,9 @@
         "BeautifulSoup"
       ],
       "learned": [
-        "Flask 라우트와 템플릿 렌더링",
-        "키워드별 결과 재사용과 정적 HTML 내보내기"
+        "Playwright로 페이지를 불러오고 BeautifulSoup으로 공고 정보 추출",
+        "Flask 라우트와 템플릿으로 키워드별 검색 결과 표시",
+        "수집 결과의 메모리 재사용과 Frozen-Flask 정적 내보내기"
       ],
       "repo": "https://github.com/jonghwa3471/dynamic-scrapper",
       "branch": "master",
@@ -599,7 +651,8 @@
       "kind": "학습 프로젝트",
       "sources": [
         "main.py",
-        "build/index.html"
+        "extractor.py",
+        "templates/search.html"
       ],
       "blogs": [
         {
@@ -623,9 +676,14 @@
       ],
       "images": [
         {
-          "src": "./journey/images/dynamic-scrapper.jpg",
-          "caption": "채용 공고 스크래퍼 화면",
-          "source": "https://github.com/jonghwa3471/dynamic-scrapper/blob/master/screenshot.png"
+          "src": "journey/images/dynamic-scrapper-results.png",
+          "caption": "Python 채용 공고 검색 결과 · 저장된 수집 데이터",
+          "source": "https://jonghwa3471.github.io/dynamic-scrapper/search/python/"
+        },
+        {
+          "src": "journey/images/dynamic-scrapper-search.png",
+          "caption": "검색 키워드 입력 화면",
+          "source": "https://jonghwa3471.github.io/dynamic-scrapper/"
         }
       ],
       "course": {
@@ -1465,7 +1523,35 @@
       "id": "Learning-GraphQL",
       "name": "Learning-GraphQL",
       "title": "GraphQL 서버 실습",
-      "purpose": "REST 데이터와 사용자·게시물을 GraphQL 스키마로 표현했습니다.",
+      "purpose": "Apollo Server로 게시물·작성자를 조회하고 게시물을 추가·삭제하는 GraphQL API를 만들었습니다. 외부 영화 REST API도 GraphQL로 조회할 수 있게 연결했습니다.",
+      "motivation": "GraphQL 영화 앱에서 필요한 필드를 골라 요청해 본 뒤, 서버에서는 어떤 타입을 정의하고 요청한 필드에 데이터를 어떻게 채우는지 알아보고 싶었습니다. 게시물과 사용자 데이터를 다루는 작은 API를 만들며 스키마와 리졸버의 역할을 실습했습니다.",
+      "reflections": [
+        {
+          "title": "여러 출처의 데이터를 한 스키마에서 조회하기",
+          "text": "게시물과 사용자는 서버의 배열에서 읽고, 영화 정보는 외부 REST API에서 받아 왔습니다. 출처가 달라도 클라이언트에서는 같은 GraphQL 스키마를 보고 필요한 필드를 골라 요청할 수 있다는 점이 좋았습니다."
+        },
+        {
+          "title": "중첩 필드에 어떤 값이 전달되는지 이해하기",
+          "category": "challenge",
+          "text": "게시물 목록을 반환하는 Query 리졸버와 각 게시물의 작성자를 채우는 필드 리졸버가 어떻게 이어지는지 처음에는 헷갈렸습니다. Tweet.author가 부모 게시물의 userId로 사용자를 찾고, User.fullName이 그 사용자의 이름을 조합하는 흐름을 쿼리 결과와 비교하며 익혔습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "게시물의 작성자와 이름을 필드 리졸버로 연결하기",
+          "language": "JavaScript",
+          "description": "server.js의 리졸버 일부입니다. author는 게시물의 userId로 사용자를 찾고, fullName은 찾은 사용자의 이름을 조합합니다.",
+          "code": "User: {\n  fullName({ firstName, lastName }) {\n    return `${firstName} ${lastName}`;\n  },\n},\nTweet: {\n  author({ userId }) {\n    const user = users.find((user) => user.id === userId);\n    return user;\n  },\n},",
+          "takeaway": "게시물에 작성자 객체나 이름을 따로 저장하지 않아도, 요청한 필드에 맞춰 관계를 연결하고 값을 만들어 반환할 수 있다는 점이 인상 깊었습니다."
+        }
+      ],
+      "images": [
+        {
+          "src": "journey/images/graphql-server-tweets.png",
+          "caption": "작성자 이름을 포함한 게시물 쿼리와 로컬 Apollo Server 응답",
+          "source": "https://github.com/jonghwa3471/Learning-GraphQL"
+        }
+      ],
       "group": "데이터 · 백엔드",
       "year": "2026",
       "created": "2026-01-04",
@@ -1478,7 +1564,8 @@
       ],
       "learned": [
         "Query·Mutation·Resolver와 타입 정의",
-        "필드 리졸버로 작성자 관계 연결"
+        "필드 리졸버로 작성자 연결과 이름 조합",
+        "외부 영화 REST API를 GraphQL 조회로 연결"
       ],
       "repo": "https://github.com/jonghwa3471/Learning-GraphQL",
       "branch": "master",
@@ -1510,7 +1597,40 @@
       "id": "cloudflare-workers",
       "name": "cloudflare-workers",
       "title": "Workers 실시간 채팅",
-      "purpose": "서버리스 런타임에서 WebSocket 채팅을 구현했습니다.",
+      "purpose": "Cloudflare Workers와 Durable Object로 여러 브라우저가 같은 채팅방에서 메시지를 주고받는 실시간 채팅을 구현했습니다.",
+      "motivation": "브라우저 두 곳에서 같은 채팅방에 접속해 메시지를 주고받는 기능을 직접 만들어 보고 싶었습니다. WebSocket 연결을 열고, Cloudflare Workers에서 여러 연결의 상태를 한곳에 모아 관리하는 방식을 실습했습니다.",
+      "reflections": [
+        {
+          "title": "같은 채팅방에서 메시지를 바로 받아보기",
+          "text": "여러 브라우저의 연결을 같은 Durable Object에 모아 두니, 한쪽에서 메시지를 보냈을 때 다른 쪽에서도 바로 확인할 수 있다는 점이 좋았습니다. 새로 접속한 브라우저에도 메모리에 남아 있는 이전 메시지를 보낼 수 있었습니다."
+        },
+        {
+          "title": "WebSocketPair의 두 연결 구분하기",
+          "category": "challenge",
+          "text": "WebSocketPair에서 어느 쪽을 브라우저에 돌려주고 어느 쪽을 서버가 관리하는지 처음에는 헷갈렸습니다. 응답으로 반환하는 소켓과 서버에서 accept한 뒤 메시지 이벤트를 받는 소켓의 역할을 나눠 보며 이해했습니다."
+        },
+        {
+          "title": "연결 종료와 메시지 보관",
+          "category": "challenge",
+          "text": "연결과 메시지를 배열에 담는 방식으로 기본 동작을 구현했습니다. 연결이 닫힐 때 소켓을 목록에서 정리하고, 채팅방 인스턴스가 다시 시작돼도 이전 메시지를 읽을 수 있도록 저장하는 과제가 남았습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "받은 메시지를 같은 방의 모든 연결에 보내기",
+          "language": "TypeScript",
+          "description": "src/index.ts에서 새 연결에 이전 메시지를 보내고, 새 메시지가 오면 연결된 브라우저 모두에게 전달하는 부분입니다.",
+          "code": "this.messages.forEach((message) => webSocket.send(message));\nwebSocket.addEventListener('message', (event) => {\n  this.messages.push(event.data.toString());\n  this.users.forEach((user) => user.send(event.data));\n});",
+          "takeaway": "메시지가 도착하는 순간에 서버가 여러 브라우저에 같은 내용을 보낼 수 있다는 점이 인상 깊었습니다. 브라우저 두 탭을 열어 보낸 메시지가 다른 탭에도 바로 나타나는 것을 확인했습니다."
+        }
+      ],
+      "images": [
+        {
+          "src": "journey/images/workers-chat.png",
+          "caption": "로컬 Workers에서 두 브라우저 탭이 주고받은 메시지",
+          "source": "https://github.com/jonghwa3471/cloudflare-workers/blob/master/src/home.html"
+        }
+      ],
       "group": "데이터 · 백엔드",
       "year": "2025",
       "created": "2025-12-24",
@@ -1808,7 +1928,55 @@
       "name": "coding-test",
       "title": "알고리즘 문제 풀이",
       "purpose": "백준·프로그래머스·SWEA 풀이를 저장소에 기록했습니다.",
-      "group": "CS · 기초",
+      "motivation": "코딩 테스트에 대비하기 위해 공부를 시작했습니다. 문제의 조건을 파악하고 해결 방법을 코드로 옮기는 연습을 하면서, 실제로 코드를 작성할 때도 적용할 수 있는 문제 해결력을 키우고 싶었습니다.",
+      "reflections": [
+        {
+          "title": "풀이 순서를 정하고 하나씩 해결하는 재미",
+          "text": "무엇을 해결해야 하는지 정리하고, 풀이 순서를 세워 한 단계씩 풀어 가는 과정이 재밌습니다. 특히 어려운 문제를 두세 시간 고민한 끝에 풀었을 때의 성취감이 기억에 남습니다."
+        },
+        {
+          "title": "노션에서 첫 풀이와 다시 풀었을 때의 결과 비교하기",
+          "text": "문제마다 풀이 코드와 핵심 아이디어를 노션에 정리하고, 시도할 때마다 동그라미 하나를 남겼습니다. 🟢 초록은 쉽게 푼 문제, 🟠 주황은 시간이 걸렸지만 푼 문제, 🔴 빨강은 어려워서 풀지 못한 문제입니다. 동그라미 두 개는 두 번 시도했다는 뜻입니다. 예를 들어 파스칼의 삼각형에 붙은 🔴🟢는 처음엔 풀지 못했지만 다시 풀었을 때는 쉽게 해결했다는 기록입니다."
+        },
+        {
+          "title": "한 번에 풀려다 풀이가 꼬였던 경험",
+          "category": "challenge",
+          "text": "한 번에 풀 수 있을 것 같은 문제는 바로 코드를 작성하곤 했는데, 막상 구현하다 보면 풀이가 꼬여 앞부분부터 다시 살펴봐야 했습니다. 먼저 문제를 작은 단계로 나누고 하나씩 확인하며 풀면 전체 시간을 오히려 아낄 수 있다는 걸 느꼈습니다."
+        }
+      ],
+      "practiceProblems": [
+        {
+          "title": "SWEA D4 · 1249 보급로",
+          "description": "이동 횟수가 가장 적은 길이 아니라, 칸마다 다른 복구 비용의 합이 가장 작은 경로를 찾아야 하는 문제입니다.",
+          "language": "Python",
+          "code": "import heapq\n\nT = int(input())\n\nfor t in range(T):\n    N = int(input())\n    arr = [list(map(int, input())) for _ in range(N)]\n    dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]\n    inf = float(\"inf\")\n    dist = [[inf] * N for _ in range(N)]\n    dist[0][0] = 0\n    pq = [(0, 0, 0)]\n    while pq:\n        cur_cost, r, c = heapq.heappop(pq)\n        if cur_cost > dist[r][c]:\n            continue\n        if r == N - 1 and c == N - 1:\n            break\n        for dr, dc in dirs:\n            nr, nc = r + dr, c + dc\n            if 0 <= nr < N and 0 <= nc < N:\n                next_cost = cur_cost + arr[nr][nc]\n                if next_cost < dist[nr][nc]:\n                    dist[nr][nc] = next_cost\n                    heapq.heappush(pq, (next_cost, nr, nc))\n    result = dist[N - 1][N - 1]\n    print(f\"#{t + 1} {result}\")"
+        },
+        {
+          "title": "백준 실버 III · 15649 N과 M (1)",
+          "description": "숫자를 중복 없이 선택해 수열을 만들고, 다음 수열을 탐색하기 전에 이전 선택을 되돌려야 하는 백트래킹 문제입니다.",
+          "language": "Python",
+          "code": "N, M = map(int, input().split())\n\narr = [False] * (N + 1)\nresult = []\n\ndef dfs():\n    if len(result) == M:\n        print(*result)\n    for i in range(1, N + 1):\n        if not arr[i]:\n            arr[i] = True\n            result.append(i)\n            dfs()\n            result.pop()\n            arr[i] = False\ndfs()"
+        },
+        {
+          "title": "프로그래머스 Lv. 3 · 81303 표 편집",
+          "description": "행을 삭제하거나 복구한 뒤에도 현재 선택 위치와 행의 순서를 유지하면서 많은 명령을 처리해야 하는 문제입니다.",
+          "language": "JavaScript",
+          "code": "function solution(n , k, cmd) {\n    const deleted = [];\n    const up = [...new Array(n + 2)].map((_, i) => i - 1);\n    const down = [...new Array(n + 1)].map((_, i) => i + 1);\n    \n    k += 1;\n    \n    for (const item of cmd) {\n        if (item[0] === \"C\") {\n            deleted.push(k)\n            down[up[k]] = down[k];\n            up[down[k]] = up[k];\n            k = n < down[k] ? up[k] : down[k];\n        } else if (item[0] === \"Z\") {\n            const restore = deleted.pop();\n            down[up[restore]] = restore;\n            up[down[restore]] = restore;\n        } else {\n            const [move, times] = item.split(\" \");\n            if (move === \"D\") {\n              for (let i = 0; i < times; i++) {\n                  k = down[k];\n              }  \n            } else {\n                for (let i = 0; i < times; i++) {\n                    k = up[k];\n                }\n            }\n        }\n    }\n    const answer = new Array(n).fill(\"O\");\n    for (const i of deleted) {\n        answer[i - 1] = \"X\";\n    }\n    return answer.join(\"\");\n}"
+        }
+      ],
+      "images": [
+        {
+          "src": "journey/images/coding-test-notion-list.png",
+          "caption": "노션 문제 목록 · 동그라미로 기록한 시도별 풀이 결과",
+          "source": "https://www.notion.so/2a3068f749d38080a77de252220a9240"
+        },
+        {
+          "src": "journey/images/coding-test-notion-pascal.png",
+          "caption": "SWEA 2005 파스칼의 삼각형 · Python 풀이와 반복문 조건 정리",
+          "source": "https://www.notion.so/2a3068f749d380779937fe5b7cc0e018"
+        }
+      ],
+      "group": "코딩 테스트",
       "year": "2025",
       "created": "2025-01-06",
       "updated": "2025-11-21",
@@ -2021,34 +2189,6 @@
           "User Profile"
         ]
       }
-    },
-    {
-      "id": "study-java-for-oop",
-      "name": "study-java-for-oop",
-      "title": "Java 객체지향 기초",
-      "purpose": "클래스와 상속을 작은 Java 예제로 연습했습니다.",
-      "group": "CS · 기초",
-      "year": "2025",
-      "created": "2025-03-14",
-      "updated": "2025-05-23",
-      "period": "2025.03.14",
-      "stack": [
-        "Java",
-        "객체지향"
-      ],
-      "learned": [
-        "클래스와 객체 생성",
-        "상속을 이용한 기본 클래스 확장"
-      ],
-      "repo": "https://github.com/jonghwa3471/study-java-for-oop",
-      "branch": "master",
-      "commits": 13,
-      "kind": "학습 프로젝트",
-      "sources": [
-        "src/ex1/App.java",
-        "src/ex1/Ramyon.java"
-      ],
-      "blogs": []
     },
     {
       "id": "wetube",
@@ -3154,7 +3294,35 @@
       "id": "study-js-zoom-clone",
       "name": "study-js-zoom-clone",
       "title": "Zoom · 실시간 통신",
-      "purpose": "HTTP 서버와 Socket.IO 기반 양방향 통신을 학습했습니다.",
+      "purpose": "Socket.IO로 같은 방의 브라우저끼리 연결 정보를 교환하고, WebRTC로 영상과 음성을 주고받는 통화 기능을 실습했습니다.",
+      "motivation": "실시간 영상이나 음성 통화, 채팅이 어떻게 동작하는지 찾아볼 때마다 소켓과 WebRTC라는 용어를 자주 접했습니다. 두 기술이 실제로 어디에 쓰이는지 궁금해 브라우저에서 영상 통화 기능을 직접 만들어 보며 공부하기 시작했습니다.",
+      "reflections": [
+        {
+          "title": "같은 방에 연결 정보를 보내고 상대 영상 띄우기",
+          "text": "Socket.IO의 룸을 사용하니 새 사용자의 입장과 연결에 필요한 정보를 같은 방의 상대에게 보낼 수 있었습니다. 연결이 맺어진 뒤 상대 영상이 브라우저에 나타나면서, 방 입장 이벤트가 실제 영상 통화로 이어지는 과정을 확인할 수 있어 좋았습니다."
+        },
+        {
+          "title": "offer·answer·ICE가 오가는 흐름 따라가기",
+          "category": "challenge",
+          "text": "먼저 입장한 브라우저가 offer를 만들고, 나중에 입장한 브라우저가 answer를 돌려주는 흐름이 처음에는 헷갈렸습니다. 각 브라우저에서 자신의 연결 정보와 상대의 연결 정보를 어디에 설정하는지, ICE 후보는 어떤 이벤트로 전달하는지 나눠 보며 익혔습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "상대 브라우저의 영상 스트림을 화면에 연결하기",
+          "language": "JavaScript",
+          "description": "src/public/js/app.js에서 WebRTC 연결의 track 이벤트를 받고 상대 스트림을 video 요소에 연결하는 부분입니다. 관련 코드만 발췌했습니다.",
+          "code": "myPeerConnection.addEventListener(\"track\", handleTrack);\nmyStream.getTracks().forEach((track) => {\n  myPeerConnection.addTrack(track, myStream);\n});\n\nfunction handleTrack(event) {\n  const peerFace = document.getElementById(\"peerFace\");\n  peerFace.srcObject = event.streams[0];\n}",
+          "takeaway": "카메라와 마이크에서 가져온 트랙을 연결에 추가한 뒤, 상대 쪽에서는 받은 스트림을 video 요소에 연결하면 영상이 표시된다는 점이 인상 깊었습니다."
+        }
+      ],
+      "images": [
+        {
+          "src": "journey/images/zoom-webrtc-call.png",
+          "caption": "같은 방에 접속한 두 브라우저의 영상 통화 · 테스트 영상",
+          "source": "https://github.com/jonghwa3471/study-js-zoom-clone/blob/master/src/public/js/app.js"
+        }
+      ],
       "group": "데이터 · 백엔드",
       "year": "2024",
       "created": "2024-09-20",
@@ -3165,7 +3333,7 @@
         "JavaScript",
         "Express",
         "Socket.IO",
-        "WebSocket"
+        "WebRTC"
       ],
       "learned": [
         "Express와 HTTP 서버의 역할 분리",
@@ -3177,7 +3345,8 @@
       "commits": 34,
       "kind": "학습 프로젝트",
       "sources": [
-        "src/server.js"
+        "src/server.js",
+        "src/public/js/app.js"
       ],
       "blogs": [],
       "course": {
@@ -3837,7 +4006,7 @@
       "id": "study-js-youtube-clone",
       "name": "study-js-youtube-clone",
       "title": "YouTube · 기초",
-      "purpose": "Node.js로 인증·영상·댓글이 연결되는 웹 구조를 학습했습니다.",
+      "purpose": "YouTube 기능을 따라 만들며 브라우저에서 카메라 영상을 미리 보고, 녹화본을 변환해 썸네일을 추출하는 흐름을 실습했습니다.",
       "group": "데이터 · 백엔드",
       "year": "2023",
       "created": "2023-06-22",
@@ -3848,11 +4017,14 @@
         "JavaScript",
         "Express",
         "MongoDB",
-        "SCSS"
+        "SCSS",
+        "FFmpeg.wasm"
       ],
       "learned": [
         "Express 라우트·컨트롤러·MongoDB 모델",
-        "세션 로그인과 콘텐츠 접근 권한 검사"
+        "세션 로그인과 콘텐츠 접근 권한 검사",
+        "getUserMedia로 카메라 미리보기, MediaRecorder로 녹화",
+        "FFmpeg.wasm으로 MP4 변환 및 썸네일 추출"
       ],
       "repo": "https://github.com/jonghwa3471/study-js-youtube-clone",
       "branch": "master",
@@ -3879,7 +4051,35 @@
           "Models·Authentication",
           "Video Player·Deployment"
         ]
-      }
+      },
+      "motivation": "YouTube처럼 영상을 다루는 웹 서비스를 만들어 보고 싶어 강의를 들으며 기능을 하나씩 따라 구현했습니다. 카메라 미리보기와 녹화, 썸네일 추출을 차근차근 익혔고, 이후에는 이때 배운 내용을 바탕으로 YouTube 학습 프로젝트를 직접 만들어 봤습니다.",
+      "reflections": [
+        {
+          "title": "카메라 스트림을 화면에 띄우고 녹화하기",
+          "text": "getUserMedia로 가져온 카메라 스트림을 video 요소에 연결하니 촬영 중인 화면을 바로 볼 수 있었습니다. 같은 스트림을 MediaRecorder에 전달해 녹화하고, 녹화가 끝난 뒤에는 미리보기 화면을 녹화본 재생으로 전환했습니다."
+        },
+        {
+          "title": "녹화 데이터가 영상 파일과 이미지가 되는 과정",
+          "category": "challenge",
+          "text": "녹화가 끝나면 받은 데이터를 FFmpeg에서 읽을 수 있는 파일로 준비하고, 변환된 결과를 다시 브라우저에서 다운로드할 수 있게 만들어야 했습니다. 녹화본을 MP4로 변환하는 명령과 특정 시점에서 썸네일 한 장을 추출하는 명령을 구분하며 흐름을 익혔습니다."
+        }
+      ],
+      "codeHighlights": [
+        {
+          "title": "녹화 영상의 1초 지점에서 썸네일 추출하기",
+          "language": "JavaScript",
+          "description": "같은 YouTube 학습 프로젝트의 후속 저장소(wetube-reloaded)에 남은 recorder.js 코드입니다. FFmpeg에 입력 파일을 준비한 뒤 1초 지점에서 프레임 한 장을 추출합니다.",
+          "code": "await ffmpeg.writeFile(files.input, await fetchFile(videoFile));\n\nawait ffmpeg.exec([\n  \"-i\",\n  files.input,\n  \"-ss\",\n  \"00:00:01\",\n  \"-frames:v\",\n  \"1\",\n  files.thumb,\n]);\n\nconst thumbFile = await ffmpeg.readFile(files.thumb);",
+          "takeaway": "영상에서 원하는 시간과 프레임 수를 지정하는 것만으로 브라우저에서 썸네일 이미지를 만들 수 있다는 점이 인상 깊었습니다."
+        }
+      ],
+      "images": [
+        {
+          "src": "journey/images/wetube-recording-preview.png",
+          "caption": "업로드 화면의 녹화본 미리보기 · 브라우저 테스트 영상",
+          "source": "https://github.com/jonghwa3471/wetube-reloaded/blob/master/src/client/js/recorder.js"
+        }
+      ]
     },
     {
       "id": "study-react-router-v6",
@@ -4563,32 +4763,6 @@
       }
     },
     {
-      "id": "challenge-bookclub-nomad",
-      "name": "challenge-bookclub-nomad",
-      "title": "노마드 북클럽 기록",
-      "purpose": "북클럽 챌린지용 HTML 문서를 저장한 학습 기록입니다.",
-      "group": "CS · 기초",
-      "year": "2024",
-      "created": "2024-02-19",
-      "updated": "2024-02-19",
-      "period": "2024.02.19",
-      "stack": [
-        "HTML",
-        "CSS"
-      ],
-      "learned": [
-        "HTML 문서 구성과 콘텐츠 마크업"
-      ],
-      "repo": "https://github.com/jonghwa3471/challenge-bookclub-nomad",
-      "branch": "master",
-      "commits": 1,
-      "kind": "학습 챌린지",
-      "sources": [
-        "index.html"
-      ],
-      "blogs": []
-    },
-    {
       "id": "study-gulp-recap",
       "name": "study-gulp-recap",
       "demo": "https://jonghwa3471.github.io/study-gulp-recap/",
@@ -5055,7 +5229,6 @@
     {
       "id": "paintbox",
       "name": "study-scss-paint-box-clone",
-      "demo": "https://jonghwa3471.github.io/study-scss-paint-box-clone/",
       "title": "Paintbox",
       "purpose": "큰 이미지 위 소개 문구를 겹치고, 이미지와 텍스트 섹션을 이어 배치한 네일 브랜드 화면을 구현했습니다.",
       "group": "HTML · CSS",
@@ -5076,7 +5249,7 @@
         "@extend로 공통 스타일 재사용"
       ],
       "repo": "https://github.com/jonghwa3471/study-scss-paint-box-clone",
-      "galleryLayout": "comparison",
+      "galleryLayout": "landscape",
       "branch": "master",
       "commits": 13,
       "kind": "학습 프로젝트",
@@ -5088,7 +5261,27 @@
       "images": [
         {
           "src": "journey/images/paint-box-result.jpg",
-          "caption": "직접 구현한 화면",
+          "caption": "구현 화면 · 이미지 위에 문구를 배치한 첫 화면",
+          "source": "https://github.com/jonghwa3471/study-scss-paint-box-clone/blob/master/index.html"
+        },
+        {
+          "src": "journey/images/paint-box-detail.jpg",
+          "caption": "구현 화면 · 이미지와 예약 안내를 나란히 배치한 스튜디오",
+          "source": "https://github.com/jonghwa3471/study-scss-paint-box-clone/blob/master/index.html"
+        },
+        {
+          "src": "journey/images/paint-box-gallery.jpg",
+          "caption": "구현 화면 · 4열 2행으로 배치한 갤러리",
+          "source": "https://github.com/jonghwa3471/study-scss-paint-box-clone/blob/master/index.html"
+        },
+        {
+          "src": "journey/images/paint-box-journal.jpg",
+          "caption": "구현 화면 · 이미지와 텍스트 위치를 번갈아 배치한 저널",
+          "source": "https://github.com/jonghwa3471/study-scss-paint-box-clone/blob/master/index.html"
+        },
+        {
+          "src": "journey/images/paint-box-bottom.jpg",
+          "caption": "구현 화면 · 3열로 배치한 푸터",
           "source": "https://github.com/jonghwa3471/study-scss-paint-box-clone/blob/master/index.html"
         }
       ],

@@ -1,9 +1,12 @@
 import Link from "next/link";
+import { ActivityVideoDialog } from "@/components/activity-video-dialog";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/portfolio";
 import { SiteHeader } from "@/components/site-header";
 import { ReadingProgress } from "@/components/reading-progress";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { ZoomImage } from "@/components/image-viewer";
+import { ActivityStoryDialog } from "@/components/activity-story-dialog";
 import JourneyArchive, {
   ArchiveSearchButton,
 } from "@/components/journey-archive";
@@ -12,6 +15,140 @@ import {
   LearningHighlights,
   LearningWriting,
 } from "@/components/learning-highlights";
+
+const awards = [
+  {
+    title: "캡스톤디자인 경진대회",
+    date: "2023.12",
+    award: "최우수상",
+    description: "구직자와 현직자를 멘티와 멘토로 연결하는 웹 플랫폼을 개발해 출품했습니다.",
+  },
+  {
+    title: "IT경력관리 경진대회",
+    date: "2023.11",
+    award: "금상",
+    description: "그동안의 학습과 프로젝트 경험을 포트폴리오로 정리해 발표했습니다.",
+  },
+  {
+    title: "문제해결형 콘텐츠개발 경진대회",
+    date: "2023.11",
+    award: "금상",
+    description: "해커톤에서 만든 Pose Pro에 MediaPipe의 자세 추정 기능을 적용해 재활 동작을 더 부드럽게 인식하도록 개선했습니다.",
+  },
+  {
+    title: "2023 OSS 아카데미 제2회 OSS Training 캠프 및 경진대회",
+    date: "2023.09",
+    award: "장려상",
+    description: "기존 AI 모델을 카카오톡 형태의 채팅 UI에 연결해, 이성에게 말을 걸기 어려운 사용자가 호감을 표현하는 대화를 연습할 수 있는 웹 서비스를 만들었습니다.",
+  },
+  {
+    title: "SW중심대학 공동해커톤 2023",
+    date: "2023.06",
+    award: "장려상",
+    description: "OpenPose로 재활 동작을 인식하고 운동 가이드를 보여주는 Pose Pro를 팀으로 개발했습니다.",
+  },
+  {
+    title: "기술창업캠프 경진대회",
+    date: "2023.02",
+    award: "대상",
+    description: "AI 기반 태블릿 드로잉 보조 서비스를 기획하고 발표했습니다.",
+  },
+];
+
+const activities = [
+  {
+    title: "기술창업캠프 경진대회",
+    date: "2023.02",
+    description: "세 명이 함께 AI 기반 태블릿 드로잉 보조 서비스를 기획해 대상을 받았습니다.",
+    photo: assetPath("/photos/startup-camp-2023-crop.png"),
+    alt: "기술창업캠프 대상 수상 기념 사진",
+    story: [
+      "컴퓨터공학과 친구와 창업 아이디어 경진대회에 나갔고, 같은 과 선배가 합류해 세 명이 팀을 이뤘습니다. 저희는 AI 기반 태블릿 드로잉 보조 서비스를 기획했습니다.",
+      "저는 사용자가 서비스의 핵심을 쉽게 이해할 수 있도록 기능을 줄이고, 결제 방식도 월 구독제로 단순화하자고 제안했습니다. 팀원은 기능을 줄이면 차별성과 확장성이 약해질 수 있다고 지적했습니다. 처음엔 의견이 달랐지만, 팀원이 제안한 방향에도 가능성이 있다고 생각해 첫날 발표에서 먼저 시도해 보자고 했습니다.",
+      "첫날 발표를 마치고 평가위원에게 서비스가 무엇을 제공하는지 명확하지 않다는 피드백을 받았습니다. 팀원들과 다시 논의해 핵심 기능과 결제 방식을 단순화했고, 둘째 날 발표에서 대상을 받았습니다. 수상 결과를 듣고 셋이서 함께 환호했던 순간이 기억에 남습니다.",
+      "의견이 갈릴 때는 각자의 제안을 직접 시도해 보고, 그 결과와 사용자 관점에서 받은 피드백을 바탕으로 함께 판단하는 법을 배웠습니다.",
+    ],
+  },
+  {
+    title: "SW중심대학 공동해커톤 2023",
+    date: "2023.06",
+    description: "OpenPose 기반 재활 동작 보조 서비스 Pose Pro의 프론트엔드를 담당했습니다.",
+    photo: assetPath("/photos/hackathon-team-award.jpg"),
+    alt: "Pose Pro 팀의 한글과컴퓨터 후원기업상 수상 사진",
+    story: [
+      "HTML, CSS, JavaScript로 간단한 화면을 만들던 시기에 해커톤이 어떻게 진행되는지 직접 경험해 보고 싶어 참가했습니다. 현장에서는 팀장들이 참가자와 면접처럼 이야기를 나누고 팀원을 골랐습니다. 개발 경험이 많은 참가자들은 먼저 팀을 꾸렸고, 저희 팀은 실전 경험이 많지 않은 여섯 명으로 모여 무박 3일 동안 작업했습니다.",
+      "한 명은 자료 조사와 발표 자료 작성, 발표를 맡았고 네 명은 AI를 담당했습니다. 저는 Flask 서버에서 실행한 동작 인식 결과를 웹 화면에 연결했습니다. Pose Pro는 OpenPose로 사용자의 동작을 인식해, 재활이 필요한 부위별로 미리 정한 동작을 잘 따라 하는지 확인하고 가이드를 보여주는 프로그램이었습니다.",
+      "당시에는 GitHub의 기본 사용법은 알았지만, 브랜치를 나눠 작업하고 PR로 변경 사항을 합치는 방식은 익숙하지 않았습니다. 발표까지 시간이 빠듯해서 카카오톡으로 코드를 주고받으며 각자 만든 부분을 합쳤습니다.",
+      "마감 전에 프로그램을 완성하고 발표까지 마쳤습니다. 팀이 한글과컴퓨터 후원기업상을 받았을 때, 처음 만난 팀원들과 함께 끝까지 해냈다는 게 기뻤고 서로 축하하던 순간이 기억에 남습니다.",
+    ],
+    gallery: [
+      { src: assetPath("/photos/hackathon-pose-pro.jpg"), caption: "Pose Pro 재활 부위 선택 화면" },
+      { src: assetPath("/photos/hackathon-pose-pro-demo-2.png"), caption: "Pose Pro 실행 화면 · 팔을 들어 올렸을 때의 동작 인식" },
+      { src: assetPath("/photos/sw-hackathon-2023.jpg"), caption: "공동해커톤 시상식 단체 사진" },
+      { src: assetPath("/photos/hackathon-audience.jpg"), caption: "공동해커톤 참가자 단체 사진" },
+      { src: assetPath("/photos/hackathon-photo-zone.jpg"), caption: "공동해커톤 현장 포토존" },
+    ],
+  },
+  {
+    title: "SW 해외교육 · Chiang Mai Program",
+    date: "2023.07",
+    description: "치앙마이대학교 학생들과 2주간 교육을 듣고, 현지에서 즐겨 입던 코끼리 바지를 소개하는 마케팅 영상을 만들었습니다.",
+    photo: assetPath("/photos/chiang-mai-program-group.jpg"),
+    alt: "치앙마이대학교 CAMT 앞 해외교육 단체 사진",
+    story: [
+      "2주간 치앙마이 현지를 둘러보고 치앙마이대학교에서 수업을 듣는 프로그램에 참여했습니다. 수업에서는 현지 학생들과 함께 로봇을 미로의 골인 지점까지 보내는 실습을 했고, 디스코드에서 미드저니 봇으로 AI 이미지를 만드는 법도 배웠습니다. 가장 기억에 남는 건 조별로 전공에 어울리는 자유 주제를 골라 프로젝트를 진행하고 발표하는 과제였습니다.",
+      "당시 저는 디지털콘텐츠공학과 소속이었고, 저희 조도 같은 과 학생들로 구성됐습니다. 다른 팀에는 컴퓨터공학과 학생이 많았고, 어떤 소프트웨어를 만들고 어떻게 구현할지 정리한 기획안을 발표할 계획인 팀이 많았습니다. 저희 팀은 디지털콘텐츠공학 전공을 살려 발표에 차별점을 주고 싶었습니다. 그래서 저는 마케팅 영상 기획에서 한발 더 나아가, 직접 촬영하고 편집해 완성본을 발표 자리에서 상영하자고 제안했습니다. 치앙마이에서 많이 보이고 저희도 시원해서 즐겨 입던 코끼리 바지를 골랐습니다. AJR의 ‘Bang!’이 나온 아이폰 마케팅 영상을 참고해 사과 로고를 코끼리 로고로 바꿔 보고, 음악의 박자에 맞춰 장면을 편집했습니다.",
+      "팀원 모두가 영상 기획에 참여해 콘셉트와 스토리보드를 함께 짰습니다. 저는 촬영 연출과 카메라 촬영, 메인 편집을 맡았습니다. 태국 학생 두 명은 보조 촬영을 맡았고, 한국 학생 한 명과 태국 학생 한 명은 영상에 출연했습니다. 한 명은 편집을 도왔고, 나머지 팀원들은 기획을 중심으로 함께했습니다.",
+      "처음에는 팀원들도 반신반의했지만 완성된 영상을 보고 함께 웃으며 좋아해 줬습니다. 발표 때 교수님들과 학생들의 반응도 좋았습니다. 조금 딱딱할 수 있었던 과제에서 다 같이 만든 유쾌한 결과물을 보여줄 수 있어 뿌듯했습니다.",
+    ],
+    video: {
+      src: assetPath("/photos/chiang-mai-elephant-pants.mp4"),
+      poster: assetPath("/photos/chiang-mai-video-poster.jpg"),
+      title: "코끼리 바지 마케팅 영상 완성본",
+    },
+    gallery: [
+      { src: assetPath("/photos/chiang-mai-storyboard.jpg"), caption: "마케팅 영상 스토리보드" },
+      { src: assetPath("/photos/chiang-mai-ad-concept.jpg"), caption: "팀이 함께 정리한 마케팅 콘셉트" },
+      { src: assetPath("/photos/chiang-mai-editing.jpg"), caption: "마케팅 영상 편집 및 렌더링" },
+      { src: assetPath("/photos/chiang-mai-presentation.jpg"), caption: "완성한 마케팅 영상을 발표하는 모습" },
+      { src: assetPath("/photos/chiang-mai-ai-art.jpg"), caption: "미드저니 실습에서 만든 그림" },
+      { src: assetPath("/photos/chiang-mai-outdoor-group.jpg"), caption: "마케팅 영상 촬영 중에 찍은 기념사진" },
+      { src: assetPath("/photos/chiang-mai-camt-portrait.jpg"), caption: "치앙마이대학교 CAMT 방문 기념" },
+    ],
+  },
+  {
+    title: "노마드코더 10주 웹 기초 스터디",
+    date: "2024.12",
+    description: "서로의 코드를 보며 혼자 공부할 때 놓치던 다른 해결 방식을 배웠습니다.",
+    photo: assetPath("/photos/nomad-web-study-session.jpg"),
+    alt: "노마드코더 웹 기초 스터디 오프라인 모임",
+    story: [
+      "Node.js 공부를 마치고 React를 배우기 시작할 무렵, 웹 기초를 복습하고 혼자 공부하며 놓친 부분이 있는지 확인하고 싶어 스터디에 신청했습니다. 오프라인에서 개발 이야기를 나누며 다른 분들은 어떻게 공부하는지 듣고, 제가 아는 내용도 필요한 분들과 나누고 싶었습니다.",
+      "10주 과정을 모두 마쳤습니다. 스터디 중에는 함께 코딩 테스트 모임을 만들어 하루에 한 문제씩 풀고 기록을 남겼습니다. 이때 처음으로 프로그래머스에서 JavaScript로 코딩 테스트 문제를 풀어봤습니다.",
+      "오프라인 모임에서 니콜라스와 영어로 대화한 것도 기억에 남습니다. 영어 회화가 아직 익숙하지 않았지만, 직접 대화를 나누면서 영어로 말을 꺼내는 일이 조금 더 자연스러워지고 자신감도 생겼습니다.",
+    ],
+    gallery: [
+      { src: assetPath("/photos/nomad-web-study-group.jpg"), caption: "웹 기초 스터디 참가자 단체사진" },
+    ],
+  },
+  {
+    title: "노마드코더 연말 모임 · Community Night",
+    date: "2024.12",
+    description: "취업 준비생, 현직 개발자, 프리랜서와 대화하며 개발자의 다양한 커리어를 접했습니다.",
+    photo: assetPath("/photos/nomad-night-group.jpg"),
+    alt: "2024 노마드코더 Community Night 단체사진",
+    story: [
+      "노마드코더 연말 모임에는 취업 준비생, 프리랜서, 현직 개발자, 창업가 등 각자의 자리에서 개발을 공부하거나 일하는 분들이 모였습니다. 테이블마다 모더레이터로 지원한 분이 직접 고른 주제로 자신의 경험과 생각을 나눠 주셨습니다.",
+      "세 테이블을 돌아다니며 맥주를 한 잔씩 마시고, 서로 다른 일을 하는 분들의 이야기를 들었습니다. 평소에도 사람들을 만나 이야기하는 걸 좋아하는데, 크리스마스 분위기가 더해져 유독 즐거웠던 연말로 기억에 남습니다.",
+    ],
+    gallery: [
+      { src: assetPath("/photos/nomad-night-venue.jpg"), caption: "크리스마스 분위기의 연말 모임 현장" },
+      { src: assetPath("/photos/nomad-night-code-gift.jpg"), caption: "코드 문구가 담긴 굿즈" },
+      { src: assetPath("/photos/nomad-night-character-gift.jpg"), caption: "캐릭터가 들어간 굿즈" },
+      { src: assetPath("/photos/nomad-night-mug.jpg"), caption: "코드가 새겨진 머그컵" },
+    ],
+  },
+];
 
 export default function HomeContent() {
   return (
@@ -681,76 +818,74 @@ export default function HomeContent() {
             <JourneyArchive />
           </div>
         </section>
-        <section className={"activities-section section"} id={"activities"}>
-          <div className={"container"}>
-            <header className={"section-heading reveal"}>
-              <p className={"label"}>{"활동"}</p>
-              <h2>{"사람과 경험에서 배운 것"}</h2>
-              <p>
-                {
-                  "추후 활동별 사진 폴더가 추가되면 같은 형식으로 확장할 수 있습니다."
-                }
-              </p>
+        <section className="activities-section section" id="activities">
+          <div className="container">
+            <header className="section-heading reveal">
+              <p className="label">활동</p>
+              <h2>사람과 경험에서 배운 것</h2>
+              <p>해외 협업 프로젝트, 해커톤, 개발자 모임에 참여한 기록입니다.</p>
             </header>
-            <div className={"activity-grid"}>
-              <article className={"activity-card wide reveal"}>
-                <img
-                  src={assetPath(
-                    "/photos/KakaoTalk_Photo_2026-10-19-13-07-12%20001.png",
+            <div className="activity-stories">
+              {activities.map(({ title, date, description, photo, alt, story, gallery, video }) => (
+                <article
+                  className={gallery ? "activity-story activity-story--with-gallery reveal" : "activity-story reveal"}
+                  key={title}
+                  data-image-gallery
+                >
+                  {!gallery && (
+                    <div className="activity-story-photo">
+                      <ZoomImage src={photo} alt={alt} />
+                    </div>
                   )}
-                  alt={"SW중심대학 공동해커톤 후원기업상 수상 사진"}
-                />
-                <div>
-                  <span>{"2023.06"}</span>
-                  <h3>{"SW중심대학 공동해커톤"}</h3>
-                  <p>
-                    {
-                      "OpenPose 기반 재활 동작 보조 서비스 Pose Pro의 프론트엔드를 담당하고 한글과컴퓨터 후원기업상을 수상했습니다."
-                    }
-                  </p>
-                </div>
-              </article>
-              <article className={"activity-card reveal"}>
-                <img
-                  src={assetPath("/photos/KakaoTalk_20241130_214336355_08.jpg")}
-                  alt={"노마드코더 웹 기초 오프라인 모임"}
-                />
-                <div>
-                  <span>{"WEB STUDY"}</span>
-                  <h3>{"노마드코더 웹 기초 모임"}</h3>
-                  <p>
-                    {
-                      "서로의 코드를 보며 혼자 공부할 때 놓치던 다른 해결 방식을 배웠습니다."
-                    }
-                  </p>
-                </div>
-              </article>
-              <article className={"activity-card reveal"}>
-                <img
-                  src={assetPath(
-                    "/photos/KakaoTalk_Photo_2026-10-19-12-53-05.png",
+                  <div>
+                    <p className="label">{date}</p>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                    {story && <ActivityStoryDialog title={title} story={story} />}
+                  </div>
+                  {gallery && (
+                    <div className="activity-story-gallery">
+                      <figure>
+                        <ZoomImage src={photo} alt={alt} />
+                        <figcaption>{alt}</figcaption>
+                      </figure>
+                      {video && <ActivityVideoDialog {...video} />}
+                      {gallery.map(({ src, caption }) => (
+                        <figure key={src}>
+                          <ZoomImage src={src} alt={caption} />
+                          <figcaption>{caption}</figcaption>
+                        </figure>
+                      ))}
+                    </div>
                   )}
-                  alt={"2024년 노마드코더 연말 모임"}
-                />
-                <div>
-                  <span>{"2024 YEAR-END"}</span>
-                  <h3>{"개발자 교류 모임"}</h3>
-                  <p>
-                    {
-                      "취업 준비생, 현직 개발자, 프리랜서와 대화하며 개발자의 다양한 커리어를 접하고 시야를 넓혔습니다."
-                    }
-                  </p>
-                </div>
-              </article>
+                </article>
+              ))}
             </div>
+          </div>
+        </section>
+        <section className="section" id="awards">
+          <div className="container">
+            <header className="section-heading reveal">
+              <p className="label">수상</p>
+              <h2>수상 경력</h2>
+            </header>
+            <ul className="award-list reveal">
+              {awards.map(({ title, date, award, description }) => (
+                <li key={title}>
+                  <time dateTime={date.replace(".", "-")}>{date}</time>
+                  <div>
+                    <span>{title}</span>
+                    <p className="award-description">{description}</p>
+                  </div>
+                  <strong>{award}</strong>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
         <section className={"contact-section section"} id={"contact"}>
           <div className={"container contact-box reveal"}>
-            <div>
-              <p className={"label"}>{"연락처"}</p>
-              <h2>{"함께 만들 기회를 기다립니다."}</h2>
-            </div>
+            <h2>연락처</h2>
             <div className={"contact-links"}>
               <a
                 href={"https://github.com/jonghwa3471"}
@@ -765,7 +900,7 @@ export default function HomeContent() {
                 target={"_blank"}
                 rel={"noreferrer"}
               >
-                <span>{"기술 블로그"}</span>
+                <span>{"블로그"}</span>
                 <strong>{"j2yonghwa.tistory.com"}</strong>
               </a>
               <a href={"mailto:whdghk3471@gmail.com"}>

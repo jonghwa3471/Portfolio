@@ -33,7 +33,7 @@ for (const directory of [
   await mkdir(path.join("public", directory), { recursive: true });
   for (const file of await readdir(directory)) {
     if (
-      !/\.(png|jpe?g|gif|webp|svg|ico)$/i.test(file) ||
+      !/\.(png|jpe?g|gif|webp|svg|ico|mp4)$/i.test(file) ||
       !used.has(`${directory}/${file}`.normalize("NFC"))
     )
       continue;
